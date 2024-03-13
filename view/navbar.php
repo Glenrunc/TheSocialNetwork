@@ -12,9 +12,9 @@
       </form>
     </div>
     <div class="d-flex align-items-end">
-        <a href="#">
-            <img src="icons8-person-64.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top" >
-        </a>
+        
+        <img src="icons8-person-64.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top"  data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover" >
+       
     </div>
   </div>
 </nav>
