@@ -1,20 +1,24 @@
 
-<nav class="navbar navbar-expand-lg bg-success border-bottom border-body">
+<div class="container-xl  my-auto sticky-top" >
+<nav class="navbar navbar-expand-sm  mt-5 my-3 navbar-dark rounded" style="background-color: #141f27;">
   <div class="container-fluid">
-    <!-- add credit page -->
     <a class="navbar-brand" href="#">
-        <img src="Logo_TZU.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
+      <img src="Logo_TZU.png" alt="Logo" style="width:40px;" class="rounded-pill"> 
     </a>
-    <div class="mx-auto d-flex align-items-end">
-      <form class="d-flex" role="search" action="#" method="POST">
-        <input class="form-control me-2 bg-success-subtle" type="search" placeholder="What's up" aria-label="Search">
-        <button class="btn btn-outline-light text-dark  bg-success-subtle" type="submit">Search</button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <form class="d-flex mx-auto" method="POST" action="#">
+          <input class="form-control me-2" type="text" placeholder="Search for someone">
+          <button class="btn btn-primary"; type="button">Search</button>
       </form>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link " href="#"><img src="user.png" alt="Logo" style="width:48px;" class="rounded-pill"></a>
+          </li>
+        </ul>
     </div>
-    <div class="d-flex align-items-end">
-        
-        <img src="icons8-person-64.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top"  data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover" >
-       
-    </div>
-  </div>
 </nav>
+</div>
