@@ -1,4 +1,12 @@
 body{
-    height: 2000px;
-    background-color: #1b384a;
+    position: relative;
+    /* height: 2000px; */
+    background-color: #ffffff;
+    
+}
+
+.test{
+    position: absolute;
+    background-color: red;
+    display:none;
 }
