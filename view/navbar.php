@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-sm  mt-5 my-3 navbar-dark rounded " style="background-color: #BCD0C7;">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <img src="./img/Logo_TZU.png" alt="Logo" style="width:40px;" class="rounded-pill"> 
+      <img src="../image/Logo_TZU.png" alt="Logo" style="width:40px;" class="rounded-pill"> 
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
       <span class="navbar-toggler-icon"></span>
@@ -16,7 +16,7 @@
         </form>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link " href="#"><img src="./img/user.svg" alt="Logo" style="width:48px;" class="rounded-pill"></a>
+            <a class="nav-link " href="#"><img src="../image/user.svg" alt="Logo" style="width:48px;" class="rounded-pill"></a>
           </li>
         </ul>
     </div>

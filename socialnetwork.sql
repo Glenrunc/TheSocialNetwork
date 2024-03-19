@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 16 mars 2024 à 17:06
+-- Généré le : lun. 18 mars 2024 à 21:02
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -24,6 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `comment`
+--
+
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL,
+  `id_post` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `follow`
 --
 
@@ -31,6 +44,30 @@ CREATE TABLE `follow` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_follow` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `likedcomment`
+--
+
+CREATE TABLE `likedcomment` (
+  `id` int(11) NOT NULL,
+  `id_comment` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `likedpost`
+--
+
+CREATE TABLE `likedpost` (
+  `id` int(11) NOT NULL,
+  `id_post` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -76,12 +113,36 @@ INSERT INTO `user` (`id`, `first_name`, `last_name`, `age`, `birthday`, `email`,
 --
 
 --
+-- Index pour la table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_post` (`id_post`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Index pour la table `follow`
 --
 ALTER TABLE `follow`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`),
   ADD KEY `id_follow` (`id_follow`);
+
+--
+-- Index pour la table `likedcomment`
+--
+ALTER TABLE `likedcomment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_comment` (`id_comment`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Index pour la table `likedpost`
+--
+ALTER TABLE `likedpost`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_post` (`id_post`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Index pour la table `post`
@@ -103,9 +164,27 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT pour la table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `follow`
 --
 ALTER TABLE `follow`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `likedcomment`
+--
+ALTER TABLE `likedcomment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `likedpost`
+--
+ALTER TABLE `likedpost`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -125,11 +204,32 @@ ALTER TABLE `user`
 --
 
 --
+-- Contraintes pour la table `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Contraintes pour la table `follow`
 --
 ALTER TABLE `follow`
   ADD CONSTRAINT `follow_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `follow_ibfk_2` FOREIGN KEY (`id_follow`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `likedcomment`
+--
+ALTER TABLE `likedcomment`
+  ADD CONSTRAINT `likedcomment_ibfk_1` FOREIGN KEY (`id_comment`) REFERENCES `comment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `likedcomment_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `likedpost`
+--
+ALTER TABLE `likedpost`
+  ADD CONSTRAINT `likedpost_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `likedpost_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `post`

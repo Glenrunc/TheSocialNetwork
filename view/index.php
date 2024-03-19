@@ -15,10 +15,11 @@
   <body>
     <?php require("navbar.php") ?>
     
+
     <!-- Just a test for the connection to the BDD -->
 
     <!-- <?php 
-      require("database.php");  
+      require("../model/database.php");  
       global $db;
       $sql = "SELECT * FROM user WHERE admin=1";
 
@@ -30,6 +31,14 @@
         echo $res['first_name'];
       }
     ?> -->
+
+    <?php 
+      session_start();
+
+      if(isset($_SESSION["pseudo"])){
+        echo"<p>".$_SESSION["pseudo"]."</p>";      
+      }
+    ?>
 
   </body>
 </html>
