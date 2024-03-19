@@ -25,4 +25,3 @@
         <input type="submit" id="join-btn" name="join" alt="Join" value="Join">
     </form>
 </div>
-<div id=link-signin><a href="signin.php">Have an account ?</a></div>

@@ -10,4 +10,4 @@
             <input type="submit" id="join-btn" name="join" alt="Join" value="Join">
         </form>
 </div>
-<div id = link-login><a href="signup.php">Not register?</a></div>
+
