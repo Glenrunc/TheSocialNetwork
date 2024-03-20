@@ -1,6 +1,6 @@
 <div class="log-box">
     <h1>Signup</h1>
-    <form method="POST" action="signup.php">
+    <form name="form-signup" method="POST" action="../model/signup.php">
         <div class="user-box">
             <input type="text" name="pseudo" required="" placeholder="Pseudo">
         </div>

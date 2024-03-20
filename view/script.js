@@ -19,7 +19,6 @@ function checkSessionandRedirect() {
                 document.getElementById('overlay').style.display = 'block';
                 document.getElementById('rectangle').style.display = 'block';
                 document.getElementById('flou-body').style.display = 'block'; // Affichage du masque de flou pour le body
-                // Ajout de la classe de flou à tout le body
                 document.body.classList.add('blur');
                 return false;
             }
@@ -29,5 +28,11 @@ function checkSessionandRedirect() {
         }
     });
 }
+
+function toSignup(){
+    window.location.href = "../model/signup.php";
+}
+
+
 
 

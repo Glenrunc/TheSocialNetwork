@@ -16,17 +16,16 @@
   <?php
   require("../model/database.php");
   include("navbar.php");
-  session_start();
-  session_unset();
-  session_destroy();
-
+  // session_unset();
+  // session_destroy();
   ?>
- 
 
   <div id="overlay"></div>
   <div id="rectangle">
-    
+    <?php require("../model/signin.php") ?>
+    <button class='btn' type='button' onclick="toSignup()">Not register </button>
   </div>
+ 
   <div id="flou-body"></div>
   <script src="script.js"></script>
 

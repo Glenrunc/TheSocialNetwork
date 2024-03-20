@@ -14,7 +14,7 @@
       </form>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a id="nav-link" href="#" onclick="checkSessionandRedirect()">
+          <a id="nav-link" onclick="checkSessionandRedirect()">
             <img src="../image/user.svg" alt="Logo" style="width:48px;" class="rounded-pill">
           </a>
         </li>
