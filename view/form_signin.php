@@ -1,10 +1,10 @@
-<div class="login-box">
+<div id="login-box">
         <h1>Signin</h1>
         <form name="form-signin" method="POST" >
-            <div class="user-box">
+            <div id="email">
                 <input type="text" name="email" required="" placeholder="Email">
             </div>
-            <div class="user-box">
+            <div id="password">
                 <input type="password" name="password" required="" placeholder="Password">
             </div>
             <input type="submit" id="join" name="join" alt="Join" value="Join" >

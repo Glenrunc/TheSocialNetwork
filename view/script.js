@@ -6,33 +6,24 @@ document.getElementById('overlay').addEventListener('click', function () {
     document.body.classList.remove('blur');
 });
 
-function checkSessionandRedirect() {
-    $.ajax({
-        url: 'check_session.php',
-        type: 'GET',
-        dataType: 'json',
-        success: function (response) {
-            if (response.sessionExists) {
-                window.location.href = "user.php";
-                return true;
-            } else {
-                document.getElementById('overlay').style.display = 'block';
-                document.getElementById('rectangle').style.display = 'block';
-                document.getElementById('flou-body').style.display = 'block'; // Affichage du masque de flou pour le body
-                document.body.classList.add('blur');
-                return false;
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error('Error checking session status:', error);
-        }
-    });
+function checkAndRedirect() {
+    
+    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('rectangle').style.display = 'block';
+    document.getElementById('flou-body').style.display = 'block'; // Affichage du masque de flou pour le body
+    document.body.classList.add('blur');
+      
+ 
 }
 
 function toSignup(){
     window.location.href = "../model/signup.php";
 }
 
+function redirect()
+{
+    window.location.href = "../view/user.php";
+}
 
 
 

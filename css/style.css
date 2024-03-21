@@ -1,3 +1,9 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
 #contenu {
     position: relative;
 }
@@ -14,6 +20,7 @@
 }
 
 #rectangle {
+    border-radius:10px;
     display: none;
     position: fixed;
     top: 50%;
@@ -24,6 +31,7 @@
     background-color: #ffffff;
     z-index: 1001; /* au-dessus de l'overlay */
 }
+
 
 #flou-body {
     display: none;
