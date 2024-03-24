@@ -17,12 +17,12 @@
     if (isset($_SESSION["id_user"])) {
         echo "<p>Unauthorized</p>";
     } else {
-        require("../view/form_signin.php");
+        require("../view/form_signin.html");
         if (!empty($_POST)) {
 
             if (!empty($_POST["password"]) && !empty($_POST["email"])) {
-                $password = $_POST["password"];
-                $email = $_POST["email"];
+                $password = SecurizeString_ForSQL($_POST["password"]);
+                $email = SecurizeString_ForSQL($_POST["email"]);
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     echo "<script> alert('Type a valid email')</script>";
                 }
@@ -39,6 +39,7 @@
                     } else {
 
                         $_SESSION["id_user"] = $user["id"];
+                        $_SESSION["pseudo"] = $user["pseudo"];
                         header("Location: ../view/user.php");
                     }
                 }

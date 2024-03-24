@@ -26,8 +26,6 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30%;
-    height: 75%;
     background-color: #ffffff;
     z-index: 1001; /* au-dessus de l'overlay */
 }
@@ -43,4 +41,9 @@ body{
     backdrop-filter: blur(5px); /* flou gaussien */
     pointer-events: none; /* empêche les clics sur les éléments floutés */
     z-index: 999; /* au-dessous de l'overlay */
+}
+
+#para{
+    margin:auto;
+    width:fit-content;
 }

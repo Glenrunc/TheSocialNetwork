@@ -18,7 +18,7 @@
     if (isset($_SESSION["id_user"])) {
         echo "unauthorized";
     } else {
-        require("../view/form_signup.php");
+        require("../view/form_signup.html");
 
         if (!empty($_POST)) {
 
@@ -92,7 +92,7 @@
                     $user = $query->fetch();
 
 
-                    $_SESSION["mail"] = $user["email"];
+                    $_SESSION["pseudo"] = $user["pseudo"];
                     $_SESSION["id_user"] = $user["id"];
 
                     header("Location: ../view/user.php");

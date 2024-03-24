@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-sm mt-5 my-3 navbar-dark rounded" style="background-color: #BCD0C7;">
-    <div class="container-fluid ">
+<nav class="navbar navbar-expand-sm mt-5 my-3 navbar-dark rounded" style="background-color: #BCD0C7; width: 800px;margin: 0 auto;">
+    <div class="container ">
       <a class="navbar-brand" href="#">
         <img src="../image/Logo_TZU.png" alt="Logo" style="width:40px;" class="rounded-pill">
       </a>
@@ -16,6 +16,7 @@
           <li class="nav-item">
             <?php
             if (isset($_SESSION["id_user"])) {
+              echo"<p id='para'>".$_SESSION['pseudo']."</p>";
               echo "<a id='nav-link' href='../model/deconnect.php'>Deconnection</a>";
               echo " <a id='nav-link'>";
               echo "<img src='../image/user.svg' alt='Logo' style='width:48px'; class='rounded-pill' onclick='redirect()'";
