@@ -1,8 +1,8 @@
-body{
+/* body{
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
-}
+} */
 
 #contenu {
     position: relative;
@@ -20,13 +20,13 @@ body{
 }
 
 #rectangle {
-    border-radius:10px;
+    border-radius:50px;
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #ffffff;
+    background-color: #15172b;
     z-index: 1001; /* au-dessus de l'overlay */
 }
 
@@ -38,8 +38,8 @@ body{
     left: 0;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(5px); /* flou gaussien */
-    pointer-events: none; /* empêche les clics sur les éléments floutés */
+    /* backdrop-filter: blur(5px); flou gaussien */
+    pointer-events: none; 
     z-index: 999; /* au-dessous de l'overlay */
 }
 

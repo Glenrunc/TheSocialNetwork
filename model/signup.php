@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="login.css" />
     <title>Signup</title>
 </head>
 
@@ -75,25 +74,26 @@
                     echo "<div class=error-box>you must be 13 years old</div>";
                     $bool = False;
                 }
-
+                // echo"$bool , $bool2, $bool3";
                 if ($bool && $bool2 && $bool3) {
+                    __sendDataUser($first_name,$last_name,$age,$birthday,$email,$pass,$pseudo,$db);
+                    $_SESSION["id_user"] = $db->lastInsertId();
 
-                    // we insert the user in the database
-                    // we hash the password
-                    // we store the user in the session
-                    // we redirect to the profile page
-
-                    $sql = "INSERT INTO user(first_name,last_name,age,birthday,email,password,pseudo) VALUES (?,?,?,?,?,?,?)";
-                    $query = $db->prepare($sql);
-                    $query->execute(array($first_name, $last_name, $age, $birthday, $email, $pass, $pseudo));
-
-                    $query = $db->prepare("SELECT * FROM user WHERE email = ?");
-                    $query->execute([$email]);
+                    $query = $db->prepare("SELECT * FROM user WHERE id = ?");
+                    $query->execute([$_SESSION["id_user"]]);
                     $user = $query->fetch();
 
-
                     $_SESSION["pseudo"] = $user["pseudo"];
-                    $_SESSION["id_user"] = $user["id"];
+
+                    if($_FILES["profile_picture"]["size"] != 0 ){
+                        
+                        echo"edzedz";
+                        $sql = "UPDATE user SET profil_picture = ? WHERE email=?";
+                        $qry = $db->prepare($sql);
+                        $qry->execute([file_get_contents($_FILES["profile_picture"]["tmp_name"]), $email]);
+                        $_SESSION['profile_picture'] = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
+                    }
+
 
                     header("Location: ../view/user.php");
                 }

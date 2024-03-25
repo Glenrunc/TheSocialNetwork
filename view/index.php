@@ -23,7 +23,6 @@
   <div id="overlay"></div>
   <div id="rectangle">
     <?php require("../model/signin.php") ?>
-    <button class='btn' type='button' onclick="toSignup()">Not register</button>
   </div>
 
   <div id="flou-body"></div>

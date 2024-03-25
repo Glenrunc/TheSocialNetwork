@@ -1,14 +1,19 @@
-<div id="login-box">
-        <h1>Signin</h1>
-        <form name="form-signin" method="POST" >
-            <div id="email">
-                <input type="text" name="email" required="" placeholder="Email">
-            </div>
-            <div id="password">
-                <input type="password" name="password" required="" placeholder="Password">
-            </div>
-            <input type="submit" id="join" name="join" alt="Join" value="Join" >
-        </form>
-        <div id="message"></div>
-</div>
+<form name = "form-signin"class="form" method="POST">
+    <div class="input-container ic1">
+      <div class="input-container ic2">
+        <input id="email" class="input" type="text" name="email" required="" placeholder="Email" />
+        <div class="cut"></div>
+        <label for="email" class="placeholder">Email</label>
+      </div>
+      <div class="input-container ic2">
+        <input id="password" class="input" type="password" name="password" required="" placeholder="Password" />
+        <div class="cut"></div>
+        <label for="password" class="placeholder">Password</label>
+      </div>
+
+      <input type="submit" class="submit" name="join"  name="join" alt="Join" value="Join" >
+
+  </form>
+ 
+  <button class='submit' type='button' onclick="toSignup()">Not register</button>
 
