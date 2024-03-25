@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,8 +16,7 @@
     session_start();
     global $db;
     
-
-    
+   
     if (isset($_SESSION["id_user"])) {
 
         $user = $_SESSION["id_user"];
@@ -66,5 +66,11 @@
     
     
     
+<?php 
+echo"<a href=index.php>kerfervfer</a>"
+?>
+<a href="../model/create_post.php">Create a post</a>
 
 </body>
+
+
