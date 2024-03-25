@@ -1,19 +1,18 @@
 body {
     align-items: center;
-
-    background-color: #151515;
+    background-color: #0e1117   ;
     display: flex;
     justify-content: center;
-    background-color: #15172b;
   }
   
   .form {
     background-color: #0e1117;
     border-radius: 20px;
     box-sizing: border-box;
-    height: 500px;
+    height: fit-content;
     padding: 20px;
     width: 320px;
+
   }
   
   .title {
@@ -47,11 +46,11 @@ body {
   }
   
   .input {
-    background-color: #fff;
+    background-color: #fefefe;
     border-radius: 12px;
     border: 0;
     box-sizing: border-box;
-    color: #000000;
+    color: black;
     font-size: 18px;
     height: 100%;
     outline: 0;
@@ -68,7 +67,7 @@ body {
     top: -20px;
     transform: translateY(0);
     transition: transform 200ms;
-    width: 76px;
+    width: 110px
   }
   
   .cut-short {
@@ -103,11 +102,11 @@ body {
   
   .input:focus ~ .placeholder {
     background-color: transparent;
-    color: #ededed;
+    color: #cf4e4e;
   }
   
   .submit {
-    background-color: #05273b;
+    background-color: rgb(11, 55, 82);
     border-radius: 12px;
     border: 0;
     box-sizing: border-box;

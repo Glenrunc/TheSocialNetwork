@@ -1,36 +1,38 @@
-<div class="log-box">
-    <h1>Signup</h1>
-    <form name="form-signup" enctype="multipart/form-data" method="POST" action="../model/signup.php">
-        <div class="user-box">
-            <input type="text" name="pseudo" required="" placeholder="Pseudo">
-        </div>
-        <div class="user-box">
-            <input type="text" name="first_name" required="" placeholder="First Name">
-        </div>
-        <div class="user-box">
-            <input type="text" name="last_name" required="" placeholder="Last Name">
-        </div>
-        <div class="user-box">
-            <input type="text" name="email" required="" placeholder="Email">
-        </div>
-        <div class="user-box">
-            <input type="date" name="birthday" id="birthday" placeholder="Birthday">
-        </div>
-        <div class="user-box">
-            <input type="password" name="password" required="" placeholder="Password">
-        </div>
-        <div class="user-box">
-            <input type="password" name="passwordRepeat" required="" placeholder="Repeat Password">
-        </div>
-        <div class="user-box">
-            <input type="hidden" name="MAX_FILE_SIZE" value="" />
-
-            <div class="parent-div">
-                <input class='input' id='profile_picture' name="profile_picture" type="file"
-                    accept='image/png, image/jpeg, image/jpg' autocomplete="off" />
-            </div>
-
-        </div>
-        <input type="submit" id="join-btn" name="join" alt="Join" value="Join">
-    </form>
-</div>
+<form class="form" method="POST" action="../model/signup.php">
+    <div class="input-container ic1">
+        <input id="email" class="input" type="text" name="email" placeholder="Email" required>
+        <div class="cut"></div>
+        <label for="email" class="placeholder">Email</label>
+    </div>
+    <div class="input-container ic2">
+        <input id="password" class="input" type="password" name="password" placeholder="Password" required>
+        <div class="cut"></div>
+        <label for="password" class="placeholder">Password</label>
+    </div>
+    <div class="input-container ic2">
+        <input id="pseudo" class="input" type="text" name="pseudo" placeholder="Pseudo" required>
+        <div class="cut"></div>
+        <label for="pseudo" class="placeholder">Pseudo</label>
+    </div>
+    <div class="input-container ic2">
+        <input id="first_name" class="input" type="text" name="first_name" placeholder="First Name" required>
+        <div class="cut"></div>
+        <label for="first_name" class="placeholder">First Name</label>
+    </div>
+    <div class="input-container ic2">
+        <input id="last_name" class="input" type="text" name="last_name" placeholder="Last Name" required>
+        <div class="cut"></div>
+        <label for="last_name" class="placeholder">Last Name</label>
+    </div>
+    <div class="input-container ic2">
+        <input id="birthday" class="input" type="date" name="birthday" placeholder="Birthday">
+        <div class="cut"></div>
+        <label for="birthday" class="placeholder">Birthday</label>
+    </div>
+    <div class="input-container ic2">
+        <input id="passwordRepeat" class="input" type="password" name="passwordRepeat" placeholder="Repeat Password" required>
+        <div class="cut"></div>
+        <label for="passwordRepeat" class="placeholder">Repeat Password</label>
+    </div>
+    <button type="submit" class="submit">Submit</button>
+</form>

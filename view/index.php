@@ -28,6 +28,13 @@
   <div id="flou-body"></div>
  
   <script src="script.js"></script>
+  <div class="displaypost">
+  <!-- <?php   
+  $query = $db->prepare("SELECT * FROM post WHERE id_user = ? ORDER BY created_at DESC");
+  $query->execute([$_SESSION["id_user"]]);
+  $user = $query->fetch(); ?> -->
+
+  </div>
 </body>
 
 </html>
