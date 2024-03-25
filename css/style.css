@@ -1,8 +1,10 @@
+
 body{
     margin: 0;
     padding: 0;
     background-color: #151515;
 }
+
 
 #contenu {
     position: relative;
@@ -15,7 +17,9 @@ body{
     left: 0;
     width: 100%;
     height: 100%;
+
     backdrop-filter: blur(5px);
+
     background-color: rgba(0, 0, 0, 0.5); /* fond semi-transparent */
     z-index: 1000; /* au-dessus de tout */
 }

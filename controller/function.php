@@ -14,4 +14,10 @@
         $query = $db->prepare($sql);
         $query->execute(array($first_name, $last_name, $age, $birthday, $email,$password,$pseudo));
     }
+
+    function modifyUser($first_name,$last_name,$age,$birthday,$email,$pseudo,$db){
+        $sql = "UPDATE user SET first_name=?,last_name=?,age=?,birthday=?,email=?,pseudo=? WHERE id=?";
+        $query = $db->prepare($sql);
+        $query->execute(array($first_name, $last_name, $age, $birthday, $email,$pseudo,$_SESSION["id_user"]));
+    }
 ?>
