@@ -86,3 +86,21 @@ body{
     pointer-events: none; 
     z-index: 999; /* au-dessous de l'overlay */
 }
+
+.form {
+    background-color: #15172b;
+    border-radius: 10px;
+    box-sizing: border-box;
+    height: fit-content;
+    padding: 20px;
+    width: fit-content;
+  }
+
+#button{
+    box-sizing: border-box;
+    font-size: 18px;
+    height: fit-content;
+    outline: 0;
+    padding: 4px 20px 0;
+    width: fit-content;
+}

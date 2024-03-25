@@ -34,24 +34,22 @@
         <div id="overlay"></div>
         <div id="rectangle">
         <?php
-        echo '<form action="update_user.php" method="POST">';
-        echo '    <label for="first_name">First Name:</label>';
+        echo '<form class="form" action="../model/update_user.php" method="POST">';
         echo '    <input type="text" name="first_name" value="' . $user->getFirstName() . '"><br>';
 
-        echo '    <label for="last_name">Last Name:</label>';
         echo '    <input type="text" name="last_name" value="' . $user->getLastName() . '"><br>';
 
-        echo '    <label for="age">Age:</label>';
         echo '    <input type="number" name="age" value="' . $user->getAge() . '"><br>';
 
-        echo '    <label for="birthday">Birthday:</label>';
         echo '    <input type="date" name="birthday" ><br>';
 
-        echo '    <label for="email">Email:</label>';
         echo '    <input type="email" name="email" value="' . $user->getEmail() . '"><br>';
 
-        echo '    <label for="pseudo">Pseudo:</label>';
         echo '    <input type="text" name="pseudo" value="' . $user->getPseudo() . '"><br>';
+
+        echo '    <input type="password" name="password" placeholder="password"><br>';
+
+        echo '    <input type="password" name="passwordRepeat" placeholder="password repeat"><br>';
 
         echo '    <input type="submit" value="Update">';
         echo '</form>';
