@@ -94,7 +94,7 @@
                         $_SESSION['profile_picture'] = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
                     }
 
-
+                    // mail($email,"Signin on social network","Hi".$pseudo."welcome on board");
                     header("Location: ../view/user.php");
                 }
             } else {

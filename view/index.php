@@ -26,6 +26,7 @@
   </div>
 
   <div id="flou-body"></div>
+ 
   <script src="script.js"></script>
 </body>
 

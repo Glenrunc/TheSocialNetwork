@@ -1,8 +1,8 @@
 body {
     align-items: center;
-    background-color: #15172b;
     display: flex;
     justify-content: center;
+    background-color: #15172b;
   }
   
   .form {
