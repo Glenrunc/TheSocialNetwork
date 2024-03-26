@@ -48,6 +48,7 @@
                         $sql = "UPDATE user SET email=? WHERE id = ?";
                         $qry = $db->prepare($sql);
                         $qry->execute([$new_email, $_SESSION["id_user"]]);
+                        $_SESSION["email"] = $new_email;
                     }
 
                     if ($data["id"] != false && $data["id"] != $_SESSION["id_user"]) {
@@ -66,22 +67,24 @@
                         $sql = "UPDATE user SET pseudo=? WHERE id = ?";
                         $qry = $db->prepare($sql);
                         $qry->execute([$new_pseudo, $_SESSION["id_user"]]);
+                        $_SESSION["pseudo"] = $new_pseudo;
                     }
                     if ($data["id"] != false && $data["id"] != $_SESSION["id_user"]) {
                         echo '<script>alert("This pseudo is already taken by other user")</script>';
                     }
                 }
 
-                if (isset($_POST["password"])) {
-
+                if (isset($_POST["password"]) && $_POST["password"] != "") {
+            
                     if (isset($_POST["passwordRepeat"]) && ($_POST["password"] == $_POST["passwordRepeat"])) {
+                       
                         $new_password = password_hash(SecurizeString_ForSQL($_POST["password"]), PASSWORD_ARGON2ID);
                         $sql = "UPDATE user SET password = ? WHERE id = ?";
                         $qry = $db->prepare($sql);
                         $qry->execute([$new_password, $_SESSION["id_user"]]);
                     }
 
-                    if (!isset($_POST["passwordRepeat"])) {
+                    if ($_POST["passwordRepeat"] == "") {
                         echo '<script>alert("You must enter your password twice")</script>';
                     }
                     if ($_POST["password"] != $_POST["passwordRepeat"]) {
@@ -96,7 +99,7 @@
                     $qry->execute([file_get_contents($_FILES["profile_picture"]["tmp_name"]), $_SESSION["id_user"]]);
                     $_SESSION['profile_picture'] = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
                 }
-                echo '<script>window.location.href = "../model/user_gestion.php";</script>';
+                echo '<script>window.location.href = "../view/index.php";</script>';
             }
             ?>
 
