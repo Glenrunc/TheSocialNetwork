@@ -16,55 +16,7 @@
     require("../model/database.php");
     session_start();
     global $db;
-    
-   
-    if (isset($_SESSION["id_user"])) {
-
-        $user = $_SESSION["id_user"];
-        $sql = "SELECT id,first_name,last_name,age,birthday,email,pseudo,admin,profil_picture FROM user WHERE id=?";
-        $qry = $db->prepare($sql);
-        $qry->execute([$user]);
-        $data = $qry->fetch();
-        $user = new User($data["id"], $data["first_name"], $data["last_name"], $data["age"], $data["birthday"], $data["email"], $data["pseudo"], $data["admin"], $data["profil_picture"]);
-
-        $user->displayUserPage();
-        ?>
-        <div id="button">
-            <button id="update" onclick="checkAndRedirect()">Update</button>
-        </div>
-        <div id="overlay"></div>
-        <div id="rectangle">
-        <?php
-        echo '<form class="form" action="../model/update_user.php" method="POST">';
-        echo '    <input type="text" name="first_name" value="' . $user->getFirstName() . '"><br>';
-
-        echo '    <input type="text" name="last_name" value="' . $user->getLastName() . '"><br>';
-
-        echo '    <input type="number" name="age" value="' . $user->getAge() . '"><br>';
-
-        echo '    <input type="date" name="birthday" ><br>';
-
-        echo '    <input type="email" name="email" value="' . $user->getEmail() . '"><br>';
-
-        echo '    <input type="text" name="pseudo" value="' . $user->getPseudo() . '"><br>';
-
-        echo '    <input type="password" name="password" placeholder="password"><br>';
-
-        echo '    <input type="password" name="passwordRepeat" placeholder="password repeat"><br>';
-
-        echo '    <input type="submit" value="Update">';
-        echo '</form>';
-        ?>
-        </div>
-      
-        <div id="flou-body"></div>
-    <?php    
-
-    }
     ?>
-    <script src="script.js"></script>
-
-    
     
     <div id="post-container">
         <?php
