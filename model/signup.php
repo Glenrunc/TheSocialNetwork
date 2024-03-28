@@ -36,8 +36,8 @@
                 $age = intval(date("Y")) - intval(substr($birthday, 0, 4));
 
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
-                    echo "<div class=error-box>Type a correct email</div>";
+                    // echo "<div class=error-box>Type a correct email</div>";
+                    echo' <script> alert("Type a correct email")</script>';
                     $bool = False;
                 } else {
 
@@ -47,7 +47,9 @@
 
                     if ($bool2) {
                         $bool2 = False;
-                        echo "<div class=error-box>email already exists</div>";
+                        // echo "<div class=error-box>email already exists</div>";
+                        echo' <script> alert("email already exists")</script>';
+
                     } else {
                         $bool2 = True;
                     }
@@ -59,20 +61,23 @@
 
                 if ($bool3) {
                     $bool3 = False;
-                    echo "<div class=error-box>Pseudo already exists</div>";
+                    // echo "<div class=error-box>Pseudo already exists</div>";
+                    echo' <script> alert("Pseudo already exists")</script>';
+                    
                 } else {
                     $bool3 = True;
                 }
 
                 if ($_POST["password"] != $_POST["passwordRepeat"]) {
-                    echo "<div class=error-box>Password doesn't match</div>";
+                  
                     $bool = False;
                 } else {
-                    $pass = password_hash($_POST["password"], PASSWORD_ARGON2ID);
+                    $pass = password_hash(SecurizeString_ForSQL($_POST["password"]), PASSWORD_ARGON2ID);
                 }
 
                 if ($age <= 13) {
-                    echo "<div class=error-box>you must be 13 years old</div>";
+                    // echo "<div class=error-box>you must be 13 years old</div>";
+                    echo' <script> alert("you must be 13 years old")</script>';
                     $bool = False;
                 }
                 // echo"$bool , $bool2, $bool3";
@@ -85,17 +90,15 @@
                     $user = $query->fetch();
 
                     $_SESSION["pseudo"] = $user["pseudo"];
+                    $_SESSION["email"] = $user["email"];
 
                     if($_FILES["profile_picture"]["size"] != 0 ){
                         
-                        echo"edzedz";
                         $sql = "UPDATE user SET profil_picture = ? WHERE email=?";
                         $qry = $db->prepare($sql);
                         $qry->execute([file_get_contents($_FILES["profile_picture"]["tmp_name"]), $email]);
                         $_SESSION['profile_picture'] = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
                     }
-
-                    // mail($email,"Signin on social network","Hi".$pseudo."welcome on board");
                     header("Location: ../view/user.php");
                 }
             } else {

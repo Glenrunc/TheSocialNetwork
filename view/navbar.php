@@ -18,14 +18,14 @@
             if (isset($_SESSION["id_user"])) {
               echo"<p id='para'>".$_SESSION['pseudo']."</p>";
               echo "<a id='nav-link' href='../model/deconnect.php'>Deconnection</a>";
-              echo " <a id='nav-link'>";
+              echo " <a id='nav-link' >";
               if(isset($_SESSION["profile_picture"])){
                 $img = base64_encode($_SESSION["profile_picture"]);
 
                 echo "<img src='data:image/png;base64," . $img . "' alt='Logo' style='width:48px; height=48px;' class='rounded-pill' onclick='redirect()'>";
               }else{
 
-                echo "<img src='../image/user.svg' alt='Logo'  style='width:48px'; class='rounded-pill' onclick='redirect()'";
+                echo "<img src='../image/default_image.png' alt='Logo'  style='width:48px'; class='rounded-pill' onclick='redirect()'";
               }
               echo "</a>";
             } else {

@@ -12,6 +12,7 @@ class User{
     private $profile_picture;
 
     public function __construct($id_user,$first_name,$last_name,$age,$birthday,$email,$pseudo,$admin,$profile_picture){
+        
         $this->id_user = $id_user;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
@@ -28,14 +29,11 @@ class User{
         
     }
     
-    function displayUserPage(){
-
-        
+    function displayGestionPage(){
         //Create post_info.php
         $img = base64_encode($this->profile_picture);
-    
-        echo "<div id='profile_picture'>";
-        echo "<img src='data:image/png;base64," . $img . "' alt='Logo' style='width:100px;' id='img'>";
+        echo "<div class='profile_picture'>";
+        echo "<a href='../view/user.php'><img src='data:image/png;base64,".$img."' alt='Logo' style='width:125px;' id='img'></a>";
         echo" </div>";
         echo "<div id='user_info'>";
         echo "<p class='info'>First name: $this->first_name</p>";
@@ -44,9 +42,19 @@ class User{
         echo "<p class='info'>Birthday: $this->birthday</p>";
         echo "<p class='info'>Email: $this->email</p>";
         echo "<p class='info'>Pseudo: $this->pseudo</p>";
-        echo "<p class='info'>Admin: $this->admin</p>";
         echo "</div>";
     }
+
+    function displayUserPage(){
+        $img = base64_encode($this->profile_picture);
+        echo "<div class='profile_picture'>";
+        echo "<a href='../view/user.php?id=".$_GET["id"]."'><img src='data:image/png;base64,".$img."' alt='Logo' style='width:125px;' id='img'></a>";
+        echo" </div>";
+        echo "<div id='user_info'>";
+        echo "<p class='info'>Pseudo: $this->pseudo</p>";
+        echo "</div>";
+    }
+
     public function getIdUser() {
         return $this->id_user;
     }
