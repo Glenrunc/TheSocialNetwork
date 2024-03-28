@@ -45,7 +45,7 @@
 
               });
             }else{
-              $("#searchresult").css("display","none");
+              $("#searchresult").empty();
             }
         })
     })
