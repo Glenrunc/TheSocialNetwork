@@ -11,21 +11,19 @@
 
 <?php
     require("database.php");
-    require("../controller/function.php");
+    
     global $db;
-
-
+    session_start();
+    if (isset($_SESSION["id_user"])) {
         require("../view/form_create_post.html");
         if (!empty($_POST)) {
             if (!empty($_POST["content"])) {
-                require("../model/post_info.php");
-                
+            
                 $content = "";
                 
-                $content = SecurizeString_ForSQL($_POST["content"]);
+                $content = $_POST["content"];
                 $id_user = $_SESSION["id_user"];
                 $date = date("Y-m-d H:i:s");
-                $post = new Post($content, $id_user, $date);
                 $query = $db->prepare("INSERT INTO post ( id_user,time,content) VALUES (?,?,?)");
                 $query->execute([$id_user,$date,$content]);
                 echo "<div class=success-box>Post created</div>";
@@ -33,6 +31,6 @@
                 echo "<div class=error-box>Fill all the fields</div>";
             }
         }
-   
+    } 
     ?>
 </body>

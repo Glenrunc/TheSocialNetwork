@@ -1,20 +1,18 @@
 <?php
 class Post {
-    private static $latestId = 0; // Variable statique pour stocker l'ID le plus récent
     private $id;
     private $content;
     private $author;
     private $createdAt;
 
-    public function __construct($content, $author, $createdAt) {
-        $this->id = ++self::$latestId; // Incrémente l'ID à chaque nouvelle instance
-      
+    public function __construct($content, $author, $createdAt,$id) {
+        $this->id = $id;
         $this->content = $content;
         $this->author = $author;
         $this->createdAt = $createdAt;
     }
 
-    // Getters and Setters for the properties
+
 
     public function getId() {
         return $this->id;
@@ -46,7 +44,6 @@ class Post {
     public function displayPost() {
         echo "<div class='post'>";
         echo "<p class='content'>$this->content</p>";
-        echo "<p class='author'>$this->author</p>";
         echo "<p class='createdAt'>$this->createdAt</p>";
         echo "</div>";
     }

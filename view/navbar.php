@@ -12,6 +12,7 @@
           <input type="search" id="search" placeholder="What's happening ?!">
           <button type="submit" id="button">Search</button>
         </form>
+ 
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <?php

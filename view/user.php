@@ -10,8 +10,6 @@
 
 <body>
 
-    <div id="title"><h1>Profil page</h1></div>
-    <div id= "creation_post"><?php require("../model/create_post.php");?></div>
 
     <?php
     require("../controller/function.php");
@@ -52,26 +50,27 @@
 
 
     ?>
-
-    ?>
-    
-    <div id="post-container">
+    <div id="title"><h1>Profil page</h1></div>
+    <div id= "creation_post"><?php require("../model/create_post.php");?></div>
+    <div id="display_post">
         <?php
         require("../model/post_info.php");
-        $sql = "SELECT id_user,time,content FROM post WHERE id_user=?";
-        $qry = $db->prepare($sql);
-        $qry->execute([$user->getIdUser()]);
-        $data = $qry->fetchAll();
-        foreach ($data as $post) {
-            $post = new Post($post["content"], $post["id_user"], $post["time"]);
-            $post->displayPost();
+        $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
+        $query->execute([$_GET["id"]]);
+        $data = $query->fetchAll();
+        $list_post = array();
+        foreach ($data as $post){
+            $new_post = New Post($post["content"],$post["id_user"],$post["time"],$post["id"]);
+            array_push($list_post,$new_post);
         }
+        foreach ($list_post as $post){
+            $post->displayPost();
+        } 
         ?>
     </div>
-<?php 
-echo"<a href=index.php>kerfervfer</a>"
-?>
-<a href="../model/create_post.php">Create a post</a>
+
+    
+
 
 
 </body>
