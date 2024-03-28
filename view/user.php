@@ -9,11 +9,16 @@
 </head>
 
 <body>
+
+    <div id="title"><h1>Profil page</h1></div>
+    <div id= "creation_post"><?php require("../model/create_post.php");?></div>
+
     <?php
     require("../controller/function.php");
     require("../model/database.php");
     require("../model/user_info.php");
     global $db;
+
     if (isset($_GET["id"]) && !isset($_SESSION["id_user"])) {
 
         $id_user = $_GET["id"];
@@ -47,6 +52,28 @@
 
 
     ?>
+
+    ?>
+    
+    <div id="post-container">
+        <?php
+        require("../model/post_info.php");
+        $sql = "SELECT id_user,time,content FROM post WHERE id_user=?";
+        $qry = $db->prepare($sql);
+        $qry->execute([$user->getIdUser()]);
+        $data = $qry->fetchAll();
+        foreach ($data as $post) {
+            $post = new Post($post["content"], $post["id_user"], $post["time"]);
+            $post->displayPost();
+        }
+        ?>
+    </div>
+<?php 
+echo"<a href=index.php>kerfervfer</a>"
+?>
+<a href="../model/create_post.php">Create a post</a>
+
+
 </body>
 
 </html>
