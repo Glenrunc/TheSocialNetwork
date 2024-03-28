@@ -44,6 +44,17 @@ class User{
         echo "<p class='info'>Pseudo: $this->pseudo</p>";
         echo "</div>";
     }
+
+    function displayUserPage(){
+        $img = base64_encode($this->profile_picture);
+        echo "<div class='profile_picture'>";
+        echo "<a href='../view/user.php?id=".$_GET["id"]."'><img src='data:image/png;base64,".$img."' alt='Logo' style='width:125px;' id='img'></a>";
+        echo" </div>";
+        echo "<div id='user_info'>";
+        echo "<p class='info'>Pseudo: $this->pseudo</p>";
+        echo "</div>";
+    }
+
     public function getIdUser() {
         return $this->id_user;
     }
