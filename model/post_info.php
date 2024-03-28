@@ -43,5 +43,12 @@ class Post {
     public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
     }
+    public function displayPost() {
+        echo "<div class='post'>";
+        echo "<p class='content'>$this->content</p>";
+        echo "<p class='author'>$this->author</p>";
+        echo "<p class='createdAt'>$this->createdAt</p>";
+        echo "</div>";
+    }
 }
 ?>

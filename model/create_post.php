@@ -13,10 +13,8 @@
     require("database.php");
     require("../controller/function.php");
     global $db;
-    session_start();
-    if (!isset($_SESSION["id_user"])) {
-        echo "unauthorized";
-    } else {
+
+
         require("../view/form_create_post.html");
         if (!empty($_POST)) {
             if (!empty($_POST["content"])) {
@@ -35,6 +33,6 @@
                 echo "<div class=error-box>Fill all the fields</div>";
             }
         }
-    }
+   
     ?>
 </body>
