@@ -52,3 +52,15 @@ body{
     margin:auto;
     width:fit-content;
 }
+
+#searchresult {
+    overflow-y: scroll; /* Activer le défilement vertical */
+    height: 60px; /* Hauteur de la zone de recherche */
+    scrollbar-width: none; /* Masquer la barre de défilement pour Firefox */
+    -ms-overflow-style: none; /* Masquer la barre de défilement pour IE et Edge */
+}
+
+#searchresult::-webkit-scrollbar {
+    display: none; /* Masquer la barre de défilement pour Chrome, Safari et Opera */
+}
+

@@ -19,7 +19,7 @@
 
     if (!isset($_SESSION["id_user"])) {
         if(isset($_GET["id"])){
-            //on affiche le nombre de follower de following  plus page avec les post car la personne n'est pas co 
+            echo $_GET["id"];
         }else{
             echo'<div><p>unauthorized redirection</p></div>';
         }

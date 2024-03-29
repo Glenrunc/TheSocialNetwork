@@ -4,26 +4,20 @@
     if(isset($_POST["input"])){
         $input = $_POST["input"];
 
-        $sql = "SELECT pseudo FROM user WHERE pseudo LIKE '{$input}%'";
+        $sql = "SELECT id,pseudo FROM user WHERE pseudo LIKE '{$input}%' OR pseudo LIKE '%{$input}%' OR pseudo LIKE '%{$input}' OR pseudo LIKE '{$input}'";
 
         $result = mysqli_query($con,$sql);
 
         if(mysqli_num_rows($result) > 0){?>
             <table class="table table-bordered table-striped mt-4">
-                <thread>
-                    <tr>
-                        <th>Pseudo</th>
-                    </tr>
-                </thread>
                 <tbody>
                     <?php 
                     while($row = mysqli_fetch_assoc($result)){
                         $pseudo = $row["pseudo"];
-                     
-                    
-                        ?>
+                        $id= $row["id"];
+                         ?>
                         <tr>
-                            <td><?php echo $pseudo; ?></td>
+                            <td><a href="../view/user.php?id=<?php echo $id; ?>"><?php echo $pseudo; ?></a></td>
                         </tr>
                         <?php
                     }

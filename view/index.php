@@ -26,8 +26,8 @@
   </div>
 
   <div id="flou-body"></div>
-  <div id="searchresult"></div> 
   <script src="script.js"></script>
+
   <script type=text/javascript>
     $(document).ready(function(){
         $("#search").keyup(function(){

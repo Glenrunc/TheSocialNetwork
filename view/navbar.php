@@ -10,7 +10,7 @@
       <div class="collapse navbar-collapse" id="mynavbar">
         
         <input type="text" id="search" placeholder="What's happening ?!" autocomplete="off">
-          
+        <div id="searchresult"></div> 
       
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
@@ -22,7 +22,7 @@
               if(isset($_SESSION["profile_picture"])){
                 $img = base64_encode($_SESSION["profile_picture"]);
 
-                echo "<img src='data:image/png;base64," . $img . "' alt='Logo' style='width:48px; height=48px;' class='rounded-pill' >";
+                echo "<img src='data:image/png;base64," . $img . "' alt='Logo' style='width:48px; height=48px;'class='rounded-pill' >";
               }else{
 
                 echo "<img src='../image/default_image.png' alt='Logo'  style='width:48px'; class='rounded-pill'";
