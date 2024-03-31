@@ -1,0 +1,21 @@
+body{
+    background-color: #15172b;
+    color:aliceblue;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+
+}
+
+.profile_picture {
+    width: 100px; /* Largeur souhaitée */
+    height: 100px; /* Hauteur souhaitée */
+    overflow: hidden; /* Cache les parties de l'image qui dépassent */
+    border-radius: 50%; /* Rend le conteneur rond */
+  }
+  
+  .profile_picture img {
+    width: 100%; /* Utilise toute la largeur du conteneur */
+    height: 100%; /* Hauteur automatique pour conserver le ratio d'aspect */
+    display: block; /* Assure que l'image est un bloc */
+  }

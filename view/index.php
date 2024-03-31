@@ -35,7 +35,7 @@
 
             if(input != ""){
               $.ajax({
-                url:"livesearch.php",
+                url:"../model/livesearch.php",
                 method:"POST",
                 data:{input:input},
 
