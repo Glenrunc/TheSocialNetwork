@@ -16,14 +16,3 @@ function checkAndRedirect() {
  
 }
 
-function toSignup(){
-    window.location.href = "../model/signup.php";
-}
-
-function redirect()
-{
-    window.location.href = "../view/user.php";
-}
-
-
-

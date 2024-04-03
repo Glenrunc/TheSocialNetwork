@@ -36,7 +36,6 @@
                 $age = intval(date("Y")) - intval(substr($birthday, 0, 4));
 
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    // echo "<div class=error-box>Type a correct email</div>";
                     echo' <script> alert("Type a correct email")</script>';
                     $bool = False;
                 } else {
@@ -47,7 +46,6 @@
 
                     if ($bool2) {
                         $bool2 = False;
-                        // echo "<div class=error-box>email already exists</div>";
                         echo' <script> alert("email already exists")</script>';
 
                     } else {
@@ -61,7 +59,6 @@
 
                 if ($bool3) {
                     $bool3 = False;
-                    // echo "<div class=error-box>Pseudo already exists</div>";
                     echo' <script> alert("Pseudo already exists")</script>';
                     
                 } else {
@@ -76,11 +73,9 @@
                 }
 
                 if ($age <= 13) {
-                    // echo "<div class=error-box>you must be 13 years old</div>";
                     echo' <script> alert("you must be 13 years old")</script>';
                     $bool = False;
                 }
-                // echo"$bool , $bool2, $bool3";
                 if ($bool && $bool2 && $bool3) {
                     __sendDataUser($first_name,$last_name,$age,$birthday,$email,$pass,$pseudo,$db);
                     $_SESSION["id_user"] = $db->lastInsertId();
@@ -99,7 +94,7 @@
                         $qry->execute([file_get_contents($_FILES["profile_picture"]["tmp_name"]), $email]);
                         $_SESSION['profile_picture'] = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
                     }
-                    header("Location: ../view/user.php");
+                    header("Location: ../view/user.php?id=".$_SESSION["id_user"]);
                 }
             } else {
                 die("You must fill all the fields");

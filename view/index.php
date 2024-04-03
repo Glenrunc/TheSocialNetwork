@@ -26,15 +26,32 @@
   </div>
 
   <div id="flou-body"></div>
- 
   <script src="script.js"></script>
-  <div class="displaypost">
-  <!-- <?php   
-  $query = $db->prepare("SELECT * FROM post WHERE id_user = ? ORDER BY created_at DESC");
-  $query->execute([$_SESSION["id_user"]]);
-  $user = $query->fetch(); ?> -->
 
-  </div>
+  <script type=text/javascript>
+    $(document).ready(function(){
+        $("#search").keyup(function(){
+            var input = $(this).val();
+
+            if(input != ""){
+              $.ajax({
+                url:"../model/livesearch.php",
+                method:"POST",
+                data:{input:input},
+
+                success:function(data){
+                  $("#searchresult").html(data);
+                }
+
+              });
+            }else{
+              $("#searchresult").empty();
+            }
+        })
+    })
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 </body>
 
 </html>

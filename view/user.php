@@ -4,46 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/user_page.css" rel="stylesheet">
     <title>TZU</title>
 
 </head>
 
 <body>
 
-    
+
     <?php
     require("../controller/function.php");
     require("../model/database.php");
     require("../model/user_info.php");
+    session_start();
     global $db;
 
-    if (isset($_GET["id"]) && !isset($_SESSION["id_user"])) {
-
-        $id_user = $_GET["id"];
-        $sql = "SELECT MAX(id) as id FROM user";
-        $qry = $db->prepare($sql);
-        $qry->execute();
-        $data = $qry->fetch();
-        // echo'<script> console.log('.$data["id"].')</script>';
-        if($data["id"] >= $id_user){
-            $sql = "SELECT id,first_name,last_name,age,birthday,email,pseudo,admin,profil_picture FROM user WHERE id=?";
-            $qryUser = $db->prepare($sql);
-            $qryUser->execute([$_GET["id"]]);
-            $dataUser = $qryUser->fetch();
-
-            if($dataUser !== false){
-                $user = new User($dataUser["id"], $dataUser["first_name"], $dataUser["last_name"], $dataUser["age"], $dataUser["birthday"], $dataUser["email"], $dataUser["pseudo"], $dataUser["admin"], $dataUser["profil_picture"]);
-                $user->displayUserPage();
-            }else{
-                echo"<div class='unauthorized'><p>This page doesn't exist</p></div>";
-
+    if(isset($_GET["id"])){
+        $sql = "SELECT * FROM user WHERE id = ?";
+        $query = $db->prepare($sql);
+        $query->execute([$_GET["id"]]);
+        $data = $query->fetch();
+        if($data){
+            $user = new User($data["id"],$data["first_name"],$data["last_name"],$data["age"],$data["birthday"],$data["email"],$data["pseudo"],$data["admin"],$data["profil_picture"]);
+            $user->displayUserPage();
+            //afficher follower number
+            //bouton follow
+            //afficher post
+            if(isset($_SESSION["id_user"])){
+                if($_SESSION["id_user"] == $data["id"]){
+                    echo'<div><a href="../model/user_gestion.php">Edit</a></div>';
+                    //afficher création de post 
+                }
             }
-
-            // $user = new User($dataUser["id"], $dataUser["first_name"], $dataUser["last_name"], $dataUser["age"], $dataUser["birthday"], $dataUser["email"], $dataUser["pseudo"], $dataUser["admin"], $dataUser["profil_picture"]);
-            // $user->displayUserPage();
         }else{
-            echo"<div class='unauthorized'><p>This page doesn't exist</p></div>";
+            echo'<div><p>user not found</p></div>';
         }
+        
+    }else{
+        echo'<div><p>unauthorized</p></div>';
     }
 
     ?>
@@ -56,6 +54,7 @@
 
 if(isset($_SESSION['id_user']) && isset($_GET['id']) && $_SESSION['id_user'] == $_GET['id']) {
     ?>
+
     <div id="title"><h1>Profil page</h1></div>
     <div id= "creation_post"><?php require("../model/create_post.php");?></div>
     <div id="display_post">

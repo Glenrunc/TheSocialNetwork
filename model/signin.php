@@ -43,7 +43,7 @@
                         $_SESSION["email"] = $user["email"];
                         $_SESSION["pseudo"] = $user["pseudo"];
                         $_SESSION["profile_picture"]= $user["profil_picture"];
-                        header("Location: ../view/user.php");
+                        header("Location: ../view/user.php?id=".$_SESSION["id_user"]);
                     }
                 }
             } else {
