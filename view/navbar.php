@@ -12,6 +12,7 @@
         <input type="text" id="search" placeholder="What's happening ?!" autocomplete="off">
         <div id="searchresult"></div> 
       
+
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <?php
