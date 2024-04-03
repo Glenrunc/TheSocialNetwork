@@ -13,7 +13,7 @@
     require("database.php");
     
     global $db;
-    session_start();
+    // session_start();
     if (isset($_SESSION["id_user"])) {
         require("../view/form_create_post.html");
         if (!empty($_POST)) {
