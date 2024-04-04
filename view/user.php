@@ -48,7 +48,6 @@
 
 
 <?php
-    session_start();
     echo "ID provenant de GET : " . $_GET['id'] . "<br>";
     echo "ID de session utilisateur : " . $_SESSION['id_user'] . "<br>";
 
