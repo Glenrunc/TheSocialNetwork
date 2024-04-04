@@ -1,0 +1,221 @@
+body {
+  display: flex;
+  background-color: #15172b;
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 16px;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+
+}
+
+.info {
+  color: #eee;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.profile_picture {
+  width: 100px; /* Largeur souhaitée */
+  height: 100px; /* Hauteur souhaitée */
+  overflow: hidden; /* Cache les parties de l'image qui dépassent */
+  border-radius: 50%; /* Rend le conteneur rond */
+}
+
+.profile_picture img {
+  width: 100%; /* Utilise toute la largeur du conteneur */
+  height: 100%; /* Hauteur automatique pour conserver le ratio d'aspect */
+  display: block; /* Assure que l'image est un bloc */
+}
+
+#img {
+  translate: -10%;
+  border-radius: 50%;
+}
+
+#contenu {
+  position: relative;
+}
+
+#user_info {
+  height: fit-content;
+  width: fit-content;
+  margin-top: 50px;
+  border-radius: 20px;
+  border: solid 3px #0a091c;
+}
+
+#contenu {
+  position: relative;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.5);
+  /* fond semi-transparent */
+  z-index: 1000;
+  /* au-dessus de tout */
+}
+
+#rectangle {
+  border-radius: 50px;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #15172b;
+  z-index: 1001;
+  /* au-dessus de l'overlay */
+}
+
+
+#flou-body {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* backdrop-filter: blur(5px); flou gaussien */
+  pointer-events: none;
+  z-index: 999;
+  /* au-dessous de l'overlay */
+}
+
+.form {
+  background-color: #0e1523;
+  border-radius: 20px;
+  box-sizing: border-box;
+  height: fit-content;
+  padding: 20px;
+  width: fit-content;
+
+}
+
+.title {
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  margin-top: 30px;
+}
+
+.subtitle {
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.input-container {
+  height: 50px;
+  position: relative;
+  width: 100%;
+}
+
+.ic1 {
+  margin-top: 40px;
+}
+
+.ic2 {
+  margin-top: 30px;
+}
+
+.input {
+  background-color: #fefefe;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: black;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: 100%;
+}
+
+.cut {
+  background-color: #0e1117;
+  border-radius: 10px;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: -20px;
+  transform: translateY(0);
+  transition: transform 200ms;
+  width: 110px
+}
+
+.cut-short {
+  width: 50px;
+}
+
+.input:focus~.cut,
+.input:not(:placeholder-shown)~.cut {
+  transform: translateY(8px);
+}
+
+.placeholder {
+  color: transparent;
+  font-family: sans-serif;
+  left: 20px;
+  line-height: 14px;
+  pointer-events: none;
+  position: absolute;
+  transform-origin: 0 50%;
+  transition: transform 200ms, color 200ms;
+  top: 20px;
+}
+
+.input:focus~.placeholder,
+.input:not(:placeholder-shown)~.placeholder {
+  transform: translateY(-30px) translateX(10px) scale(0.75);
+}
+
+.input:not(:placeholder-shown)~.placeholder {
+  color: transparent;
+}
+
+.input:focus~.placeholder {
+  background-color: transparent;
+  color: #cf4e4e;
+}
+
+.submit {
+  background-color: rgb(11, 55, 82);
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  margin-top: 38px;
+  /* outline: 0; */
+  text-align: center;
+  width: 100%;
+}
+
+.submit:active {
+  background-color: #06b;
+}
+
+#button {
+  box-sizing: border-box;
+  font-size: 18px;
+  height: fit-content;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: fit-content;
+}

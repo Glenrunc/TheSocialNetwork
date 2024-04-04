@@ -6,4 +6,10 @@
       echo "Connection failed: " . $e->getMessage();
       exit(); 
     }
+
+    $con = mysqli_connect("localhost", "root", "", "socialnetwork");
+
+    if(!$con){
+      echo "Connection failed" . mysqli_connect_error();
+    }
 ?>

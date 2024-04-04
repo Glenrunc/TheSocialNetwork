@@ -1,12 +1,66 @@
+
 body{
-    position: relative;
-    /* height: 2000px; */
-    background-color: #ffffff;
-    
+    margin: 0;
+    padding: 0;
+    background-color: #151515;
 }
 
-.test{
-    position: absolute;
-    background-color: red;
-    display:none;
+
+#contenu {
+    position: relative;
 }
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    backdrop-filter: blur(5px);
+
+    background-color: rgba(0, 0, 0, 0.5); /* fond semi-transparent */
+    z-index: 1000; /* au-dessus de tout */
+}
+
+#rectangle {
+    border-radius:50px;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #15172b;
+    z-index: 1001; /* au-dessus de l'overlay */
+}
+
+
+#flou-body {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    pointer-events: none; 
+    z-index: 999; /* au-dessous de l'overlay */
+}
+
+#para{
+    margin:auto;
+    width:fit-content;
+}
+
+#searchresult {
+    overflow-y: scroll; /* Activer le défilement vertical */
+    height: 60px; /* Hauteur de la zone de recherche */
+    scrollbar-width: none; /* Masquer la barre de défilement pour Firefox */
+    -ms-overflow-style: none; /* Masquer la barre de défilement pour IE et Edge */
+}
+
+#searchresult::-webkit-scrollbar {
+    display: none; /* Masquer la barre de défilement pour Chrome, Safari et Opera */
+}
+
