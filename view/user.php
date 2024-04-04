@@ -25,7 +25,7 @@
         $query->execute([$_GET["id"]]);
         $data = $query->fetch();
         if($data){
-            $user = new User($data["id"],$data["first_name"],$data["last_name"],$data["age"],$data["birthday"],$data["email"],$data["pseudo"],$data["admin"],$data["profil_picture"]);
+            $user = new User($data["id"],$data["first_name"],$data["last_name"],$data["age"],$data["birthday"],$data["email"],$data["pseudo"],$data["admin"],$data["profile_picture"]);
             $user->displayUserPage();
             //afficher follower number
             //bouton follow

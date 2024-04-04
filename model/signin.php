@@ -42,7 +42,7 @@
                         $_SESSION["id_user"] = $user["id"];
                         $_SESSION["email"] = $user["email"];
                         $_SESSION["pseudo"] = $user["pseudo"];
-                        $_SESSION["profile_picture"]= $user["profil_picture"];
+                        $_SESSION["profile_picture"]= $user["profile_picture"];
                         header("Location: ../view/user.php?id=".$_SESSION["id_user"]);
                     }
                 }
