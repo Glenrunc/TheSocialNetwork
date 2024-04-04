@@ -48,6 +48,7 @@
 
 
 <?php
+
     echo "ID provenant de GET : " . $_GET['id'] . "<br>";
     echo "ID de session utilisateur : " . $_SESSION['id_user'] . "<br>";
 
@@ -57,6 +58,7 @@ if(isset($_SESSION['id_user']) && isset($_GET['id']) && $_SESSION['id_user'] == 
     <div id="title"><h1>Profil page</h1></div>
     <div id= "creation_post"><?php require("../model/create_post.php");?></div>
     <div id="display_post">
+
     <?php
     require("../model/post_info.php");
     $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
@@ -73,28 +75,42 @@ if(isset($_SESSION['id_user']) && isset($_GET['id']) && $_SESSION['id_user'] == 
     ?>
     </div>
     <?php
+}elseif($_SESSION['id_user'] != $_GET['id']){    
+    ?>
+    <form method="post">
+    <input type="submit" name="follow" value="Follow">
+    </form>
+<?php
 }
 ?>
 
-<form method="post">
-    <input type="submit" name="follow" value="Follow">
-</form>
-<?php
 
-    if(isset($_SESSION['user_id'])) {
-    $id_user = $_SESSION['user_id']; // ID de l'utilisateur actuellement connecté
+<?php
+    
+    echo "ID de l'utilisateur actuellement connecté : ".$_SESSION['id_user']. "<br>";
+    if(isset($_SESSION['id_user'])) {
+    $id_user = $_SESSION['id_user']; // ID de l'utilisateur actuellement connecté
     echo "ID de l'utilisateur actuellement connecté : " . $id_user . "<br>";
     if(isset($_GET['id'])) {
         $id_follow = $_GET['id']; // ID de l'utilisateur que l'on veut suivre
         echo "ID de l'utilisateur que l'on veut suivre : " . $id_follow . "<br>";
     }
-
     if(isset($_POST['follow'])) {
-
-        $query = $db->prepare("INSERT INTO follow (id_user,id_follow) VALUES (?, ?)");
-        $query->execute([$id_user, $id_follow]);
-
-        echo "Vous suivez maintenant l'utilisateur.";
+        // Vérifier si le suivi n'est pas déjà actif
+        $query_check_follow = $db->prepare("SELECT COUNT(*) FROM follow WHERE id_user = ? AND id_follow = ?");
+        $query_check_follow->execute([$id_user, $id_follow]);
+        $count_follow = $query_check_follow->fetchColumn();
+    
+        if($count_follow > 0) {
+            // L'utilisateur suit déjà l'autre utilisateur
+            echo "Vous suivez déjà cet utilisateur.";
+        } else {
+            // Le suivi n'est pas déjà actif, donc on l'insère
+            $query_insert_follow = $db->prepare("INSERT INTO follow (id_user, id_follow) VALUES (?, ?)");
+            $query_insert_follow->execute([$id_user, $id_follow]);
+    
+            echo "Vous suivez maintenant l'utilisateur.";
+        }
     }
 }
 ?>
