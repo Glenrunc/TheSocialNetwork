@@ -3,9 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>create Post</title>
- 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     </head>
 <body>
 
@@ -25,7 +23,8 @@
                 $date = date("Y-m-d H:i:s");
                 $query = $db->prepare("INSERT INTO post ( id_user,time,content) VALUES (?,?,?)");
                 $query->execute([$id_user,$date,$content]);
-                echo "<div class=success-box>Post created</div>";
+                header("Location: ../view/user.php?id=".$_SESSION["id_user"]);
+                exit;
             } else {
                 echo "<div class=error-box>Fill all the fields</div>";
             }

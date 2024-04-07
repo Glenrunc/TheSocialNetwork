@@ -1,11 +1,11 @@
-body {
-    align-items: center;
+ body {
+    /* align-items: center; */
 
-    background-color: #151515;
-    display: flex;
-    justify-content: center;
+   
+    /* display: flex;
+    justify-content: center; */
     background-color: #15172b;
-  }
+  } 
   
   .form {
     background-color: #0e1117;

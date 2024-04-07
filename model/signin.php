@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/signin.css" rel="stylesheet">
 
-    <title>Signin</title>
 </head>
 
 <body>
-    <!-- <?php session_start();?>; -->
     <?php
     require("../controller/function.php");
     global $db;
@@ -42,8 +40,8 @@
                         $_SESSION["id_user"] = $user["id"];
                         $_SESSION["email"] = $user["email"];
                         $_SESSION["pseudo"] = $user["pseudo"];
-                        $_SESSION["profile_picture"]= $user["profil_picture"];
-                        header("Location: ../view/user.php?id=".$_SESSION["id_user"]);
+                        $_SESSION["profile_picture"]= $user["profile_picture"];
+                        header("Location: #");
                     }
                 }
             } else {

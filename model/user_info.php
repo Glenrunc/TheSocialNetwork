@@ -10,6 +10,7 @@ class User{
     private $pseudo;
     private $admin;
     private $profile_picture;
+    private $ban;
 
     public function __construct($id_user,$first_name,$last_name,$age,$birthday,$email,$pseudo,$admin,$profile_picture){
         
@@ -31,9 +32,9 @@ class User{
     
     function displayGestionPage(){
         //Create post_info.php
-        $img = base64_encode($this->profile_picture);
+        $img_path = $this->profile_picture;
         echo "<div class='profile_picture'>";
-        echo "<a href='../view/user.php?id=".$this->id_user."'><img src='data:image/png;base64,".$img."' alt='Logo' style='width:125px;' id='img'></a>";
+        echo "<a href='../view/user.php?id=".$this->id_user."'><img src='../image/avatar_user/".$img_path."' alt='Logo' style='width:125px;' id='img'></a>";
         echo" </div>";
         echo "<div id='user_info'>";
         echo "<p class='info'>First name: $this->first_name</p>";
@@ -46,12 +47,13 @@ class User{
     }
 
     function displayUserPage(){
-        $img = base64_encode($this->profile_picture);
+        $img_path = $this->profile_picture;
+        // echo "<p>".$img_path."</p>";
         echo "<div class='profile_picture'>";
-        echo "<a href='../view/user.php?id=".$_GET["id"]."'><img src='data:image/png;base64,".$img."' alt='Logo' style='width:125px;' id='img'></a>";
+        echo "<a href='../view/user.php?id=".$this->id_user."'><img src='../image/avatar_user/".$img_path."' alt='Logo' style='width:125px;' id='img'></a>";
         echo" </div>";
         echo "<div id='user_info'>";
-        echo "<p class='info'>Pseudo: $this->pseudo</p>";
+        echo "<p class='info'>$this->pseudo</p>";
         echo "</div>";
         //rajouter les autres infos
         //follow number
