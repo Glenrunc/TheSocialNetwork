@@ -1,4 +1,5 @@
 <?php
+
 class Post {
     private $id;
     private $content;
@@ -42,7 +43,20 @@ class Post {
         $this->createdAt = $createdAt;
     }
     public function displayPost() {
+        require("../model/database.php");
+        global $db;
         echo "<div class='post'>";
+        $query = $db->prepare("SELECT * FROM user WHERE id=?");
+        $query->execute([$this->author]);
+        $data = $query->fetch();
+        if ($data) {
+            echo "<a class='hello' id='nav-link' href='../view/user.php?id=" . $this->author . "'>";
+            echo "<p class='author'>" . $data["pseudo"] . "</p>";
+            echo "</a>";
+        } else {
+            echo "<p class='author'>Unknown</p>";
+        }
+        
         echo "<p class='content'>$this->content</p>";
         echo "<p class='createdAt'>$this->createdAt</p>";
         echo "</div>";

@@ -1,5 +1,5 @@
 <?php 
-
+    require("../model/post_info.php");
     function SecurizeString_ForSQL($string) {
         $string = trim($string);
         $string = stripcslashes($string);
@@ -14,5 +14,11 @@
         $query = $db->prepare($sql);
         $query->execute(array($first_name, $last_name, $age, $birthday, $email,$password,$pseudo));
     }
-
+    function _displayPost($data) {
+        foreach($data as $post) {
+            $post = new Post($post["content"], $post["id_user"], $post["time"],$post["id"]);
+            $post->displayPost();
+         
+        }
+    }
 ?>

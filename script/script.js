@@ -16,3 +16,12 @@ function checkAndRedirect() {
  
 }
 
+function showRecent() {
+    document.getElementById('recent').style.display = 'block';
+    document.getElementById('follow').style.display = 'none';
+  }
+  
+  function showFollowed() {
+    document.getElementById('recent').style.display = 'none';
+    document.getElementById('follow').style.display = 'block';
+  }
