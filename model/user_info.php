@@ -53,7 +53,7 @@ class User{
         echo "<a href='../view/user.php?id=".$this->id_user."'><img src='../image/avatar_user/".$img_path."' alt='Logo' style='width:125px;' id='img'></a>";
         echo" </div>";
         echo "<div id='user_info'>";
-        echo "<p class='info'>Pseudo: $this->pseudo</p>";
+        echo "<p class='info'>$this->pseudo</p>";
         echo "</div>";
         //rajouter les autres infos
         //follow number

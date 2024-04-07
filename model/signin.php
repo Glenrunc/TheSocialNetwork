@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/signin.css" rel="stylesheet">
 
-    <title>Signin</title>
 </head>
 
 <body>
-    <!-- <?php session_start();?>; -->
     <?php
     require("../controller/function.php");
     global $db;

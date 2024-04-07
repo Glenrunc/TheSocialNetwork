@@ -18,7 +18,7 @@
     $data = $query->fetchAll();
     $list_post = array();
     foreach ($data as $post){
-        $new_post = New Post($post["content"],$post["id_user"],$post["time"]);
+        $new_post = New Post($post["content"],$post["id_user"],$post["time"],$_GET["id"]);
         array_push($list_post,$new_post);
     }
     foreach ($list_post as $post){

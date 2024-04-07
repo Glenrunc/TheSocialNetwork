@@ -1,9 +1,8 @@
 body{
     background-color: #15172b;
     color:aliceblue;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: large;
 
 }
 
@@ -19,3 +18,22 @@ body{
     height: 100%; /* Hauteur automatique pour conserver le ratio d'aspect */
     display: block; /* Assure que l'image est un bloc */
   }
+
+  .post{
+    padding-top: 1em; /* Ajustez cette valeur en fonction de vos besoins */
+
+    border: solid 3px #c5c4c4;
+
+    border-radius: 10px;
+    background-color: #15172b;
+    box-shadow: 0 0 10px #000;
+    margin: 10px;
+    padding: 10px;
+    /* width: 300px; */
+    /* height : 50px */
+  }
+
+  #user_info{
+    width: fit-content;
+  }
+ 
