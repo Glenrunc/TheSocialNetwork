@@ -51,8 +51,11 @@
   <div id="follow" >
    
             <?php
-            
-            // Récupérer les utilisateurs
+            if (!isset($_SESSION["id_user"])) {
+                echo "<p>Vous devez être connecté pour voir les publications des utilisateurs que vous suivez.</p>";
+              
+            }else{
+                         // Récupérer les utilisateurs
             $sql_follow = "SELECT id_follow FROM follow WHERE id_user = ?";
             $query_follow = $db->prepare($sql_follow);
             $query_follow->execute([$_SESSION["id_user"]]);
@@ -72,6 +75,8 @@
                 }
             
             }
+            }
+
             ?>
         
     
