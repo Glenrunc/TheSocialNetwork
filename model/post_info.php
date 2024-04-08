@@ -6,16 +6,26 @@ class Post
     private $content;
     private $author;
     private $createdAt;
-
-    public function __construct($content, $author, $createdAt, $id)
+    private $comments;
+    public function __construct($content, $author, $createdAt ,$id)
     {
         $this->id = $id;
         $this->content = $content;
         $this->author = $author;
         $this->createdAt = $createdAt;
+        $this->comments = array();
     }
 
 
+    public function addComment($comment)
+    {
+        $this->comments[] = array_push($this->comments, $comment);
+    }
+
+    public function getComments()
+    {
+        return $this->comments;
+    }
 
     public function getId()
     {
