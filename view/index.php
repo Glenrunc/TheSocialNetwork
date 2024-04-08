@@ -25,13 +25,13 @@
     // require("../controller/function.php");
   ?>
   </a>
-
-    <div id="postbox">
-    <div id="button">
+  <div id="button">
   <button onclick="showRecent()">Afficher les publications récentes</button>
   <button onclick="showFollowed()">Afficher les publications suivies</button>
 </div>
-  <div id="recent" class="post">
+    <div id="postbox">
+
+  <div id="recent">
     <?php
     $sql = "SELECT * FROM post ORDER BY time DESC";
     $query = $db->prepare($sql);
@@ -46,11 +46,11 @@
 
     ?>
   </div>
-  <div id="follow" class="post">
+  <div id="follow" >
    
             <?php
             
-            // Récupérer les utilisateurs que vous suivez
+            // Récupérer les utilisateurs
             $sql_follow = "SELECT id_follow FROM follow WHERE id_user = ?";
             $query_follow = $db->prepare($sql_follow);
             $query_follow->execute([$_SESSION["id_user"]]);
