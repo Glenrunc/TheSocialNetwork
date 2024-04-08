@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm mt-5 my-3 navbar-dark rounded" style="background-color: #303245; width: 800px;margin: 0 auto;">
+<nav class="navbar navbar-expand-sm mt-5 my-3 navbar-dark rounded sticky-top" style="background-color: #303245; width: 800px;margin: 0 auto;">
   <div class="container ">
     <a class="navbar-brand" href="../view/index.php">
       <img src="../image/Logo_TZU.png" alt="Logo" style="width:40px;" class="rounded-pill">

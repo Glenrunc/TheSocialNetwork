@@ -49,7 +49,7 @@
             echo '<div><p>user not found</p></div>';
         }
     } else {
-        echo '<div><p>unauthorized</p></div>';
+       header("Location: ../view/user.php?id=".$_SESSION['id_user']);
     }
 
     ?>
@@ -91,7 +91,7 @@
             </div>
         <?php
     } else {
-        //DO something 
+    
     }
         ?>
 
@@ -125,7 +125,7 @@
             }
         }
         ?>
-
+  
 
 </body>
 
