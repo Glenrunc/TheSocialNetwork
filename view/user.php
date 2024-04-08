@@ -52,7 +52,9 @@
 
 
     } else {
-        
+
+       header("Location: ../view/user.php?id=".$_SESSION['id_user']);
+
     }
 
     ?>
@@ -74,6 +76,8 @@
             } ?>
             </div>
         <?php
+
+
     }
         ?>
 
@@ -126,10 +130,11 @@
         
         }
         ?>
-        <?php     
+  <?php     
 }
 
         ?>
+
 
 </body>
 

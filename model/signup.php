@@ -18,7 +18,6 @@
     if (isset($_SESSION["id_user"])) {
         echo "unauthorized";
     } else {
-        require("../view/form_signup.html");
 
         if (!empty($_POST)) {
 
@@ -100,10 +99,13 @@
                     }
                     header("Location: ../view/user.php?id=".$_SESSION["id_user"]);
                 }
+
             } else {
                 die("You must fill all the fields");
             }
         }
+        require("../view/form_signup.html");
+
     }
     ?>
 </body>
