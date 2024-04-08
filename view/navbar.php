@@ -25,27 +25,33 @@
               } else {
                 echo "<p id='para'>" . $_SESSION['pseudo'] . "</p>";
                 echo "<a id='nav-link' href='../model/deconnect.php'>Deconnection</a>";
-                echo " <a id='nav-link' href='../view/user.php?id=" . $_SESSION["id_user"] . "'>";
+                echo " <a class= 'hello' id='nav-link' href='../view/user.php?id=" . $_SESSION["id_user"] . "'>";
                 if (isset($_SESSION["profile_picture"])) {
                   echo "<img src='../image/avatar_user/" . $_SESSION["profile_picture"] . "' alt='Logo' style='width:48px; height=48px;'class='' >";
+                  
                 } else {
-
+                  
                   echo "<img src='../image/default_image.png' alt='Logo'  style='width:48px'; class='rounded-pill'";
                 }
+                
                 echo "</a>";
               }
             }else{
                 echo "<p id='para'>" . $_SESSION['pseudo'] . "</p>";
                 echo "<a id='nav-link' href='../model/deconnect.php'>Deconnection</a>";
-                echo " <a id='nav-link' href='../view/user.php?id=" . $_SESSION["id_user"] . "'>";
+                echo " <a class'test' id='nav-link' href='../view/user.php?id=" . $_SESSION["id_user"] . "'>";
+                
                 if (isset($_SESSION["profile_picture"])) {
                   echo "<img src='../image/avatar_user/" . $_SESSION["profile_picture"] . "' alt='Logo' style='width:48px; height=48px;'class='' >";
+                  
                 } else {
 
                   echo "<img src='../image/default_image.png' alt='Logo'  style='width:48px'; class='rounded-pill'";
+               
                 }
-                echo "</a>";
+                
             }
+            
           } else {
             echo " <a id='nav-link' >";
             echo "<img src='../image/user.svg' alt='Logo' style='width:48px'; class='rounded-pill' onclick='checkAndRedirect()'";

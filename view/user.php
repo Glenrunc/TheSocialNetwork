@@ -46,10 +46,15 @@
                 }
             }
         } else {
-            echo '<div><p>user not found</p></div>';
+            header("Location: ../view/user.php?id=".$_SESSION['id_user']);
+
         }
+
+
     } else {
+
        header("Location: ../view/user.php?id=".$_SESSION['id_user']);
+
     }
 
     ?>
@@ -68,64 +73,68 @@
             <div id="display_post">
 
                 <?php
-                require("../model/post_info.php");
-                $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
-                $query->execute([$_GET["id"]]);
-                $data = $query->fetchAll();
-                $list_post = array();
-                foreach ($data as $post) {
-                    $new_post = new Post($post["content"], $post["id_user"], $post["time"], $post["id"]);
-                    array_push($list_post, $new_post);
-                }
-                foreach ($list_post as $post) {
-                    $post->displayPost();
-                }
-            } else {
-                ?>
-                <form method="post">
-                    <input type="submit" name="follow" value="Follow">
-                </form>
-            <?php
-            }
-            ?>
+            } ?>
             </div>
         <?php
-    } else {
-    
+
+
     }
         ?>
 
-
+       <!-- follow gestion code -->
         <?php
 
         // echo "ID de l'utilisateur actuellement connecté : ".$_SESSION['id_user']. "<br>";
-        if (isset($_SESSION['id_user'])) {
+        if (isset($_SESSION['id_user']) && isset($_GET['id'])) {
             $id_user = $_SESSION['id_user']; // ID de l'utilisateur actuellement connecté
             // echo "ID de l'utilisateur actuellement connecté : " . $id_user . "<br>";
-            if (isset($_GET['id'])) {
-                $id_follow = $_GET['id']; // ID de l'utilisateur que l'on veut suivre
+            
+            $id_follow = $_GET['id']; // ID de l'utilisateur que l'on veut suivre
                 // echo "ID de l'utilisateur que l'on veut suivre : " . $id_follow . "<br>";
+            
+            if ($id_follow == $id_user) {
+                $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
+                $query->execute([$_GET["id"]]);
+                $data = $query->fetchAll();
+                _displayPost($data);
             }
-            if (isset($_POST['follow'])) {
-                // Vérifier si le suivi n'est pas déjà actif
-                $query_check_follow = $db->prepare("SELECT COUNT(*) FROM follow WHERE id_user = ? AND id_follow = ?");
+            // ON VISITE LA PAGE D'UN AUTRE UTILISATEUR
+            else { 
+                require("../model/follow.php");
+                $query_check_follow = $db->prepare("SELECT * FROM follow WHERE id_user = ? AND id_follow = ?");
                 $query_check_follow->execute([$id_user, $id_follow]);
-                $count_follow = $query_check_follow->fetchColumn();
-
-                if ($count_follow > 0) {
-                    // L'utilisateur suit déjà l'autre utilisateur
-                    echo "Vous suivez déjà cet utilisateur.";
-                } else {
-                    // Le suivi n'est pas déjà actif, donc on l'insère
-                    $query_insert_follow = $db->prepare("INSERT INTO follow (id_user, id_follow) VALUES (?, ?)");
-                    $query_insert_follow->execute([$id_user, $id_follow]);
-
-                    echo "Vous suivez maintenant l'utilisateur.";
-                }
+                $data = $query_check_follow->fetch();
+                // ON CHECK SI ON LE FOLLOW OU PAS SI OUI ON AFFICHE SES POSTS
+                if ($data) {          
+                    $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
+                    $query->execute([$_GET["id"]]);
+                    $data = $query->fetchAll();
+                    _displayPost($data);
+                    require("../view/form_unfollow.html");
+                    ?>
+                    
+                    <?php
             }
+            // SINON ON AFFICHE UN BOUTON POUR LE FOLLOW
+            else {
+                require("../view/form_follow.html");
+                ?>
+                
+                <p> ne suivez pas encore cet utilisateur. Suivez-le pour voir ses publications.</p>
+                <?php
+                
+            }  ?>
+            <?php
+           
+   
+        
         }
         ?>
-  
+  <?php     
+}
+
+        ?>
+
 
 </body>
 

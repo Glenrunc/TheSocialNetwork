@@ -20,3 +20,50 @@ body{
 #searchresult::-webkit-scrollbar {
     display: none; /* Masquer la barre de défilement pour Chrome, Safari et Opera */
 }
+#button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: fit-content;
+}
+
+#postbox {
+    margin-top: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+    /* background-color: green; */
+}
+
+#recent, #follow {
+    position: relative; /* Changez de position absolue à relative */
+    width: fit-content;
+    height: fit-content;
+    display: none;
+    border: 1px solid green;
+    /* background-color: yellow;  */
+    margin-top: 0px;
+}
+#follow {
+    margin-top: 0px;
+}
+.post {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #cccfed;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.show {
+    display: block !important; /* Pour afficher une div */
+}
