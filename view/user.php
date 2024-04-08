@@ -105,6 +105,7 @@
                 $query_check_follow->execute([$id_user, $id_follow]);
                 $data = $query_check_follow->fetch();
                 // ON CHECK SI ON LE FOLLOW OU PAS SI OUI ON AFFICHE SES POSTS
+            
                 if ($data) {          
                     $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
                     $query->execute([$_GET["id"]]);

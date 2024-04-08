@@ -20,38 +20,49 @@ body{
 #searchresult::-webkit-scrollbar {
     display: none; /* Masquer la barre de défilement pour Chrome, Safari et Opera */
 }
+#maincontainer {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f0f0f0;
+}
+
 #button {
     position: absolute;
-    top: 50%;
+    top: 20px; /* Ajustez selon vos besoins */
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     text-align: center;
     width: fit-content;
 }
 
 #postbox {
-    margin-top: 600px;
     position: absolute;
-    top: 50%;
+    top: calc(50% + 100px); /* Ajustez la marge en fonction de la hauteur des boutons */
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     width: fit-content;
-    height: fit-content;
-    /* background-color: green; */
+    height: 100%;
+   
 }
 
-#recent, #follow {
-    position: relative; /* Changez de position absolue à relative */
+#recent,
+#follow {
     width: fit-content;
     height: fit-content;
-    display: none;
-    border: 1px solid green;
-    /* background-color: yellow;  */
-    margin-top: 0px;
+    
+
 }
 #follow {
-    margin-top: 0px;
+    display: none;
+}
+#recent {
+    display: block;
 }
 .post {
     width: 100%;
@@ -65,5 +76,5 @@ body{
 }
 
 .show {
-    display: block !important; /* Pour afficher une div */
+    display: block !important;
 }

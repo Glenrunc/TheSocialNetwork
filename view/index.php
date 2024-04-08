@@ -25,10 +25,12 @@
     // require("../controller/function.php");
   ?>
   </a>
+  <div id ="maincontainer">
   <div id="button">
   <button onclick="showRecent()">Afficher les publications récentes</button>
   <button onclick="showFollowed()">Afficher les publications suivies</button>
 </div>
+
     <div id="postbox">
 
   <div id="recent">
@@ -73,6 +75,7 @@
             ?>
         
     
+</div>
 </div>
 </div>
 </body>
