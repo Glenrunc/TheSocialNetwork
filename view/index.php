@@ -17,6 +17,8 @@
   <?php
   require("../model/database.php");
   session_start();
+  echo "<script src='../script/add_like.js'></script>";
+  echo "<script src='../script/add_dislike.js'></script>";
   ?>
   <?php 
     require("navbar.php");
@@ -43,13 +45,19 @@
         echo "<p>Il n'y a pas de publication pour le moment.</p>";
     } else {
       foreach ($data as $post){
-        $post = new Post($post['content'], $post['id_user'], $post['time'], $post['id']);
-        echo "<div class='post' id='post'".$post['id'].">";
+        $postData = $post;
+        $post = new Post($postData['content'], $postData['id_user'], $postData['time'], $postData['id']);
+        echo " <script> window.onload = toLike(".$post->getId()."); </script> ";
+        echo "<div class='post' id='post" . $post->getId() . "'>";
         $post->displayPost();
         echo "</div>";
+      }
+        
 
       }
-    }
+    // Remove the closing curly brace '}' at the end of the code block
+
+    
     ?>
 
 
@@ -81,7 +89,6 @@
                     $post = new Post($post['content'], $post['id_user'], $post['time'], $post['id']);
                     echo "<div class='post' id='post'".$post['id'].">";
                     $post->displayPost();
-
                     echo "</div>";
             
                   }
