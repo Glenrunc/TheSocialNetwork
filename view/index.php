@@ -27,8 +27,8 @@
   </a>
   <div id ="maincontainer">
   <div id="button">
-  <button onclick="showRecent()">Afficher les publications récentes</button>
-  <button onclick="showFollowed()">Afficher les publications suivies</button>
+  <button type="button" class="btn btn" onclick="showRecent()" style="background-color: #303245; color:aliceblue">News</button>
+  <button type="button" class="btn btn" onclick="showFollowed()" style="background-color: #303245; color:aliceblue">Followed</button>
 </div>
 
     <div id="postbox">
@@ -39,14 +39,21 @@
     $query = $db->prepare($sql);
     $query->execute();
     $data = $query->fetchAll();
-    if (empty($data)) {
-        echo "<p>No post found</p>";
-    }
-    else{
-        _displayPost($data);
-    }
+    if (empty($data)) { 
+        echo "<p>Il n'y a pas de publication pour le moment.</p>";
+    } else {
+      foreach ($data as $post){
+        $post = new Post($post['content'], $post['id_user'], $post['time'], $post['id']);
+        echo "<div class='post' id='post'".$post['id'].">";
+        $post->displayPost();
+        echo "</div>";
 
+      }
+    }
     ?>
+
+
+
   </div>
   <div id="follow" >
    
@@ -70,8 +77,14 @@
                 if (empty($data)) {
                     
                 }else{
-                  
-                    _displayPost($data);
+                  foreach ($data as $post){
+                    $post = new Post($post['content'], $post['id_user'], $post['time'], $post['id']);
+                    echo "<div class='post' id='post'".$post['id'].">";
+                    $post->displayPost();
+
+                    echo "</div>";
+            
+                  }
                 }
             
             }

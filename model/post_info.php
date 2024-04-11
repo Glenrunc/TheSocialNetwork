@@ -7,6 +7,8 @@ class Post
     private $author;
     private $createdAt;
     private $comments;
+    // private $like;
+
     public function __construct($content, $author, $createdAt ,$id)
     {
         $this->id = $id;
@@ -14,6 +16,7 @@ class Post
         $this->author = $author;
         $this->createdAt = $createdAt;
         $this->comments = array();
+        // $this->getLike();
     }
 
 
@@ -61,12 +64,12 @@ class Post
     {
         $this->createdAt = $createdAt;
     }
+
     public function displayPost()
     {
         require("../model/database.php");
         global $db;
-        echo "<div class='post'>";
-        $query = $db->prepare("SELECT * FROM user WHERE id=?");
+        $query = $db->prepare("SELECT pseudo FROM user WHERE id=?");
         $query->execute([$this->author]);
         $data = $query->fetch();
         if ($data) {
@@ -79,6 +82,33 @@ class Post
 
         echo "<p class='content'>$this->content</p>";
         echo "<p class='createdAt'>$this->createdAt</p>";
-        echo "</div>";
     }
+
+    // public function getLike(){
+    //     require("../model/database.php");
+    //     global $db;
+    //     $sql = "SELECT COUNT(*) FROM likedpost WHERE id_post = ?";
+    //     $query = $db->prepare($sql);
+    //     $query->execute([$this->id]);
+    //     $this->like = $query->fetch()[0];
+    // }
+    // public function addLike($id_user)
+    // {
+    //     require("../model/database.php");
+    //     global $db;
+    //     $sql = "INSERT INTO likedpost (id_post,id_user) VALUES (?, ?)";
+    //     $query = $db->prepare($sql);
+    //     $query->execute([$this->id, $id_user]);
+    //     $this->getLikes();
+    // }
+
+    // private function deleteLike($id_user)
+    // {
+    //     require("../model/database.php");
+    //     global $db;
+    //     $sql = "DELETE FROM likedpost WHERE id_post = ? AND id_user = ?";
+    //     $query = $db->prepare($sql);
+    //     $query->execute([$this->id, $id_user]);
+    //     $this->getLikes();
+    // }
 }
