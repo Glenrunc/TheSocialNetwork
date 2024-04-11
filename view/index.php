@@ -47,7 +47,18 @@
       foreach ($data as $post){
         $postData = $post;
         $post = new Post($postData['content'], $postData['id_user'], $postData['time'], $postData['id']);
-        echo " <script> window.onload = toLike(".$post->getId()."); </script> ";
+        if(isset($_SESSION["id_user"])){
+          $query = $db->prepare("SELECT COUNT(*) FROM likedpost WHERE id_post = ? AND id_user = ?");
+          $query->execute([$post->getId(), $_SESSION["id_user"]]);
+          $liked = $query->fetch()[0];
+          if ($liked) {
+            echo " <script> window.onload = toDislike(".$post->getId()."); </script> ";
+          } else {
+            echo " <script> window.onload = toLike(".$post->getId()."); </script> ";
+          }
+        }
+         
+     
         echo "<div class='post' id='post" . $post->getId() . "'>";
         $post->displayPost();
         echo "</div>";
@@ -55,7 +66,6 @@
         
 
       }
-    // Remove the closing curly brace '}' at the end of the code block
 
     
     ?>
