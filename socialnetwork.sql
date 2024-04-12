@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 05 avr. 2024 à 20:00
+-- Généré le : ven. 12 avr. 2024 à 15:30
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -46,6 +46,13 @@ CREATE TABLE `follow` (
   `id_follow` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `follow`
+--
+
+INSERT INTO `follow` (`id`, `id_user`, `id_follow`) VALUES
+(1, 45, 40);
+
 -- --------------------------------------------------------
 
 --
@@ -65,10 +72,18 @@ CREATE TABLE `likedcomment` (
 --
 
 CREATE TABLE `likedpost` (
-  `id` int(11) NOT NULL,
   `id_post` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `likedpost`
+--
+
+INSERT INTO `likedpost` (`id_post`, `id_user`) VALUES
+(19, 45),
+(21, 40),
+(24, 45);
 
 -- --------------------------------------------------------
 
@@ -105,7 +120,8 @@ INSERT INTO `post` (`id`, `id_user`, `time`, `content`, `image`) VALUES
 (20, 45, '2024-04-05 14:09:46', 'b', NULL),
 (21, 45, '2024-04-05 14:10:18', 'b', NULL),
 (22, 45, '2024-04-05 14:11:26', 'zdazdazdazd', NULL),
-(23, 45, '2024-04-05 14:13:29', 'dzedezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', NULL);
+(23, 45, '2024-04-05 14:13:29', 'dzedezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', NULL),
+(24, 45, '2024-04-08 17:17:30', 'gdctgxdgfxgtfhujxgtujxgtujuxjhyixloigmoh^mohn^mikbvgjcxf', NULL);
 
 -- --------------------------------------------------------
 
@@ -132,7 +148,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `age`, `birthday`, `email`, `password`, `pseudo`, `admin`, `profile_picture`, `ban`) VALUES
-(40, 'admin', 'admin', 24, 2000, 'admin@tzu.com', '$argon2id$v=19$m=65536,t=4,p=1$Uy5hQWJNUE5ZUnN6eDRMbg$I7y5+vPal6trTjdEnQroJ4lP8rwVgmz0YdcQk4djdv4', 'admin', 1, NULL, 0),
+(40, 'admin', 'admin', 24, 2000, 'admin@tzu.com', '$argon2id$v=19$m=65536,t=4,p=1$Uy5hQWJNUE5ZUnN6eDRMbg$I7y5+vPal6trTjdEnQroJ4lP8rwVgmz0YdcQk4djdv4', 'admin', 1, 'admin.jpeg', 0),
 (45, 'Matteo', 'Chaouche', 24, 2000, 'glenmorton5555@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$YkZVOTFxZFpLRnZGUExsQg$zIyP5EJ3ay5dITaPAiwEvM/4jOsnspjeAv48eqCcdgk', 'Glen', NULL, '45.jpg', 0);
 
 --
@@ -167,8 +183,7 @@ ALTER TABLE `likedcomment`
 -- Index pour la table `likedpost`
 --
 ALTER TABLE `likedpost`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_post` (`id_post`),
+  ADD PRIMARY KEY (`id_post`,`id_user`),
   ADD KEY `id_user` (`id_user`);
 
 --
@@ -207,18 +222,12 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT pour la table `follow`
 --
 ALTER TABLE `follow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `likedcomment`
 --
 ALTER TABLE `likedcomment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `likedpost`
---
-ALTER TABLE `likedpost`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -231,7 +240,7 @@ ALTER TABLE `notification`
 -- AUTO_INCREMENT pour la table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT pour la table `user`
@@ -268,8 +277,8 @@ ALTER TABLE `likedcomment`
 -- Contraintes pour la table `likedpost`
 --
 ALTER TABLE `likedpost`
-  ADD CONSTRAINT `likedpost_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `likedpost_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `likedpost_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `likedpost_ibfk_2` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `notification`
