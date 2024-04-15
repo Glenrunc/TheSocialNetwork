@@ -16,7 +16,7 @@
     }
     function _displayPost($data) {
         foreach($data as $post) {
-            $post = new Post($post["content"], $post["id_user"], $post["time"],$post["id"]);
+            $post = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["id"]);
             $post->displayPost();
          
         }

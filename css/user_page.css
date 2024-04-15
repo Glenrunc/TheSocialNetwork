@@ -5,7 +5,12 @@ body{
     font-size: large;
 
 }
-
+.img{
+  width: auto;
+  height: 500px;
+  max-width: 100%;
+  max-height: 100%;
+}
 .profile_picture {
     width: 100px; /* Largeur souhaitée */
     height: 100px; /* Hauteur souhaitée */
@@ -36,4 +41,4 @@ body{
   #user_info{
     width: fit-content;
   }
- 
+

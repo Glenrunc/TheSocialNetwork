@@ -16,13 +16,11 @@
     $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
     $query->execute([$_GET["id"]]);
     $data = $query->fetchAll();
-    $list_post = array();
     foreach ($data as $post){
-        $new_post = New Post($post["content"],$post["id_user"],$post["time"],$_GET["id"]);
-        array_push($list_post,$new_post);
+        $new_post = New Post($post["id"],$post["content"],$post["id_user"],$post["time"],$_GET["id"]);
+        $new_post->displayPost();
     }
-    foreach ($list_post as $post){
-        $post->displayPost();
-    }
+    
     ?>
 </body>
+ 

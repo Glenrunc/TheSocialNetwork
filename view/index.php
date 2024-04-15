@@ -46,7 +46,7 @@
     } else {
       foreach ($data as $post){
         $postData = $post;
-        $post = new Post($postData['content'], $postData['id_user'], $postData['time'], $postData['id']);
+        $post = new Post($postData["id"],$postData['content'], $postData['id_user'], $postData['time'], $postData['id']);
         if(isset($_SESSION["id_user"])){
           $query = $db->prepare("SELECT COUNT(*) FROM likedpost WHERE id_post = ? AND id_user = ?");
           $query->execute([$post->getId(), $_SESSION["id_user"]]);
@@ -96,7 +96,7 @@
                     
                 }else{
                   foreach ($data as $post){
-                    $post = new Post($post['content'], $post['id_user'], $post['time'], $post['id']);
+                    $post = new Post($post["id"],$post['content'], $post['id_user'], $post['time'], $post['id']);
                     echo "<div class='post' id='post'".$post['id'].">";
                     $post->displayPost();
                     echo "</div>";

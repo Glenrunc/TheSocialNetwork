@@ -41,20 +41,16 @@
             //afficher post
             if (isset($_SESSION["id_user"])) {
                 if ($_SESSION["id_user"] == $data["id"]) {
-                    echo '<div><a href="../model/user_gestion.php?id='.$_SESSION["id_user"].'">Edit</a></div>';
+                    echo '<div><a href="../model/user_gestion.php?id=' . $_SESSION["id_user"] . '">Edit</a></div>';
                     //afficher création de post 
                 }
             }
         } else {
-            header("Location: ../view/user.php?id=".$_SESSION['id_user']);
-
+            header("Location: ../view/user.php?id=" . $_SESSION['id_user']);
         }
-
-
     } else {
 
-       header("Location: ../view/user.php?id=".$_SESSION['id_user']);
-
+        header("Location: ../view/user.php?id=" . $_SESSION['id_user']);
     }
 
     ?>
@@ -69,11 +65,11 @@
         if ($_SESSION['id_user'] == $_GET['id']) {
     ?>
 
-            <div id="creation_post"><?php require("../model/create_post.php"); ?></div>
+            <div id="creation_post"><?php require("../view/form_create_post.html"); ?></div>
             <div id="display_post">
 
-                <?php
-            } ?>
+            <?php
+        } ?>
             </div>
         <?php
 
@@ -81,17 +77,17 @@
     }
         ?>
 
-       <!-- follow gestion code -->
+        <!-- follow gestion code -->
         <?php
 
         // echo "ID de l'utilisateur actuellement connecté : ".$_SESSION['id_user']. "<br>";
         if (isset($_SESSION['id_user']) && isset($_GET['id'])) {
             $id_user = $_SESSION['id_user']; // ID de l'utilisateur actuellement connecté
             // echo "ID de l'utilisateur actuellement connecté : " . $id_user . "<br>";
-            
+
             $id_follow = $_GET['id']; // ID de l'utilisateur que l'on veut suivre
-                // echo "ID de l'utilisateur que l'on veut suivre : " . $id_follow . "<br>";
-            
+            // echo "ID de l'utilisateur que l'on veut suivre : " . $id_follow . "<br>";
+
             if ($id_follow == $id_user) {
                 $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
                 $query->execute([$_GET["id"]]);
@@ -99,40 +95,40 @@
                 _displayPost($data);
             }
             // ON VISITE LA PAGE D'UN AUTRE UTILISATEUR
-            else { 
+            else {
                 require("../model/follow.php");
                 $query_check_follow = $db->prepare("SELECT * FROM follow WHERE id_user = ? AND id_follow = ?");
                 $query_check_follow->execute([$id_user, $id_follow]);
                 $data = $query_check_follow->fetch();
                 // ON CHECK SI ON LE FOLLOW OU PAS SI OUI ON AFFICHE SES POSTS
-            
-                if ($data) {          
+
+                if ($data) {
                     $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
                     $query->execute([$_GET["id"]]);
                     $data = $query->fetchAll();
                     _displayPost($data);
                     require("../view/form_unfollow.html");
-                    ?>
-                    
-                    <?php
-            }
-            // SINON ON AFFICHE UN BOUTON POUR LE FOLLOW
-            else {
-                require("../view/form_follow.html");
-                ?>
-                
-                <p> ne suivez pas encore cet utilisateur. Suivez-le pour voir ses publications.</p>
-                <?php
-                
-            }  ?>
-            <?php
-           
-   
-        
-        }
         ?>
-  <?php     
-}
+
+                <?php
+                }
+                // SINON ON AFFICHE UN BOUTON POUR LE FOLLOW
+                else {
+                    require("../view/form_follow.html");
+                ?>
+
+                    <p> ne suivez pas encore cet utilisateur. Suivez-le pour voir ses publications.</p>
+                <?php
+
+                }  ?>
+            <?php
+
+
+
+            }
+            ?>
+        <?php
+        }
 
         ?>
 

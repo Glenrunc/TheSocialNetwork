@@ -1,3 +1,7 @@
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="../script/ajax_search.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <nav class="navbar navbar-expand-sm mt-5 my-3 navbar-dark rounded sticky-top" style="background-color: #303245; width: 800px;margin: 0 auto;">
   <div class="container ">
     <a class="navbar-brand" href="../view/index.php">
@@ -64,6 +68,4 @@
     </div>
   </div>
 </nav>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-<script src="../script/ajax_search.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+

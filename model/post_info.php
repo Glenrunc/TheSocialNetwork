@@ -2,16 +2,18 @@
 
 class Post
 {
-    private $id;
+    private $id_post;
+    private $id_user;
     private $content;
     private $author;
     private $createdAt;
     private $comments;
     // private $like;
 
-    public function __construct($content, $author, $createdAt ,$id)
+    public function __construct($id_post, $content, $author, $createdAt, $id)
     {
-        $this->id = $id;
+        $this->id_post = $id_post;
+        $this->id_user = $id;
         $this->content = $content;
         $this->author = $author;
         $this->createdAt = $createdAt;
@@ -32,7 +34,7 @@ class Post
 
     public function getId()
     {
-        return $this->id;
+        return $this->id_post;
     }
 
     public function getContent()
@@ -81,34 +83,13 @@ class Post
         }
 
         echo "<p class='content'>$this->content</p>";
+        $query = $db->prepare("SELECT image FROM post WHERE id=?");
+        $query->execute([$this->id_post]);
+        $data = $query->fetch();
+        var_dump($data); // Add this line for debugging
+        if (isset($data["image"])) {
+            echo "<img class='img' src='../image/post_photo/" . $data["image"] . "' alt='post image'>";
+        }
         echo "<p class='createdAt'>$this->createdAt</p>";
     }
-
-    // public function getLike(){
-    //     require("../model/database.php");
-    //     global $db;
-    //     $sql = "SELECT COUNT(*) FROM likedpost WHERE id_post = ?";
-    //     $query = $db->prepare($sql);
-    //     $query->execute([$this->id]);
-    //     $this->like = $query->fetch()[0];
-    // }
-    // public function addLike($id_user)
-    // {
-    //     require("../model/database.php");
-    //     global $db;
-    //     $sql = "INSERT INTO likedpost (id_post,id_user) VALUES (?, ?)";
-    //     $query = $db->prepare($sql);
-    //     $query->execute([$this->id, $id_user]);
-    //     $this->getLikes();
-    // }
-
-    // private function deleteLike($id_user)
-    // {
-    //     require("../model/database.php");
-    //     global $db;
-    //     $sql = "DELETE FROM likedpost WHERE id_post = ? AND id_user = ?";
-    //     $query = $db->prepare($sql);
-    //     $query->execute([$this->id, $id_user]);
-    //     $this->getLikes();
-    // }
 }
