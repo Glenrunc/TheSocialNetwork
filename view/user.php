@@ -29,22 +29,41 @@
     <?php
 
     if (isset($_GET["id"])) {
+        //On regarde si l'utilisateur existe
         $sql = "SELECT * FROM user WHERE id = ?";
         $query = $db->prepare($sql);
         $query->execute([$_GET["id"]]);
         $data = $query->fetch();
+
         if ($data) {
             $user = new User($data["id"], $data["first_name"], $data["last_name"], $data["age"], $data["birthday"], $data["email"], $data["pseudo"], $data["admin"], $data["profile_picture"]);
             $user->displayUserPage();
-            //afficher follower number
-            //bouton follow
-            //afficher post
             if (isset($_SESSION["id_user"])) {
-                if ($_SESSION["id_user"] == $data["id"]) {
+                //Si l'utilisateur est connecté et que c'est son profil
+                if ($_SESSION["id_user"] == $_GET["id"]) {
                     echo '<div><a href="../model/user_gestion.php?id=' . $_SESSION["id_user"] . '">Edit</a></div>';
-                    //afficher création de post 
+                    ?><div id="creation_post"><?php require("../view/form_create_post.html"); ?></div>
+                    <?php 
+                            
+                }else{
+                    //Si l'utilisateur est connecté et que ce n'est pas son profil
+                    //bouton follow
+                    require("../model/follow.php");
+                    $query_check_follow = $db->prepare("SELECT * FROM follow WHERE id_user = ? AND id_follow = ?");
+                    $query_check_follow->execute([$_SESSION["id_user"], $_GET["id"]]);
+                    $data = $query_check_follow->fetch();
+                    if($data){
+                        require("../view/form_unfollow.php");
+                    }else{
+                        require("../view/form_follow.php");
+                    }
                 }
-            }
+            }              
+            //Afficher les posts de l'utilisateur  
+            $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
+            $query->execute([$_GET["id"]]);
+            $data = $query->fetchAll();
+            _displayPost($data);
         } else {
             header("Location: ../view/user.php?id=" . $_SESSION['id_user']);
         }
@@ -56,82 +75,7 @@
     ?>
 
 
-    <?php
-
-    // echo "ID provenant de GET : " . $_GET['id'] . "<br>";
-    // echo "ID de session utilisateur : " . $_SESSION['id_user'] . "<br>";
-
-    if (isset($_SESSION['id_user']) && isset($_GET['id'])) {
-        if ($_SESSION['id_user'] == $_GET['id']) {
-    ?>
-
-            <div id="creation_post"><?php require("../view/form_create_post.html"); ?></div>
-            <div id="display_post">
-
-            <?php
-        } ?>
-            </div>
-        <?php
-
-
-    }
-        ?>
-
-        <!-- follow gestion code -->
-        <?php
-
-        // echo "ID de l'utilisateur actuellement connecté : ".$_SESSION['id_user']. "<br>";
-        if (isset($_SESSION['id_user']) && isset($_GET['id'])) {
-            $id_user = $_SESSION['id_user']; // ID de l'utilisateur actuellement connecté
-            // echo "ID de l'utilisateur actuellement connecté : " . $id_user . "<br>";
-
-            $id_follow = $_GET['id']; // ID de l'utilisateur que l'on veut suivre
-            // echo "ID de l'utilisateur que l'on veut suivre : " . $id_follow . "<br>";
-
-            if ($id_follow == $id_user) {
-                $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
-                $query->execute([$_GET["id"]]);
-                $data = $query->fetchAll();
-                _displayPost($data);
-            }
-            // ON VISITE LA PAGE D'UN AUTRE UTILISATEUR
-            else {
-                require("../model/follow.php");
-                $query_check_follow = $db->prepare("SELECT * FROM follow WHERE id_user = ? AND id_follow = ?");
-                $query_check_follow->execute([$id_user, $id_follow]);
-                $data = $query_check_follow->fetch();
-                // ON CHECK SI ON LE FOLLOW OU PAS SI OUI ON AFFICHE SES POSTS
-
-                if ($data) {
-                    $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
-                    $query->execute([$_GET["id"]]);
-                    $data = $query->fetchAll();
-                    _displayPost($data);
-                    require("../view/form_unfollow.html");
-        ?>
-
-                <?php
-                }
-                // SINON ON AFFICHE UN BOUTON POUR LE FOLLOW
-                else {
-                    require("../view/form_follow.html");
-                ?>
-
-                    <p> ne suivez pas encore cet utilisateur. Suivez-le pour voir ses publications.</p>
-                <?php
-
-                }  ?>
-            <?php
-
-
-
-            }
-            ?>
-        <?php
-        }
-
-        ?>
-
+    
 
 </body>
 
