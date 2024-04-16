@@ -17,16 +17,9 @@ function checkAndRedirect() {
 }
 
 function showRecent() {
-
-    document.getElementById('recent').style.display = 'block';
-    document.getElementById('follow').style.display = 'none';
-   
-  }
+  window.location.replace("index.php");  
+}
   
-  function showFollowed() {
-  
-    document.getElementById('recent').style.display = 'none';
-    document.getElementById('follow').style.display = 'block';
-    
-
-  }
+function showFollowed() {
+  window.location.replace("followed_feed.php");
+}

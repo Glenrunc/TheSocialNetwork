@@ -86,7 +86,7 @@ class Post
         $query = $db->prepare("SELECT image FROM post WHERE id=?");
         $query->execute([$this->id_post]);
         $data = $query->fetch();
-        var_dump($data); // Add this line for debugging
+        // var_dump($data); // Add this line for debugging
         if (isset($data["image"])) {
             echo "<img class='img' src='../image/post_photo/" . $data["image"] . "' alt='post image'>";
         }

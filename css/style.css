@@ -45,6 +45,8 @@ body{
     transform: translateX(-50%);
     text-align: center;
     width: fit-content;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:#f0f0f0;
 }
 
 #postbox {
@@ -58,19 +60,7 @@ body{
    
 }
 
-#recent,
-#follow {
-    width: fit-content;
-    height: fit-content;
-    
 
-}
-#follow {
-    display: none;
-}
-#recent {
-    display: block;
-}
 .post {
     width: 100%;
     display: flex;

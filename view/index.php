@@ -20,99 +20,60 @@
   echo "<script src='../script/add_like.js'></script>";
   echo "<script src='../script/add_dislike.js'></script>";
   ?>
-  <?php 
-    require("navbar.php");
-    require("../view/popup_signin.php");
-    
-    // require("../controller/function.php");
+  <?php
+  require("navbar.php");
+  require("../view/popup_signin.php");
+
+  // require("../controller/function.php");
   ?>
   </a>
-  <div id ="maincontainer">
-  <div id="button">
-  <button type="button" class="btn btn" onclick="showRecent()" style="background-color: #303245; color:aliceblue">News</button>
-  <button type="button" class="btn btn" onclick="showFollowed()" style="background-color: #303245; color:aliceblue">Followed</button>
-</div>
+  <div id="maincontainer">
+    <div id="button">
+      <p>Recent post</p>
+      <?php
+      if(isset($_SESSION["id_user"])) {
+        echo "<button type='button' class='btn btn' onclick='showFollowed()' style='background-color: #303245; color:aliceblue'>Followed</button>";
+      }
+      ?>
+    </div>
 
     <div id="postbox">
 
-  <div id="recent">
-    <?php
-    $sql = "SELECT * FROM post ORDER BY time DESC";
-    $query = $db->prepare($sql);
-    $query->execute();
-    $data = $query->fetchAll();
-    if (empty($data)) { 
-        echo "<p>Il n'y a pas de publication pour le moment.</p>";
-    } else {
-      foreach ($data as $post){
-        $postData = $post;
-        $post = new Post($postData["id"],$postData['content'], $postData['id_user'], $postData['time'], $postData['id']);
-        if(isset($_SESSION["id_user"])){
-          $query = $db->prepare("SELECT COUNT(*) FROM likedpost WHERE id_post = ? AND id_user = ?");
-          $query->execute([$post->getId(), $_SESSION["id_user"]]);
-          $liked = $query->fetch()[0];
-          if ($liked) {
-            echo " <script> window.onload = toDislike(".$post->getId()."); </script> ";
-          } else {
-            echo " <script> window.onload = toLike(".$post->getId()."); </script> ";
+      <div id="recent">
+        <?php
+        $sql = "SELECT * FROM post ORDER BY time DESC";
+        $query = $db->prepare($sql);
+        $query->execute();
+        $data = $query->fetchAll();
+        if (empty($data)) {
+          echo "<p>Il n'y a pas de publication pour le moment.</p>";
+        } else {
+          foreach ($data as $post) {
+            $postData = $post;
+            $post = new Post($postData["id"], $postData['content'], $postData['id_user'], $postData['time'], $postData['id']);
+            if (isset($_SESSION["id_user"])) {
+              $query = $db->prepare("SELECT COUNT(*) FROM likedpost WHERE id_post = ? AND id_user = ?");
+              $query->execute([$post->getId(), $_SESSION["id_user"]]);
+              $liked = $query->fetch()[0];
+              if ($liked) {
+                echo " <script> window.onload = toDislike(" . $post->getId() . "); </script> ";
+              } else {
+                echo " <script> window.onload = toLike(" . $post->getId() . "); </script> ";
+              }
+            }
+
+
+            echo "<div class='post' id='post" . $post->getId() . "'>";
+            $post->displayPost();
+            echo "</div>";
           }
         }
-         
-     
-        echo "<div class='post' id='post" . $post->getId() . "'>";
-        $post->displayPost();
-        echo "</div>";
-      }
-        
-
-      }
-
-    
-    ?>
 
 
-
+        ?>
+      </div>
+    </div>
   </div>
-  <div id="follow" >
-   
-            <?php
-            if (!isset($_SESSION["id_user"])) {
-                echo "<p>Vous devez être connecté pour voir les publications des utilisateurs que vous suivez.</p>";
-              
-            }else{
-                         // Récupérer les utilisateurs
-            $sql_follow = "SELECT id_follow FROM follow WHERE id_user = ?";
-            $query_follow = $db->prepare($sql_follow);
-            $query_follow->execute([$_SESSION["id_user"]]);
-            $followed_users = $query_follow->fetchAll(PDO::FETCH_COLUMN);
-            
-            // Récupérer les posts de chaque utilisateur suivi
-            foreach($followed_users as $followed_user_id) {
-                $sql_post = "SELECT * FROM post WHERE id_user = ? ORDER BY time DESC";
-                $query_post = $db->prepare($sql_post);
-                $query_post->execute([$followed_user_id]);
-                $data = $query_post->fetchAll();
-                if (empty($data)) {
-                    
-                }else{
-                  foreach ($data as $post){
-                    $post = new Post($post["id"],$post['content'], $post['id_user'], $post['time'], $post['id']);
-                    echo "<div class='post' id='post'".$post['id'].">";
-                    $post->displayPost();
-                    echo "</div>";
-            
-                  }
-                }
-            
-            }
-            }
-
-            ?>
-        
-    
-</div>
-</div>
-</div>
 </body>
 
 </html>
