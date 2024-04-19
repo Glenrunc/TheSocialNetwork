@@ -71,13 +71,22 @@ class Post
     {
         require("../model/database.php");
         global $db;
-        $query = $db->prepare("SELECT pseudo FROM user WHERE id=?");
+        $query = $db->prepare("SELECT pseudo,profile_picture FROM user WHERE id=?");
         $query->execute([$this->author]);
         $data = $query->fetch();
         if ($data) {
+            echo "<div class='author-info'>";
             echo "<a class='hello' id='nav-link' href='../view/user.php?id=" . $this->author . "'>";
-            echo "<p class='author'>" . $data["pseudo"] . "</p>";
+            echo "<span class='author'>" . $data["pseudo"] . "</span>";
             echo "</a>";
+            if ($data["profile_picture"][0] == "#") {
+                echo "<span class='picture' style='width: 48px;px; height=48px; background-color:".$data["profile_picture"]."; color:aliceblue; text-align: center; line-height: 48px; font-size: 20px; border-radius: 50%;'>".substr($data["pseudo"],0,1)."</span>";
+            }else{
+                echo "<span class='picture'>";
+                echo "<img src='../image/avatar_user/".$data["profile_picture"]."' alt='Logo' style='width:48px;' id='img'>";
+                echo" </span>";        
+            }
+            echo "</div>";
         } else {
             echo "<p class='author'>Unknown</p>";
         }

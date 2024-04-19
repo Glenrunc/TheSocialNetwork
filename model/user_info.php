@@ -33,9 +33,14 @@ class User{
     function displayGestionPage(){
         //Create post_info.php
         $img_path = $this->profile_picture;
-        echo "<div class='profile_picture'>";
-        echo "<a href='../view/user.php?id=".$this->id_user."'><img src='../image/avatar_user/".$img_path."' alt='Logo' style='width:125px;' id='img'></a>";
-        echo" </div>";
+
+        if ($img_path[0] == "#") {
+            echo "<a href='../view/user.php?id=".$this->id_user."'<div class='rounded-pill' style='width: 48px;px; height=48px; background-color:".$img_path."; color:aliceblue; text-align: center; line-height: 48px; font-size: 20px; border-radius: 50%;'>".substr($this->getPseudo(),0,1)."</div></a>";
+        }else{
+            echo "<div class='profile_picture'>";
+            echo "<a href='../view/user.php?id=".$this->id_user."'><img src='../image/avatar_user/".$img_path."' alt='Logo' style='width:125px;' id='img'></a>";
+            echo" </div>";        
+        }
         echo "<div id='user_info'>";
         echo "<p class='info'>First name: $this->first_name</p>";
         echo "<p class='info'>Last name: $this->last_name</p>";
@@ -48,15 +53,19 @@ class User{
 
     function displayUserPage(){
         $img_path = $this->profile_picture;
-        // echo "<p>".$img_path."</p>";
-        echo "<div class='profile_picture'>";
-        echo "<a href='../view/user.php?id=".$this->id_user."'><img src='../image/avatar_user/".$img_path."' alt='Logo' style='width:125px;' id='img'></a>";
-        echo" </div>";
+
+        if ($img_path[0] == "#") {
+            echo "<div class='rounded-pill' style='width: 48px;px; height=48px; background-color:".$img_path."; color:aliceblue; text-align: center; line-height: 48px; font-size: 20px; border-radius: 50%;'>".substr($this->getPseudo(),0,1)."</div>";
+        }else{
+            echo "<div class='profile_picture'>";
+            echo "<img src='../image/avatar_user/".$img_path."' alt='Logo' style='width:125px;' id='img'>";
+            echo" </div>";        
+        }       
+        
         echo "<div id='user_info'>";
         echo "<p class='info'>$this->pseudo</p>";
         echo "</div>";
-        //rajouter les autres infos
-        //follow number
+     
     }
 
     public function getIdUser() {

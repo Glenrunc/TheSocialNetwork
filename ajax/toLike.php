@@ -14,5 +14,5 @@ $like = $query->fetch()[0];
 
 <div id="like<?php echo $id_post; ?>">
     <button type="button" class="btn btn-success mb-1"  onclick="toDislike(<?php echo $id_post; ?>)">Like</button>
-    <span> Total amount of :<?php echo $like ?></span>
+    <span> Total amount of like : <?php echo $like ?></span>
 </div>

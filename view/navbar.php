@@ -12,7 +12,6 @@
     </button>
 
     <div class="collapse navbar-collapse" id="mynavbar">
-
       <input type="text" id="search" placeholder="Search for user ?!" autocomplete="off">
       <div id="searchresult"></div>
 
@@ -30,12 +29,13 @@
                 echo "<p id='para'>" . $_SESSION['pseudo'] . "</p>";
                 echo "<a id='nav-link' href='../model/deconnect.php'>Deconnection</a>";
                 echo " <a class= 'hello' id='nav-link' href='../view/user.php?id=" . $_SESSION["id_user"] . "'>";
-                if (isset($_SESSION["profile_picture"])) {
+                if ($_SESSION["profile_picture"][0] != "#") {
                   echo "<img src='../image/avatar_user/" . $_SESSION["profile_picture"] . "' alt='Logo' style='width:48px; height=48px;'class='' >";
                   
                 } else {
                   
-                  echo "<img src='../image/default_image.png' alt='Logo'  style='width:48px'; class='rounded-pill'";
+                  echo "<div class='rounded-pill' style='width:48px; height=48px; background-color:".$_SESSION["profile_picture"]."; color:aliceblue; text-align: center; line-height: 48px; font-size: 20px; border-radius: 50%;'>".substr($_SESSION['pseudo'],0,1)."</div>";
+               
                 }
                 
                 echo "</a>";
@@ -45,12 +45,12 @@
                 echo "<a id='nav-link' href='../model/deconnect.php'>Deconnection</a>";
                 echo " <a class'test' id='nav-link' href='../view/user.php?id=" . $_SESSION["id_user"] . "'>";
                 
-                if (isset($_SESSION["profile_picture"])) {
-                  echo "<img src='../image/avatar_user/" . $_SESSION["profile_picture"] . "' alt='Logo' style='width:48px; height=48px;'class='' >";
+                if ($_SESSION["profile_picture"][0] != "#") {
+                  echo "<img src='../image/avatar_user/" . $_SESSION["profile_picture"] . "' alt='Logo' style='width:48px; height=48px;'class='rounded-pill' >";
                   
                 } else {
-
-                  echo "<img src='../image/default_image.png' alt='Logo'  style='width:48px'; class='rounded-pill'";
+                  
+                  echo "<div class='rounded-pill' style='width:48px; height=48px; background-color:".$_SESSION["profile_picture"]."; color:aliceblue; text-align: center; line-height: 48px; font-size: 20px; border-radius: 50%;'>".substr($_SESSION['pseudo'],0,1)."</div>";
                
                 }
                 

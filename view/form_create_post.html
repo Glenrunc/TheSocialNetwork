@@ -1,8 +1,9 @@
 <form method="POST" enctype="multipart/form-data" action="../model/create_post.php">
-    <label for="content">Content:</label>
+   
     <textarea name="content" id="content" required></textarea><br><br>
+    
     <input type="hidden" name="MAX_FILE_SIZE" value="" />
-    <input class='' id='' name="post_img" type="file" accept='image/png, image/jpeg, image/jpg' autocomplete="off" />
+    <input class='' id='post_img_form' name="post_img" type="file" accept='image/png, image/jpeg, image/jpg' autocomplete="off" />
     <br>
-    <input type="submit" value="Create">
+    <input id = "submit" type="submit" value="Create">
 </form>

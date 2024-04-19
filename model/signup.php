@@ -96,6 +96,11 @@
                         $query->execute([$_SESSION["id_user"].".".$extention,$_SESSION["id_user"]]);
                         $_SESSION["profile_picture"] = $_SESSION["id_user"].".".$extention;
             
+                    }else{
+                        $randomColor = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+                        $query = $db->prepare("UPDATE user SET profile_picture = ? WHERE id = ?");
+                        $query->execute([$randomColor,$_SESSION["id_user"]]);
+                        $_SESSION["profile_picture"] = $randomColor;
                     }
                     header("Location: ../view/user.php?id=".$_SESSION["id_user"]);
                 }

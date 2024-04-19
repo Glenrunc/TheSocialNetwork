@@ -67,13 +67,27 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #cccfed;
+    background-color: #ffffff;
     border-radius: 10px;
     border: solid 5px;
     margin: 10px;
 }
+.author-info {
+    display: flex;
+    align-items: center; /* Pour aligner verticalement */
+}
+.author{
+    font-weight: bold;
+    margin-right: 10px;
+
+}
 
 .show {
     display: block !important;
+}
+
+.picture {
+    overflow: hidden; /* Cache les parties de l'image qui dépassent */
+    border-radius: 50%; /* Rend le conteneur rond */
 }
 

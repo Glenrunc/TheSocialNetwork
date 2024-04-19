@@ -18,6 +18,7 @@ if (isset($_POST['follow'])) {
 }
 if (isset($_POST['unfollow'])) {
     // Vérifier si le suivi est actif
+    
     $query_check_follow = $db->prepare("SELECT COUNT(*) FROM follow WHERE id_user = ? AND id_follow = ?");
     $query_check_follow->execute([$_POST["id_user"], $_POST["id_follow"]]);
     $count_follow = $query_check_follow->fetchColumn();

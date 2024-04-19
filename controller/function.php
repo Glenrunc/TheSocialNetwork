@@ -14,11 +14,4 @@
         $query = $db->prepare($sql);
         $query->execute(array($first_name, $last_name, $age, $birthday, $email,$password,$pseudo));
     }
-    function _displayPost($data) {
-        foreach($data as $post) {
-            $post = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["id"]);
-            $post->displayPost();
-         
-        }
-    }
 ?>

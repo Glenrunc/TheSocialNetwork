@@ -42,7 +42,10 @@
                 //Si l'utilisateur est connecté et que c'est son profil
                 if ($_SESSION["id_user"] == $_GET["id"]) {
                     echo '<div><a href="../model/user_gestion.php?id=' . $_SESSION["id_user"] . '">Edit</a></div>';
-                    ?><div id="creation_post"><?php require("../view/form_create_post.html"); ?></div>
+                    ?><div id="creation_post">
+                        <p id = "create">Creation post</p>
+                        <?php require("../view/form_create_post.html"); ?>
+                    </div>
                     <?php 
                             
                 }else{
@@ -59,11 +62,21 @@
                     }
                 }
             }              
-            //Afficher les posts de l'utilisateur  
+            //Afficher les posts de l'utilisateur
+            echo'<div id="postbox">';
+  
             $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
             $query->execute([$_GET["id"]]);
             $data = $query->fetchAll();
-            _displayPost($data);
+            
+            foreach($data as $post) {
+                $post = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["id"]);
+                echo "<div class='post'>";
+                $post->displayPost();
+                echo "</div>";
+            }
+            
+            echo "</div>";
         } else {
             header("Location: ../view/user.php?id=" . $_SESSION['id_user']);
         }
