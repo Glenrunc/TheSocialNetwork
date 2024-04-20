@@ -26,7 +26,9 @@
 
   // require("../controller/function.php");
   ?>
-  </a>
+  <div id="wrap">
+  <div id="searchresult"></div>
+  </div>
   <div id="maincontainer">
     <div id="button">
       <p>Recent post</p>

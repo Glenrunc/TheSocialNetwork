@@ -26,6 +26,9 @@
     global $db;
 
     ?>
+    <div id="wrap">
+    <div id="searchresult"></div>
+    </div>
     <?php
 
     if (isset($_GET["id"])) {

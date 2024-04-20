@@ -29,7 +29,9 @@
     require("../view/popup_signin.php");
 
     ?>
-    </a>
+    <div id="wrap">
+    <div id="searchresult"></div>
+    </div>
     <div id="maincontainer">
         <div id="button">
             <p>Followed</p>

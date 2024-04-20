@@ -16,12 +16,19 @@ body{
     margin:auto;
     width:fit-content;
 }
-
+#wrap{
+    display: none;
+    border-radius: 10px;
+}
 #searchresult {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     overflow-y: scroll; /* Activer le défilement vertical */
-    height: 60px; /* Hauteur de la zone de recherche */
-    scrollbar-width: none; /* Masquer la barre de défilement pour Firefox */
-    -ms-overflow-style: none; /* Masquer la barre de défilement pour IE et Edge */
+    width: 300px;
+    height: 100px; /* Hauteur de la zone de recherche */
+    border-radius: 10px;
+
 }
 
 #searchresult::-webkit-scrollbar {

@@ -10,11 +10,14 @@ $(document).ready(function(){
 
             success:function(data){
               $("#searchresult").html(data);
+              $("#wrap").css("display","block");
+              
             }
 
           });
         }else{
           $("#searchresult").empty();
+          $("#wrap").css("display","none");
         }
     })
 })
