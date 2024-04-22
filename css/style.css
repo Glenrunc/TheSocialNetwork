@@ -5,18 +5,96 @@ body{
 
 }
 
+.img{
+    width: auto;
+    height: 500px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
 #para{
     margin:auto;
     width:fit-content;
 }
-
+#wrap{
+    display: none;
+    border-radius: 10px;
+}
 #searchresult {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     overflow-y: scroll; /* Activer le défilement vertical */
-    height: 60px; /* Hauteur de la zone de recherche */
-    scrollbar-width: none; /* Masquer la barre de défilement pour Firefox */
-    -ms-overflow-style: none; /* Masquer la barre de défilement pour IE et Edge */
+    width: 300px;
+    height: 100px; /* Hauteur de la zone de recherche */
+    border-radius: 10px;
+
 }
 
 #searchresult::-webkit-scrollbar {
     display: none; /* Masquer la barre de défilement pour Chrome, Safari et Opera */
 }
+#maincontainer {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f0f0f0;
+}
+
+#button {
+    position: absolute;
+    top: 20px; /* Ajustez selon vos besoins */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: fit-content;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:#f0f0f0;
+}
+
+#postbox {
+    position: absolute;
+    top: calc(50% + 100px); /* Ajustez la marge en fonction de la hauteur des boutons */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: fit-content;
+    height: 100%;
+   
+}
+
+
+.post {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: solid 5px;
+    margin: 10px;
+}
+.author-info {
+    display: flex;
+    align-items: center; /* Pour aligner verticalement */
+}
+.author{
+    font-weight: bold;
+    margin-right: 10px;
+
+}
+
+.show {
+    display: block !important;
+}
+
+.picture {
+    overflow: hidden; /* Cache les parties de l'image qui dépassent */
+    border-radius: 50%; /* Rend le conteneur rond */
+}
+

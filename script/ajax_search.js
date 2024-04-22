@@ -4,17 +4,20 @@ $(document).ready(function(){
 
         if(input != ""){
           $.ajax({
-            url:"../model/livesearch.php",
+            url:"../ajax/livesearch.php",
             method:"POST",
             data:{input:input},
 
             success:function(data){
               $("#searchresult").html(data);
+              $("#wrap").css("display","block");
+              
             }
 
           });
         }else{
           $("#searchresult").empty();
+          $("#wrap").css("display","none");
         }
     })
 })

@@ -26,106 +26,87 @@
     global $db;
 
     ?>
+    <div id="wrap">
+    <div id="searchresult"></div>
+    </div>
     <?php
 
     if (isset($_GET["id"])) {
+        //On regarde si l'utilisateur existe
         $sql = "SELECT * FROM user WHERE id = ?";
         $query = $db->prepare($sql);
         $query->execute([$_GET["id"]]);
         $data = $query->fetch();
+
         if ($data) {
             $user = new User($data["id"], $data["first_name"], $data["last_name"], $data["age"], $data["birthday"], $data["email"], $data["pseudo"], $data["admin"], $data["profile_picture"]);
             $user->displayUserPage();
-            //afficher follower number
-            //bouton follow
-            //afficher post
             if (isset($_SESSION["id_user"])) {
-                if ($_SESSION["id_user"] == $data["id"]) {
-                    echo '<div><a href="../model/user_gestion.php?id='.$_SESSION["id_user"].'">Edit</a></div>';
-                    //afficher création de post 
+                //Si l'utilisateur est connecté et que c'est son profil
+                if ($_SESSION["id_user"] == $_GET["id"]) {
+                    echo '<div><a href="../model/user_gestion.php?id=' . $_SESSION["id_user"] . '">Edit</a></div>';
+                    ?><div id="creation_post">
+                        <p id = "create">Creation post</p>
+                        <?php require("../view/form_create_post.html"); ?>
+                    </div>
+                    <?php 
+                            
+                }else{
+                    //Si l'utilisateur est connecté et que ce n'est pas son profil
+                    //bouton follow
+                    require("../model/follow.php");
+                    $query_check_follow = $db->prepare("SELECT * FROM follow WHERE id_user = ? AND id_follow = ?");
+                    $query_check_follow->execute([$_SESSION["id_user"], $_GET["id"]]);
+                    $data = $query_check_follow->fetch();
+                    if($data){
+                        require("../view/form_unfollow.php");
+                    }else{
+                        require("../view/form_follow.php");
+                    }
                 }
-            }
-        } else {
-            echo '<div><p>user not found</p></div>';
-        }
-    } else {
-        echo '<div><p>unauthorized</p></div>';
-    }
+            }              
+            //Afficher les posts de l'utilisateur
+            echo'<div id="postbox">';
+  
+            $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
+            $query->execute([$_GET["id"]]);
+            $data = $query->fetchAll();
+            
+            foreach($data as $post) {
+                $sql = "SELECT COUNT(*) FROM likedpost WHERE id_post=?";
+                $query = $db->prepare($sql);
+                $query->execute([$post["id"]]);
+                $nb_likes = $query->fetch();
 
-    ?>
-
-
-    <?php
-
-    // echo "ID provenant de GET : " . $_GET['id'] . "<br>";
-    // echo "ID de session utilisateur : " . $_SESSION['id_user'] . "<br>";
-
-    if (isset($_SESSION['id_user']) && isset($_GET['id'])) {
-        if ($_SESSION['id_user'] == $_GET['id']) {
-    ?>
-
-            <div id="creation_post"><?php require("../model/create_post.php"); ?></div>
-            <div id="display_post">
-
-                <?php
-                require("../model/post_info.php");
-                $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
-                $query->execute([$_GET["id"]]);
-                $data = $query->fetchAll();
-                $list_post = array();
-                foreach ($data as $post) {
-                    $new_post = new Post($post["content"], $post["id_user"], $post["time"], $post["id"]);
-                    array_push($list_post, $new_post);
+                $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["id"]);
+                echo "<div class='post'>";
+                $post_obj->displayPost();
+                echo "<div id='like".$post["id"]."'>";
+                if($nb_likes[0] > 1){
+                    echo "<p>" . $nb_likes[0] . " likes</p>";
+                }else{
+                    echo "<p>" . $nb_likes[0] . " like</p>";
                 }
-                foreach ($list_post as $post) {
-                    $post->displayPost();
-                }
-            } else {
+                echo "</div>";
+                echo "</div>";
                 ?>
-                <form method="post">
-                    <input type="submit" name="follow" value="Follow">
-                </form>
+
             <?php
             }
-            ?>
-            </div>
-        <?php
-    } else {
-        //DO something 
-    }
-        ?>
-
-
-        <?php
-
-        // echo "ID de l'utilisateur actuellement connecté : ".$_SESSION['id_user']. "<br>";
-        if (isset($_SESSION['id_user'])) {
-            $id_user = $_SESSION['id_user']; // ID de l'utilisateur actuellement connecté
-            // echo "ID de l'utilisateur actuellement connecté : " . $id_user . "<br>";
-            if (isset($_GET['id'])) {
-                $id_follow = $_GET['id']; // ID de l'utilisateur que l'on veut suivre
-                // echo "ID de l'utilisateur que l'on veut suivre : " . $id_follow . "<br>";
-            }
-            if (isset($_POST['follow'])) {
-                // Vérifier si le suivi n'est pas déjà actif
-                $query_check_follow = $db->prepare("SELECT COUNT(*) FROM follow WHERE id_user = ? AND id_follow = ?");
-                $query_check_follow->execute([$id_user, $id_follow]);
-                $count_follow = $query_check_follow->fetchColumn();
-
-                if ($count_follow > 0) {
-                    // L'utilisateur suit déjà l'autre utilisateur
-                    echo "Vous suivez déjà cet utilisateur.";
-                } else {
-                    // Le suivi n'est pas déjà actif, donc on l'insère
-                    $query_insert_follow = $db->prepare("INSERT INTO follow (id_user, id_follow) VALUES (?, ?)");
-                    $query_insert_follow->execute([$id_user, $id_follow]);
-
-                    echo "Vous suivez maintenant l'utilisateur.";
-                }
-            }
+            
+            echo "</div>";
+        } else {
+            header("Location: ../view/user.php?id=" . $_SESSION['id_user']);
         }
-        ?>
+    } else {
 
+        header("Location: ../view/user.php?id=" . $_SESSION['id_user']);
+    }
+
+    ?>
+
+
+    
 
 </body>
 

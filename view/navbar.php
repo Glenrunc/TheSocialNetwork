@@ -1,4 +1,8 @@
-<nav class="navbar navbar-expand-sm mt-5 my-3 navbar-dark rounded" style="background-color: #303245; width: 800px;margin: 0 auto;">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="../script/ajax_search.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<nav id= "signin_query"class="navbar navbar-expand-sm mt-5 my-3 navbar-dark rounded" style="background-color: #303245; width: 800px;margin: 0 auto;">
   <div class="container ">
     <a class="navbar-brand" href="../view/index.php">
       <img src="../image/Logo_TZU.png" alt="Logo" style="width:40px;" class="rounded-pill">
@@ -8,9 +12,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="mynavbar">
-
-      <input type="text" id="search" placeholder="What's happening ?!" autocomplete="off">
-      <div id="searchresult"></div>
+      <input type="text" id="search" placeholder="Search for user ?!" autocomplete="off">
 
 
       <ul class="navbar-nav ms-auto">
@@ -25,39 +27,61 @@
               } else {
                 echo "<p id='para'>" . $_SESSION['pseudo'] . "</p>";
                 echo "<a id='nav-link' href='../model/deconnect.php'>Deconnection</a>";
-                echo " <a id='nav-link' href='../view/user.php?id=" . $_SESSION["id_user"] . "'>";
-                if (isset($_SESSION["profile_picture"])) {
-                  echo "<img src='../image/avatar_user/" . $_SESSION["profile_picture"] . "' alt='Logo' style='width:48px; height=48px;'class='' >";
-                } else {
+                echo " <a class= 'hello' id='nav-link' href='../view/user.php?id=" . $_SESSION["id_user"] . "'>";
+                if ($_SESSION["profile_picture"][0] != "#") {
+                  echo"<div id='icon'>";
 
-                  echo "<img src='../image/default_image.png' alt='Logo'  style='width:48px'; class='rounded-pill'";
+                  echo "<img src='../image/avatar_user/" . $_SESSION["profile_picture"] . "' alt='Logo' style='width:48px; height=48px;'class='' ></a>";
+                  echo"</div>";
+                } else {
+                  echo"<div id='icon'>";
+
+                  echo "<div class='rounded-pill' style='width:48px; height=48px; background-color:".$_SESSION["profile_picture"]."; color:aliceblue; text-align: center; line-height: 48px; font-size: 20px; border-radius: 50%;'>".substr($_SESSION['pseudo'],0,1)."</div></a>";
+                  echo"</div>";
                 }
-                echo "</a>";
+                
+            
               }
             }else{
                 echo "<p id='para'>" . $_SESSION['pseudo'] . "</p>";
                 echo "<a id='nav-link' href='../model/deconnect.php'>Deconnection</a>";
-                echo " <a id='nav-link' href='../view/user.php?id=" . $_SESSION["id_user"] . "'>";
-                if (isset($_SESSION["profile_picture"])) {
-                  echo "<img src='../image/avatar_user/" . $_SESSION["profile_picture"] . "' alt='Logo' style='width:48px; height=48px;'class='' >";
-                } else {
+                echo " <a class'test' id='nav-link' href='../view/user.php?id=" . $_SESSION["id_user"] . "'>";
+                
+                if ($_SESSION["profile_picture"][0] != "#") {
+                  echo"<div id='icon'>";
 
-                  echo "<img src='../image/default_image.png' alt='Logo'  style='width:48px'; class='rounded-pill'";
+                  echo "<img src='../image/avatar_user/" . $_SESSION["profile_picture"] . "' alt='Logo' style='width:48px; height=48px;'class='rounded-pill' ></a>";
+                  echo"</div>";
+                } else {
+                  echo"<div id='icon'>";
+
+                  echo "<div class='rounded-pill' style='width:48px; height=48px; background-color:".$_SESSION["profile_picture"]."; color:aliceblue; text-align: center; line-height: 48px; font-size: 20px; border-radius: 50%;'>".substr($_SESSION['pseudo'],0,1)."</div></a>";
+                  echo"</div>";
                 }
-                echo "</a>";
+                
             }
+            
           } else {
+            echo"<div id='icon'>";
             echo " <a id='nav-link' >";
             echo "<img src='../image/user.svg' alt='Logo' style='width:48px'; class='rounded-pill' onclick='checkAndRedirect()'";
             echo "</a>";
+            echo "</div>";
           }
           ?>
-
+          <script>
+            $(document).ready(function(){
+              $("#icon").mouseover(function(){
+                $("#signin_query").css("background-color", "#42445E");
+              });
+              $("#icon").mouseout(function(){
+                $("#signin_query").css("background-color", "#303245");
+              });
+            })
+          </script>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-<script src="../script/ajax_search.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+

@@ -17,11 +17,72 @@
   <?php
   require("../model/database.php");
   session_start();
+  echo "<script src='../script/add_like.js'></script>";
+  echo "<script src='../script/add_dislike.js'></script>";
   ?>
-  <?php 
-    require("navbar.php");
-    require("../view/popup_signin.php");
+  <?php
+  require("navbar.php");
+  require("../view/popup_signin.php");
+
+  // require("../controller/function.php");
   ?>
+
+  <div id="wrap">
+  <div id="searchresult"></div>
+  </div>
+  <div id="maincontainer">
+    <div id="button">
+      <p>Recent post</p>
+      <?php
+      if(isset($_SESSION["id_user"])) {
+        echo "<button id='toto' type='button' class='btn btn' onclick='showFollowed()' style='background-color: #303245; color:aliceblue'>Followed</button>";
+      }
+      ?>
+    
+    </div>
+  
+
+    <div id="postbox">
+
+      <div id="recent">
+        <?php
+        $sql = "SELECT * FROM post ORDER BY time DESC";
+        $query = $db->prepare($sql);
+        $query->execute();
+        $data = $query->fetchAll();
+        if (empty($data)) {
+          echo "<p>Il n'y a pas de publication pour le moment.</p>";
+        } else {
+          foreach ($data as $post) {
+            $postData = $post;
+            $post = new Post($postData["id"], $postData['content'], $postData['id_user'], $postData['time'], $postData['id']);
+            if (isset($_SESSION["id_user"])) {
+              $query = $db->prepare("SELECT COUNT(*) FROM likedpost WHERE id_post = ? AND id_user = ?");
+              $query->execute([$post->getId(), $_SESSION["id_user"]]);
+              $liked = $query->fetch()[0];
+              if ($liked) {
+                echo " <script> window.onload = toDislike(" . $post->getId() . "); </script> ";
+              } else {
+                echo " <script> window.onload = toLike(" . $post->getId() . "); </script> ";
+              }
+            }
+            
+            echo "<div id='flou". $post->getId()."'>";
+            echo "<div class='post' id='post" . $post->getId() . "'>";
+            require("../model/post_admin.php");
+            $post->displayPost();
+            echo "</div>";
+            echo "</div>";
+            
+          }
+        }
+
+
+        ?>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>

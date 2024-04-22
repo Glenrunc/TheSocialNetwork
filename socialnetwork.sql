@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 05 avr. 2024 à 20:00
+-- Généré le : lun. 22 avr. 2024 à 16:21
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -46,6 +46,15 @@ CREATE TABLE `follow` (
   `id_follow` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `follow`
+--
+
+INSERT INTO `follow` (`id`, `id_user`, `id_follow`) VALUES
+(9, 40, 45),
+(20, 48, 45),
+(27, 45, 48);
+
 -- --------------------------------------------------------
 
 --
@@ -65,10 +74,25 @@ CREATE TABLE `likedcomment` (
 --
 
 CREATE TABLE `likedpost` (
-  `id` int(11) NOT NULL,
   `id_post` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `likedpost`
+--
+
+INSERT INTO `likedpost` (`id_post`, `id_user`) VALUES
+(46, 40),
+(46, 45),
+(47, 40),
+(47, 48),
+(48, 40),
+(48, 45),
+(49, 40),
+(50, 40),
+(50, 45),
+(51, 40);
 
 -- --------------------------------------------------------
 
@@ -93,19 +117,22 @@ CREATE TABLE `post` (
   `id_user` int(11) NOT NULL,
   `time` varchar(128) NOT NULL DEFAULT current_timestamp(),
   `content` text NOT NULL,
-  `image` varchar(128) DEFAULT NULL
+  `image` varchar(128) DEFAULT NULL,
+  `retirer` tinyint(1) DEFAULT NULL,
+  `flou` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `post`
 --
 
-INSERT INTO `post` (`id`, `id_user`, `time`, `content`, `image`) VALUES
-(19, 45, '2024-04-05 14:08:22', 'a', NULL),
-(20, 45, '2024-04-05 14:09:46', 'b', NULL),
-(21, 45, '2024-04-05 14:10:18', 'b', NULL),
-(22, 45, '2024-04-05 14:11:26', 'zdazdazdazd', NULL),
-(23, 45, '2024-04-05 14:13:29', 'dzedezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', NULL);
+INSERT INTO `post` (`id`, `id_user`, `time`, `content`, `image`, `retirer`, `flou`) VALUES
+(46, 45, '2024-04-20 09:43:47', 'Bonjour', '46.png', NULL, NULL),
+(47, 45, '2024-04-20 09:46:34', 'alors là vraiment', '47.png', NULL, NULL),
+(48, 48, '2024-04-20 10:24:31', 'Wow nouveau post', '48.jpg', NULL, NULL),
+(49, 40, '2024-04-21 12:46:56', 'Je suis l\'administrateur de ce réseau social', '49.jpeg', NULL, 1),
+(50, 40, '2024-04-21 13:14:32', 'Bonjour l\'administrateur du réseau prévient d\'une mise à jour importante', '50.png', NULL, NULL),
+(51, 45, '2024-04-21 13:15:10', 'Je test ', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -132,8 +159,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `age`, `birthday`, `email`, `password`, `pseudo`, `admin`, `profile_picture`, `ban`) VALUES
-(40, 'admin', 'admin', 24, 2000, 'admin@tzu.com', '$argon2id$v=19$m=65536,t=4,p=1$Uy5hQWJNUE5ZUnN6eDRMbg$I7y5+vPal6trTjdEnQroJ4lP8rwVgmz0YdcQk4djdv4', 'admin', 1, NULL, 0),
-(45, 'Matteo', 'Chaouche', 24, 2000, 'glenmorton5555@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$YkZVOTFxZFpLRnZGUExsQg$zIyP5EJ3ay5dITaPAiwEvM/4jOsnspjeAv48eqCcdgk', 'Glen', NULL, '45.jpg', 0);
+(40, 'admin', 'admin', 24, 2000, 'admin@tzu.com', '$argon2id$v=19$m=65536,t=4,p=1$Uy5hQWJNUE5ZUnN6eDRMbg$I7y5+vPal6trTjdEnQroJ4lP8rwVgmz0YdcQk4djdv4', 'admin', 1, 'admin.jpeg', 0),
+(45, 'Matteo', 'Chaouche', 24, 2000, 'glenmorton5555@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$YkZVOTFxZFpLRnZGUExsQg$zIyP5EJ3ay5dITaPAiwEvM/4jOsnspjeAv48eqCcdgk', 'Glen', NULL, '45.JPG', 0),
+(48, 'Thomas', 'Gredin', 28, 1996, 'tom.gredin@utbm.fr', '$argon2id$v=19$m=65536,t=4,p=1$cUxPRHY5MmcwT3pjNHAyUg$3DrPD8V7UBAtGFgFWM9Pgqc8xyf/2p3JE6sTI2km5/s', 'stagram', NULL, '#92FDCE', 0);
 
 --
 -- Index pour les tables déchargées
@@ -167,8 +195,7 @@ ALTER TABLE `likedcomment`
 -- Index pour la table `likedpost`
 --
 ALTER TABLE `likedpost`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_post` (`id_post`),
+  ADD PRIMARY KEY (`id_post`,`id_user`),
   ADD KEY `id_user` (`id_user`);
 
 --
@@ -207,18 +234,12 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT pour la table `follow`
 --
 ALTER TABLE `follow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT pour la table `likedcomment`
 --
 ALTER TABLE `likedcomment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `likedpost`
---
-ALTER TABLE `likedpost`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -231,13 +252,13 @@ ALTER TABLE `notification`
 -- AUTO_INCREMENT pour la table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- Contraintes pour les tables déchargées
@@ -268,8 +289,8 @@ ALTER TABLE `likedcomment`
 -- Contraintes pour la table `likedpost`
 --
 ALTER TABLE `likedpost`
-  ADD CONSTRAINT `likedpost_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `likedpost_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `likedpost_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `likedpost_ibfk_2` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `notification`

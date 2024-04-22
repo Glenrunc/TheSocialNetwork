@@ -19,7 +19,11 @@
     session_start();
     require("../view/navbar.php");
     global $db;
-
+    ?>
+    <div id="wrap">
+    <div id="searchresult"></div>
+    </div>
+    <?php
     if (isset($_SESSION["id_user"])) {
 
         $id_user = $_SESSION["id_user"];

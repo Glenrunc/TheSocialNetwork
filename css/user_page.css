@@ -1,11 +1,19 @@
 body{
     background-color: #15172b;
-    color:aliceblue;
+    
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: large;
 
 }
-
+.info{
+  color:aliceblue
+}
+.img{
+  width: auto;
+  height: 500px;
+  max-width: 100%;
+  max-height: 100%;
+}
 .profile_picture {
     width: 100px; /* Largeur souhaitée */
     height: 100px; /* Hauteur souhaitée */
@@ -19,21 +27,94 @@ body{
     display: block; /* Assure que l'image est un bloc */
   }
 
-  .post{
-    padding-top: 1em; /* Ajustez cette valeur en fonction de vos besoins */
-
-    border: solid 3px #c5c4c4;
-
-    border-radius: 10px;
-    background-color: #15172b;
-    box-shadow: 0 0 10px #000;
-    margin: 10px;
-    padding: 10px;
-    /* width: 300px; */
-    /* height : 50px */
+  #postbox {
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: fit-content;
+    transform: translate(35%); */
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 150px;
   }
 
+  .post {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: solid 5px;
+    margin: 10px;
+}
+.author-info {
+    display: flex;
+    align-items: center; /* Pour aligner verticalement */
+}
+.author{
+    font-weight: bold;
+    margin-right: 10px;
+
+}
   #user_info{
     width: fit-content;
   }
- 
+
+  .picture {
+    overflow: hidden; /* Cache les parties de l'image qui dépassent */
+    border-radius: 50%; /* Rend le conteneur rond */
+   
+  }
+
+#creation_post{
+  position: absolute;
+  color:rgb(0, 0, 0);
+  background-color: whitesmoke;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+#content{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  
+}
+
+
+#post_img_form{
+  margin-top: 10px;
+}
+
+#submit{
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+#wrap{
+  display: none;
+  border-radius: 10px;
+}
+#searchresult {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow-y: scroll; /* Activer le défilement vertical */
+  width: 300px;
+  height: 100px; /* Hauteur de la zone de recherche */
+  border-radius: 10px;
+
+}
+
+#searchresult::-webkit-scrollbar {
+  display: none; /* Masquer la barre de défilement pour Chrome, Safari et Opera */
+}

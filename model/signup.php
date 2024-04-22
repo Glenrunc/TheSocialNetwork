@@ -18,7 +18,6 @@
     if (isset($_SESSION["id_user"])) {
         echo "unauthorized";
     } else {
-        require("../view/form_signup.html");
 
         if (!empty($_POST)) {
 
@@ -86,6 +85,7 @@
 
                     $_SESSION["pseudo"] = $user["pseudo"];
                     $_SESSION["email"] = $user["email"];
+                    $_SESSION["admin"] = $user["admin"];
 
                     if($_FILES["profile_picture"]["size"] != 0 ){
                         
@@ -97,13 +97,21 @@
                         $query->execute([$_SESSION["id_user"].".".$extention,$_SESSION["id_user"]]);
                         $_SESSION["profile_picture"] = $_SESSION["id_user"].".".$extention;
             
+                    }else{
+                        $randomColor = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+                        $query = $db->prepare("UPDATE user SET profile_picture = ? WHERE id = ?");
+                        $query->execute([$randomColor,$_SESSION["id_user"]]);
+                        $_SESSION["profile_picture"] = $randomColor;
                     }
                     header("Location: ../view/user.php?id=".$_SESSION["id_user"]);
                 }
+
             } else {
                 die("You must fill all the fields");
             }
         }
+        require("../view/form_signup.html");
+
     }
     ?>
 </body>

@@ -16,3 +16,10 @@ function checkAndRedirect() {
  
 }
 
+function showRecent() {
+  window.location.replace("index.php");  
+}
+  
+function showFollowed() {
+  window.location.replace("followed_feed.php");
+}
