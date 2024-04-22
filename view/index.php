@@ -26,6 +26,7 @@
 
   // require("../controller/function.php");
   ?>
+
   <div id="wrap">
   <div id="searchresult"></div>
   </div>
@@ -34,10 +35,12 @@
       <p>Recent post</p>
       <?php
       if(isset($_SESSION["id_user"])) {
-        echo "<button type='button' class='btn btn' onclick='showFollowed()' style='background-color: #303245; color:aliceblue'>Followed</button>";
+        echo "<button id='toto' type='button' class='btn btn' onclick='showFollowed()' style='background-color: #303245; color:aliceblue'>Followed</button>";
       }
       ?>
+    
     </div>
+  
 
     <div id="postbox">
 
@@ -63,11 +66,14 @@
                 echo " <script> window.onload = toLike(" . $post->getId() . "); </script> ";
               }
             }
-
-
+            
+            echo "<div id='flou". $post->getId()."'>";
             echo "<div class='post' id='post" . $post->getId() . "'>";
+            require("../model/post_admin.php");
             $post->displayPost();
             echo "</div>";
+            echo "</div>";
+            
           }
         }
 
@@ -76,6 +82,7 @@
       </div>
     </div>
   </div>
+
 </body>
 
 </html>

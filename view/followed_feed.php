@@ -75,9 +75,11 @@
                         } else {
                             echo " <script> window.onload = toLike(" . $post->getId() . "); </script> ";
                         }
-
+                        echo "<div id='flou". $post->getId()."'>";      
                         echo "<div class='post' id='post" . $post->getId() . "'>";
+                        require("../model/post_admin.php");
                         $post->displayPost();
+                        echo "</div>";
                         echo "</div>";
                     }
                 }

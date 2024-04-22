@@ -41,6 +41,7 @@
                         $_SESSION["email"] = $user["email"];
                         $_SESSION["pseudo"] = $user["pseudo"];
                         $_SESSION["profile_picture"]= $user["profile_picture"];
+                        $_SESSION["admin"] = $user["admin"];
                         header("Location: ../view/user.php?id=" . $_SESSION["id_user"]);
                     }
                 }

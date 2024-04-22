@@ -73,10 +73,25 @@
             $data = $query->fetchAll();
             
             foreach($data as $post) {
-                $post = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["id"]);
+                $sql = "SELECT COUNT(*) FROM likedpost WHERE id_post=?";
+                $query = $db->prepare($sql);
+                $query->execute([$post["id"]]);
+                $nb_likes = $query->fetch();
+
+                $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["id"]);
                 echo "<div class='post'>";
-                $post->displayPost();
+                $post_obj->displayPost();
+                echo "<div id='like".$post["id"]."'>";
+                if($nb_likes[0] > 1){
+                    echo "<p>" . $nb_likes[0] . " likes</p>";
+                }else{
+                    echo "<p>" . $nb_likes[0] . " like</p>";
+                }
                 echo "</div>";
+                echo "</div>";
+                ?>
+
+            <?php
             }
             
             echo "</div>";

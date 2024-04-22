@@ -85,6 +85,7 @@
 
                     $_SESSION["pseudo"] = $user["pseudo"];
                     $_SESSION["email"] = $user["email"];
+                    $_SESSION["admin"] = $user["admin"];
 
                     if($_FILES["profile_picture"]["size"] != 0 ){
                         
