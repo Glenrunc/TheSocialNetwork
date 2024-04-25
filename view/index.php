@@ -56,7 +56,7 @@
           foreach ($data as $post) {
               if($post['retirer'] != 1){
               $postData = $post;
-              $post = new Post($postData["id"], $postData['content'], $postData['id_user'], $postData['time'], $postData['id']);
+              $post = new Post($postData["id"], $postData['content'], $postData['id_user'], $postData['time']);
               echo "<div class = 'flou' id='flou". $post->getId()."'>";
               
 

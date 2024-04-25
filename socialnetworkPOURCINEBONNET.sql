@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 22 avr. 2024 à 16:21
+-- Généré le : jeu. 25 avr. 2024 à 21:47
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -103,8 +103,21 @@ INSERT INTO `likedpost` (`id_post`, `id_user`) VALUES
 CREATE TABLE `notification` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `content` text NOT NULL
+  `id_post` int(11) DEFAULT NULL,
+  `content` text NOT NULL,
+  `viewed` int(11) DEFAULT NULL,
+  `date` date DEFAULT current_timestamp(),
+  `hour` time DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `notification`
+--
+
+INSERT INTO `notification` (`id`, `id_user`, `id_post`, `content`, `viewed`, `date`, `hour`) VALUES
+(1, 48, 48, 'Your post may causes several problem regarding our rules ', NULL, '2024-04-25', '21:47:14'),
+(2, 40, 49, 'test', NULL, '2024-04-25', '21:47:14'),
+(3, 45, 46, 'Your post may causes several problem regarding our rules ', 0, '2024-04-25', '21:47:14');
 
 -- --------------------------------------------------------
 
@@ -127,9 +140,9 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id`, `id_user`, `time`, `content`, `image`, `retirer`, `flou`) VALUES
-(46, 45, '2024-04-20 09:43:47', 'Bonjour', '46.png', NULL, NULL),
-(47, 45, '2024-04-20 09:46:34', 'alors là vraiment', '47.png', NULL, NULL),
-(48, 48, '2024-04-20 10:24:31', 'Wow nouveau post', '48.jpg', NULL, NULL),
+(46, 45, '2024-04-20 09:43:47', 'Bonjour', '46.png', NULL, 1),
+(47, 45, '2024-04-20 09:46:34', 'alors là vraiment', '47.png', NULL, 1),
+(48, 48, '2024-04-20 10:24:31', 'Wow nouveau post', '48.jpg', NULL, 1),
 (49, 40, '2024-04-21 12:46:56', 'Je suis l\'administrateur de ce réseau social', '49.jpeg', NULL, 1),
 (50, 40, '2024-04-21 13:14:32', 'Bonjour l\'administrateur du réseau prévient d\'une mise à jour importante', '50.png', NULL, NULL),
 (51, 45, '2024-04-21 13:15:10', 'Je test ', NULL, NULL, NULL);
@@ -203,7 +216,8 @@ ALTER TABLE `likedpost`
 --
 ALTER TABLE `notification`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_post` (`id_post`);
 
 --
 -- Index pour la table `post`
@@ -246,7 +260,7 @@ ALTER TABLE `likedcomment`
 -- AUTO_INCREMENT pour la table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `post`
@@ -296,7 +310,8 @@ ALTER TABLE `likedpost`
 -- Contraintes pour la table `notification`
 --
 ALTER TABLE `notification`
-  ADD CONSTRAINT `notification_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `notification_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `notification_ibfk_2` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `post`

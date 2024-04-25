@@ -76,6 +76,9 @@
                     </div>
                     <?php 
                 }
+            }else{
+                echo'<div id="postbox">';
+
             }              
             //Afficher les posts de l'utilisateur
             
@@ -90,7 +93,7 @@
                 $query->execute([$post["id"]]);
                 $nb_likes = $query->fetch();
 
-                $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["id"]);
+                $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"]);
                 echo "<div class='post'>";
                 $post_obj->displayPost();
                 echo "<div id='like".$post["id"]."'>";

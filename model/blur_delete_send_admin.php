@@ -23,7 +23,7 @@ if (!empty($_SESSION["admin"])) {
 
                           $("#blur_post'.$post->getId().'").click(function(){
                             var action = $("#blur_post'.$post->getId().'").text();
-
+                            var id_user = '.$post->getAuthor().';
                             var id = '.$post->getId().';
                            
                             var reason = prompt("Enter the reason for blurring the post:","Your post may causes several problem regarding our rules ");
@@ -33,7 +33,7 @@ if (!empty($_SESSION["admin"])) {
                                 $.ajax({
                                     url: "../ajax/blur_post.php",
                                     method: "POST",
-                                    data: { id: id, action: action , reason: reason},
+                                    data: { id: id, action: action , reason: reason, id_user: id_user},
                                     success: function (data) {
                                         if(data === "Success"){
                                             $("#flou'.$post->getId().'").css("filter", "blur(10px)");

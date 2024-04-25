@@ -3,17 +3,15 @@
 class Post
 {
     private $id_post;
-    private $id_user;
     private $content;
     private $author;
     private $createdAt;
     private $comments;
     // private $like;
 
-    public function __construct($id_post, $content, $author, $createdAt, $id)
+    public function __construct($id_post, $content, $author, $createdAt)
     {
         $this->id_post = $id_post;
-        $this->id_user = $id;
         $this->content = $content;
         $this->author = $author;
         $this->createdAt = $createdAt;
