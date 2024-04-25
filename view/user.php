@@ -43,15 +43,7 @@
             $user->displayUserPage();
             if (isset($_SESSION["id_user"])) {
                 //Si l'utilisateur est connecté et que c'est son profil
-                if ($_SESSION["id_user"] == $_GET["id"]) {
-                    echo '<div><a href="../model/user_gestion.php?id=' . $_SESSION["id_user"] . '">Edit</a></div>';
-                    ?><div id="creation_post">
-                        <p id = "create">Creation post</p>
-                        <?php require("../view/form_create_post.html"); ?>
-                    </div>
-                    <?php 
-                            
-                }else{
+                if ($_SESSION["id_user"] != $_GET["id"]) {
                     //Si l'utilisateur est connecté et que ce n'est pas son profil
                     //bouton follow
                     require("../model/follow.php");
@@ -63,10 +55,30 @@
                     }else{
                         require("../view/form_follow.php");
                     }
+                    echo'<div id="postbox">';
+                            
+                }else{
+                  
+                    $sql = "SELECT admin FROM user WHERE id = ?";
+                    $qry = $db->prepare($sql);
+                    $qry->execute([$_SESSION["id_user"]]);
+                    $data = $qry->fetch();
+                    if ($data["admin"] == 1) {
+                        echo '<div><a href="../model/undelete_page.php">Post deleted</a></div>';
+                        echo '<div><a href="../model/unblur_page.php">Post Blured</a></div>';
+                        echo '<div><a href="../model/user_gestion.php">User Banned</a></div>';
+                    }
+                    echo '<div><a href="../model/user_gestion.php?id=' . $_SESSION["id_user"] . '">Edit</a></div>';
+                    echo'<div id="postbox">';
+                    ?><div id="creation_post">
+                        <p id = "create">Creation post</p>
+                        <?php require("../view/form_create_post.html"); ?>
+                    </div>
+                    <?php 
                 }
             }              
             //Afficher les posts de l'utilisateur
-            echo'<div id="postbox">';
+            
   
             $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
             $query->execute([$_GET["id"]]);

@@ -28,17 +28,10 @@ body{
   }
 
   #postbox {
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: fit-content;
-    transform: translate(35%); */
     position: absolute;
-    top: 60%;
     left: 50%;
     transform: translate(-50%);
-    margin-top: 150px;
+    margin-top: 10px;
   }
 
   .post {
@@ -50,7 +43,8 @@ body{
     background-color: #ffffff;
     border-radius: 10px;
     border: solid 5px;
-    margin: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 .author-info {
     display: flex;
@@ -70,26 +64,33 @@ body{
     border-radius: 50%; /* Rend le conteneur rond */
    
   }
+.content{
+  width: 600px; /* Largeur maximale de la boîte */
+  word-wrap: break-word; 
 
+}
 #creation_post{
-  position: absolute;
-  color:rgb(0, 0, 0);
-  background-color: whitesmoke;
-  width: fit-content;
-  height: fit-content;
-  border-radius: 10px;
-  left: 50%;
-  transform: translate(-50%);
+  position :relative;
+  width: 100% ;
+  background-color: #ffffff;
+  border-radius: 10px ;
+  border: solid 5px;
+
 }
 
 #content{
   position: absolute;
   left: 50%;
   transform: translate(-50%);
-  
+  width: 90%;
+  resize: none;
 }
 
+#create{
+  position: relative;
+  text-align: center;
 
+}
 #post_img_form{
   margin-top: 10px;
 }

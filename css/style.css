@@ -2,7 +2,7 @@
 body{
     margin: 0;
     padding: 0;
-
+    background-color: blueviolet;
 }
 
 .img{
@@ -62,11 +62,10 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    width: fit-content;
+    width: 750px;
     height: 100%;
    
 }
-
 
 .post {
     width: 100%;
@@ -77,12 +76,27 @@ body{
     background-color: #ffffff;
     border-radius: 10px;
     border: solid 5px;
-    margin: 10px;
+    /* margin: 5px; */
 }
+
+
 .author-info {
     display: flex;
-    align-items: center; /* Pour aligner verticalement */
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
 }
+.content{
+    width: 90%; /* Largeur maximale de la boîte */
+    word-wrap: break-word; 
+  }
+.author-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
 .author{
     font-weight: bold;
     margin-right: 10px;
@@ -98,3 +112,33 @@ body{
     border-radius: 50%; /* Rend le conteneur rond */
 }
 
+.btn-action{
+    position: relative;
+    top:50px;
+    right: 10px;
+    margin-left: 20px;
+    width: fit-content;
+}
+
+.like-dislike{
+    width: 50px;
+}
+
+.flou{
+    width: 100%;
+    height: fit-content;
+}
+
+#feed{
+    width: fit-content;
+    height: fit-content;
+
+}
+#table{
+
+    width: 100px;
+    overflow: hidden;
+    height: 100px;
+    overflow-y: scroll; /* Activer le défilement vertical */
+
+}
