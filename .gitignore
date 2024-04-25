@@ -1,3 +1,9 @@
 # *.jpeg
 # *.jpg
 # *.png
+
+*.aux
+*.log
+*.synctex.gz
+*.tex
+*.toc
