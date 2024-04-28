@@ -25,6 +25,9 @@
     require("../view/popup_signin.php");
     echo "<script src='../script/add_like.js'></script>";
     echo "<script src='../script/add_dislike.js'></script>";
+    echo "<script src='../script/add_admin.js'></script>";
+    echo "<script src='../script/add_blur.js'></script>";
+
     global $db;
 
     ?>
@@ -91,8 +94,8 @@
             
             foreach($data as $post) {
                 if($post['retirer'] != 1){
-                $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"]);
-                $post_obj->displayPost();
+                    $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["flou"],$post["retirer"],$post["image"]);
+                    $post_obj->displayPost();
                 }
                 ?>
 

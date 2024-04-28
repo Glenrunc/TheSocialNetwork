@@ -7,15 +7,22 @@ class Post
     private $author;
     private $createdAt;
     private $comments;
+    private $flou;
+    private $retirer;
+    private $image;
+
     // private $like;
 
-    public function __construct($id_post, $content, $author, $createdAt)
+    public function __construct($id_post, $content, $author, $createdAt, $flou, $retirer,$image)
     {
         $this->id_post = $id_post;
         $this->content = $content;
         $this->author = $author;
         $this->createdAt = $createdAt;
         $this->comments = array();
+        $this->flou = $flou;
+        $this->retirer = $retirer;
+        $this->image = $image;
         // $this->getLike();
     }
 
@@ -65,25 +72,23 @@ class Post
         $this->createdAt = $createdAt;
     }
 
-    public function displayPost()
+    public function getFlou()
     {
+        return $this->flou;
+    }
+    public function getImage(){
+        return $this->image;
+    }
+
+    public function displayPost()
+    {   
+
         require("../model/database.php");
         global $db;
-        
-        require("../model/blur_delete_send_admin.php");
+        require("../model/blur_delete_send_admin.php");        
 
         echo "<div class='post' id='post" . $this->getId() . "'>";
-
-        if (isset($_SESSION["id_user"])) {
-            $query = $db->prepare("SELECT COUNT(*) FROM likedpost WHERE id_post = ? AND id_user = ?");
-            $query->execute([$this->getId(), $_SESSION["id_user"]]);
-            $liked = $query->fetch()[0];
-            if ($liked) {
-                echo " <script> window.onload = toDislike(" . $this->getId() . "); </script> ";
-            } else {
-                echo " <script> window.onload = toLike(" . $this->getId() . "); </script> ";
-            }
-        }
+       
         $query = $db->prepare("SELECT pseudo,profile_picture FROM user WHERE id=?");
         $query->execute([$this->author]);
         $data = $query->fetch();
@@ -104,18 +109,37 @@ class Post
             echo "<p class='author'>Unknown</p>";
         }
         
-
         echo "<p id = 'content" . $this->getId() . "' class='content'>$this->content</p>";
-        $query = $db->prepare("SELECT image FROM post WHERE id=?");
-        $query->execute([$this->id_post]);
-        $data = $query->fetch();
 
-        // var_dump($data); // Add this line for debugging
-        if (isset($data["image"])) {
-            echo "<img id = 'img" . $this->getId() . "' class='img' src='../image/post_photo/" . $data["image"] . "' alt='post image'>";
-        }        
+        if ($this->getImage()) {
+            echo "<img id = 'img" . $this->getId() . "' class='img' src='../image/post_photo/" . $this->getImage() . "' alt='post image'>";
+        }       
         echo "<p class='createdAt'>$this->createdAt</p>";
         echo "</div>";
-        require("../model/post_admin.php");
+        if ($this->getFlou() == 1) {
+            echo " <script> window.onload = add_blur(" . $this->getId() . "); </script> ";
+
+        } 
+
+        $sql = "SELECT admin FROM user WHERE id = ?";
+        $qry = $db->prepare($sql);
+        $qry -> execute([$this->getAuthor()]);
+        $result = $qry->fetch();
+        if($result["admin"] == 1){
+            echo " <script> window.onload = add_admin(" . $this->getId() . "); </script> ";
+
+        }
+
+        if (isset($_SESSION["id_user"])) {
+            $query = $db->prepare("SELECT COUNT(*) FROM likedpost WHERE id_post = ? AND id_user = ?");
+            $query->execute([$this->getId(), $_SESSION["id_user"]]);
+            $liked = $query->fetch()[0];
+            if ($liked) {
+                echo " <script> window.onload = toDislike(" . $this->getId() . "); </script> ";
+            } else {
+                echo " <script> window.onload = toLike(" . $this->getId() . "); </script> ";
+            }
+        }
+       
     }
 }
