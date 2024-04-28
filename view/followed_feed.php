@@ -68,7 +68,7 @@
                     foreach ($posts as $post) {
                         if($post['retirer'] != 1){
                             $postData = $post;
-                            $post = new Post($postData["id"], $postData['content'], $postData['id_user'], $postData['time'], $postData['id']);
+                            $post = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["flou"],$post["retirer"],$post["image"]);
                             $post->displayPost();
                       
 

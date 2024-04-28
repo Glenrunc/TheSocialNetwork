@@ -13,12 +13,15 @@
 
     <div class="collapse navbar-collapse" id="mynavbar">
       <input type="text" id="search" placeholder="Search for user ?!" autocomplete="off">
+      
 
 
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <?php
+          <?php        
           if (isset($_SESSION["id_user"])) {
+            require("../model/notification_info.php");
+            require("../view/notification.php");
 
             if (isset($_GET['id'])) {
               echo "<script> console.log('id_user : " . $_GET["id"] . "')</script>";
@@ -84,4 +87,12 @@
     </div>
   </div>
 </nav>
+<style>
+  .notification{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>
 

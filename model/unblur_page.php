@@ -35,7 +35,7 @@
 
                 foreach($data as $post){
                     
-                    $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["id"]);
+                    $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["flou"],$post["retirer"],$post["image"]);
                     echo '<div class="btn-div">';
                     echo '<button id ="unblur'.$post_obj->getId().'" type="button" class="btn btn-danger mb-1">Unblur</button>';
                     echo '</div>';

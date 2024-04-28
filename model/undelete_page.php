@@ -31,7 +31,7 @@
                 echo" <a class='link' href= '../view/user.php?id=".$_SESSION["id_user"]."'>Back</a>";
                 echo '<div id="postbox">';
                 foreach($data as $post){
-                    $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["id"]);
+                    $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["flou"],$post["retirer"],$post["image"]);
                     echo '<div class="btn-div">';
                     echo '<button id ="undelete'.$post_obj->getId().'" type="button" class="btn btn-danger mb-1">undelete</button>';
                     echo '</div>';

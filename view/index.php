@@ -19,6 +19,9 @@
   session_start();
   echo "<script src='../script/add_like.js'></script>";
   echo "<script src='../script/add_dislike.js'></script>";
+  echo "<script src='../script/add_blur.js'></script>";
+  echo "<script src='../script/add_admin.js'></script>";
+
   ?>
   <?php
   require("navbar.php");
@@ -56,8 +59,9 @@
           foreach ($data as $post) {
               if($post['retirer'] != 1){
               $postData = $post;
-              $post = new Post($postData["id"], $postData['content'], $postData['id_user'], $postData['time']);
+              $post = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["flou"],$post["retirer"],$post["image"]);
               $post->displayPost();
+              
             }
           }
         }
