@@ -32,6 +32,7 @@ body{
     left: 50%;
     transform: translate(-50%);
     margin-top: 10px;
+
   }
 
   .post {
@@ -118,4 +119,12 @@ body{
 
 #searchresult::-webkit-scrollbar {
   display: none; /* Masquer la barre de défilement pour Chrome, Safari et Opera */
+}
+
+.btn-action{
+  position: relative;
+  top:50px;
+  right: 10px;
+  margin-left: 20px;
+  width: fit-content;
 }

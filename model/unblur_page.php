@@ -19,6 +19,8 @@
             require("../model/database.php");
             require("../model/post_info.php");
             session_start();
+            echo "<script src='../script/add_like.js'></script>";
+            echo "<script src='../script/add_dislike.js'></script>";
             
             if(isset($_SESSION["admin"]) && $_SESSION["admin"] == 1){
 
@@ -30,13 +32,20 @@
                 echo "<h1>Blured post</h1>";
                 echo" <a class='link' href= '../view/user.php?id=".$_SESSION["id_user"]."'>Back</a>";
                 echo '<div id="postbox">';
-                foreach($data as $post){
-                    $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["id"]);
-                    echo "<div class='post' id='post" . $post_obj->getId() . "'>";
-                    echo '<button id ="unblur'.$post_obj->getId().'" type="button" class="btn btn-danger mb-1">Unblur</button>';
-                    $post_obj->displayPost();
-                    echo "</div>";
 
+                foreach($data as $post){
+                    
+                    $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["id"]);
+                    echo '<div class="btn-div">';
+                    echo '<button id ="unblur'.$post_obj->getId().'" type="button" class="btn btn-danger mb-1">Unblur</button>';
+                    echo '</div>';
+                    $post_obj->displayPost();
+                    ?>
+                    <script>
+                        var buttonAction = document.getElementById("btn-action"+<?php echo $post_obj->getId(); ?>);
+                        if(buttonAction != null) {buttonAction.remove();};
+                    </script>
+                    <?php
                     echo'
                         <script>
                         $(document).ready(function(){
@@ -49,6 +58,7 @@
                                     data: {id_unblur: '.$post_obj->getId().'},
                                     success: function(data){
                                         $("#post'.$post_obj->getId().'").remove();
+                                        $("#unblur'.$post_obj->getId().'").remove();
                                     }
                                 });
                                 

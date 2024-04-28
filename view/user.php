@@ -23,6 +23,8 @@
     session_start();
     require("../view/navbar.php");
     require("../view/popup_signin.php");
+    echo "<script src='../script/add_like.js'></script>";
+    echo "<script src='../script/add_dislike.js'></script>";
     global $db;
 
     ?>
@@ -88,22 +90,10 @@
             $data = $query->fetchAll();
             
             foreach($data as $post) {
-                $sql = "SELECT COUNT(*) FROM likedpost WHERE id_post=?";
-                $query = $db->prepare($sql);
-                $query->execute([$post["id"]]);
-                $nb_likes = $query->fetch();
-
+                if($post['retirer'] != 1){
                 $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"]);
-                echo "<div class='post'>";
                 $post_obj->displayPost();
-                echo "<div id='like".$post["id"]."'>";
-                if($nb_likes[0] > 1){
-                    echo "<p>" . $nb_likes[0] . " likes</p>";
-                }else{
-                    echo "<p>" . $nb_likes[0] . " like</p>";
                 }
-                echo "</div>";
-                echo "</div>";
                 ?>
 
             <?php

@@ -69,22 +69,9 @@
                         if($post['retirer'] != 1){
                             $postData = $post;
                             $post = new Post($postData["id"], $postData['content'], $postData['id_user'], $postData['time'], $postData['id']);
-                            echo "<div class = 'flou' id='flou". $post->getId()."'>";
-                            
-                            require("../model/blur_delete_send_admin.php");
-                            $query = $db->prepare("SELECT COUNT(*) FROM likedpost WHERE id_post = ? AND id_user = ?");
-                            $query->execute([$post->getId(), $_SESSION["id_user"]]);
-                            $liked = $query->fetch()[0];
-                            if ($liked) {
-                                echo " <script> window.onload = toDislike(" . $post->getId() . "); </script> ";
-                            } else {
-                                echo " <script> window.onload = toLike(" . $post->getId() . "); </script> ";
-                            }
-                            echo "<div class='post' id='post" . $post->getId() . "'>";
-                            require("../model/post_admin.php");
                             $post->displayPost();
-                            echo "</div>";
-                            echo "</div>";
+                      
+
                         }
                     }
                 }

@@ -123,11 +123,6 @@ body{
     width: 50px;
 }
 
-.flou{
-    width: 100%;
-    height: fit-content;
-}
-
 #feed{
     width: fit-content;
     height: fit-content;
@@ -141,3 +136,4 @@ body{
     overflow-y: scroll; /* Activer le défilement vertical */
 
 }
+

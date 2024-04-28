@@ -32,11 +32,16 @@
                 echo '<div id="postbox">';
                 foreach($data as $post){
                     $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["id"]);
-                    echo "<div class='post' id='post" . $post_obj->getId() . "'>";
+                    echo '<div class="btn-div">';
                     echo '<button id ="undelete'.$post_obj->getId().'" type="button" class="btn btn-danger mb-1">undelete</button>';
+                    echo '</div>';
                     $post_obj->displayPost();
-                    echo "</div>";
-
+                    ?>
+                    <script>
+                        var buttonDelete = document.getElementById("btn-action"+<?php echo $post_obj->getId(); ?>);
+                        if(buttonDelete != null) {buttonDelete.remove();};
+                    </script>
+                    <?php
                     echo'
                         <script>
                         $(document).ready(function(){
@@ -49,6 +54,7 @@
                                     data: {id_undelete: '.$post_obj->getId().'},
                                     success: function(data){
                                         $("#post'.$post_obj->getId().'").remove();
+                                        $("#undelete'.$post_obj->getId().'").remove();
                                     }
                                 });
                                 
