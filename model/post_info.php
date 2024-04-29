@@ -115,6 +115,36 @@ class Post
             echo "<img id = 'img" . $this->getId() . "' class='img' src='../image/post_photo/" . $this->getImage() . "' alt='post image'>";
         }       
         echo "<p class='createdAt'>$this->createdAt</p>";
+
+        if (isset($_SESSION["id_user"])) {
+            $query = $db->prepare("SELECT COUNT(*) FROM likedpost WHERE id_post = ? AND id_user = ?");
+            $query->execute([$this->getId(), $_SESSION["id_user"]]);
+            $liked = $query->fetch()[0];
+            
+            $sql = "SELECT COUNT(*) FROM likedpost WHERE id_post = ?";
+            $query = $db->prepare($sql);
+            $query->execute([$this->getId()]);
+            $like = $query->fetch()[0];
+            ?>
+
+            
+            <?php
+
+            if ($liked) {
+                
+                echo '<div id="dislike'.$this->getId().'">
+                <button type="button" class="btn btn-danger mb-1" onclick="toLike('.$this->getId().')">Dislike</button>
+                <span> Total amount of like : '.$like.'</span>
+                </div>';
+                
+            } else {
+                
+                echo'<div id="like'.$this->getId().'">
+                <button type="button" class="btn btn-success mb-1" onclick="toDislike('.$this->getId().')">Like</button>
+                <span> Total amount of like : '.$like.'</span>
+                </div>';
+           }
+        }
         echo "</div>";
         if ($this->getFlou() == 1) {
             echo " <script> window.onload = add_blur(" . $this->getId() . "); </script> ";
@@ -130,16 +160,7 @@ class Post
 
         }
 
-        if (isset($_SESSION["id_user"])) {
-            $query = $db->prepare("SELECT COUNT(*) FROM likedpost WHERE id_post = ? AND id_user = ?");
-            $query->execute([$this->getId(), $_SESSION["id_user"]]);
-            $liked = $query->fetch()[0];
-            if ($liked) {
-                echo " <script> window.onload = toDislike(" . $this->getId() . "); </script> ";
-            } else {
-                echo " <script> window.onload = toLike(" . $this->getId() . "); </script> ";
-            }
-        }
+       
        
     }
 }

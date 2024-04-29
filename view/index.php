@@ -49,7 +49,7 @@
 
       <div id="recent">
         <?php
-        $sql = "SELECT * FROM post ORDER BY time DESC";
+        $sql = "SELECT * FROM post ORDER BY time DESC LIMIT 5";
         $query = $db->prepare($sql);
         $query->execute();
         $data = $query->fetchAll();
