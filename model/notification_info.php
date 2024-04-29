@@ -64,7 +64,7 @@ class Notification{
         echo'
             <div>
                 <p>'.$pseudo.', '.$this->getContent().'. '.$this->getHour().'</p>
-            </div>;
+            </div>
         ';
     }
 }

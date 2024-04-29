@@ -23,6 +23,8 @@
   echo "<script src='../script/add_admin.js'></script>";
 
   ?>
+
+
   <?php
   require("navbar.php");
   require("../view/popup_signin.php");
@@ -49,7 +51,7 @@
 
       <div id="recent">
         <?php
-        $sql = "SELECT * FROM post ORDER BY time DESC";
+        $sql = "SELECT * FROM post ORDER BY time DESC LIMIT 5";
         $query = $db->prepare($sql);
         $query->execute();
         $data = $query->fetchAll();
@@ -68,6 +70,25 @@
 
 
         ?>
+          <script>
+
+//Pour utiliser fetch, la fonction doit ÃĒtre "asynchrone"
+async function loadMorePosts(numberOfPostsAlready) {
+
+	//Efface le bouton prÃŠcÃŠdent, car il sera remplacÃŠ
+    const buttonMore = document.getElementById('morePosts');
+    if (buttonMore != null ) {buttonMore.remove();}
+
+	//Le AJAX qui va chercher les nouveaux posts
+    var AJAXresult = await fetch("../model/loadMe.php?firstPost=" + numberOfPostsAlready);
+    writearea = document.getElementById("recent");
+    writearea.innerHTML += await AJAXresult.text();
+
+}
+ </script>
+                <div id="morePosts" >
+            <button type="button" onclick="loadMorePosts(5)">Charger plus de Posts</button>
+        </div>
       </div>
     </div>
   </div>
