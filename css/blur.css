@@ -17,16 +17,37 @@ h1,h2{
 }
 
 .btn-action{
-    position: relative;
-    top:50px;
-    right: 10px;
+    position: absolute;
+    top:20px;
+    right: 5px;
     margin-left: 20px;
     width: fit-content;
   }
 
 .btn-div{
-    position: relative;
+    position : relative;
+    width: fit-content;
     top: 50px;
-    left: -43%;
-    /* transform:translate(50%); */
+    left:10px;
+    z-index: 1;
+}
+
+.btn_see{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.post_admin{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color:#999BBA;
+    border-radius: 10px;
+    border: solid 5px;
+    position: relative;
 }

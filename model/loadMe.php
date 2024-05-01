@@ -3,13 +3,15 @@
 
     require_once("../model/database.php"); //Connecte
 	require_once("../model/post_info.php"); //Importe classe postStorage
+    ?>
     
+    <?php
     
     $postNumber = $_GET["firstPost"];
     $sql = "SELECT * FROM post ORDER BY time DESC LIMIT 5 OFFSET ".$postNumber;
     $stmt = $db->prepare($sql);
     $stmt->execute();
-    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $data = $stmt->fetchAll();
     
     if (!empty($data)) { 
         foreach($data as $row){
@@ -17,11 +19,7 @@
                 
                 $post = $post = new Post($row["id"],$row["content"], $row["id_user"], $row["time"],$row["flou"],$row["retirer"],$row["image"]);
                 $post->displayPost();
-            }else{
-                echo "<p>la publication numero </p>";
-                echo $row["id"];
-                echo "<p> ne rentre pas dans le if</p>";
-              }
+            }
 			//On utilise la classe "postStorage pour afficher le post
 
 

@@ -75,6 +75,7 @@ body{
     background-color: #ffffff;
     border-radius: 10px;
     border: solid 5px;
+    position: relative;
     /* margin: 5px; */
 }
 
@@ -86,7 +87,7 @@ body{
     margin-top: 10px;
 }
 .content{
-    width: 90%; /* Largeur maximale de la boîte */
+    width: 100%; /* Largeur maximale de la boîte */
     word-wrap: break-word; 
   }
 .author-info img {
@@ -112,11 +113,9 @@ body{
 }
 
 .btn-action{
-    position: relative;
-    top:50px;
-    right: 10px;
-    margin-left: 20px;
-    width: fit-content;
+    position: absolute;
+    top:10px;
+    left:10px;
 }
 
 .like-dislike{
@@ -137,3 +136,33 @@ body{
 
 }
 
+.content-blur{
+    filter: blur(15px);
+}
+
+.btn_see{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.info_btn{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
+}
+
+.post_admin{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color:#999BBA;
+    border-radius: 10px;
+    border: solid 5px;
+    position: relative;
+}

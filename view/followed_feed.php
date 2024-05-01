@@ -19,6 +19,9 @@
     session_start();
     echo "<script src='../script/add_like.js'></script>";
     echo "<script src='../script/add_dislike.js'></script>";
+    echo "<script src='../script/add_blur.js'></script>";
+    echo "<script src='../script/add_delete_admin.js'></script>";
+    echo "<script src='../script/add_blur_admin.js'></script>";
     ?>
     <?php
     if (isset($_SESSION["id_user"])) {

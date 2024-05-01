@@ -1,9 +1,5 @@
 body{
     background-color: #15172b;
-    
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: large;
-
 }
 .info{
   color:aliceblue
@@ -46,6 +42,7 @@ body{
     border: solid 5px;
     margin-top: 5px;
     margin-bottom: 5px;
+    position: relative;
 }
 .author-info {
     display: flex;
@@ -70,6 +67,7 @@ body{
   word-wrap: break-word; 
 
 }
+
 #creation_post{
   position :relative;
   width: 100% ;
@@ -122,9 +120,37 @@ body{
 }
 
 .btn-action{
-  position: relative;
-  top:50px;
-  right: 10px;
-  margin-left: 20px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+ 
   width: fit-content;
+}
+.content-blur{
+  filter: blur(15px);
+}
+.btn_see{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.info_btn{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1;
+}
+
+.post_admin{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color:#999BBA;
+  border-radius: 10px;
+  border: solid 5px;
+  position: relative;
 }

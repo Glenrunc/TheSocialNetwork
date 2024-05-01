@@ -25,8 +25,9 @@
     require("../view/popup_signin.php");
     echo "<script src='../script/add_like.js'></script>";
     echo "<script src='../script/add_dislike.js'></script>";
-    echo "<script src='../script/add_admin.js'></script>";
     echo "<script src='../script/add_blur.js'></script>";
+    echo "<script src='../script/add_delete_admin.js'></script>";
+    echo "<script src='../script/add_blur_admin.js'></script>";
 
     global $db;
 
