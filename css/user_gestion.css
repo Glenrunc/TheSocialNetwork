@@ -1,12 +1,7 @@
 body {
-  display: flex;
   background-color: #15172b;
-  color: #eee;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
-  justify-content: space-between;
-  flex-direction: column;
-  align-items: center;
   margin-top: 50px;
 
 }
@@ -237,4 +232,39 @@ body {
 
 #searchresult::-webkit-scrollbar {
   display: none; /* Masquer la barre de défilement pour Chrome, Safari et Opera */
+}
+
+.user_gestion{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+#user_info{
+  color:#eee;
+}
+.close_cross{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1; 
+}
+.check{
+  position:absolute;
+  top: 5px;
+  right: 50px;
+  z-index: 1; 
+}
+.notif{
+  position:relative;
+  height: fit-content;
+}
+.notif_viewed{
+  position:relative;
+  background-color: #ced4da;
+  height: fit-content;
+  border-radius: 10px;
+  padding-bottom: 1px;
 }

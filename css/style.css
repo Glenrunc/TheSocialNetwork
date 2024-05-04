@@ -166,3 +166,27 @@ body{
     border: solid 5px;
     position: relative;
 }
+
+.close_cross{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1; 
+}
+.check{
+    position:absolute;
+    top: 5px;
+    right: 50px;
+    z-index: 1; 
+}
+.notif{
+    position:relative;
+    height: fit-content;
+}
+.notif_viewed{
+    height: fit-content;
+    position:relative;
+    background-color: #ced4da;
+    border-radius: 10px;
+    padding-bottom: 1px;
+}

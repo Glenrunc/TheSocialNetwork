@@ -135,6 +135,7 @@ class Post
         $query = $db->prepare("SELECT pseudo,profile_picture FROM user WHERE id=?");
         $query->execute([$this->author]);
         $data = $query->fetch();
+
         if ($data) {
             echo "<div class='author-info'>";
             echo "<a class='hello' id='nav-link' href='../view/user.php?id=" . $this->author . "'>";
@@ -165,7 +166,7 @@ class Post
             echo '<div id="content-blur' . $this->getId() . '"  class="content-blur">';
 
         } else {
-            echo '<div class="content-notblur">';
+            echo '<div class="content-notblur" id="content'. $this->getId() .'">';
         }
         echo "<p id = 'content" . $this->getId() . "' class='content'>$this->content</p>";
         if ($this->getImage()) {
