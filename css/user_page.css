@@ -23,15 +23,25 @@ body{
     display: block; /* Assure que l'image est un bloc */
   }
 
-  #postbox {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    margin-top: 10px;
-
+  .profile_picture_followers{
+    width: 48px; /* Largeur souhaitée */
+    height: 48px; /* Hauteur souhaitée */
+    overflow: hidden; /* Cache les parties de l'image qui dépassent */
+    border-radius: 50%; 
   }
 
-  .post {
+  #postbox {
+    position: absolute;
+    top: calc(50% + 100px); /* Ajustez la marge en fonction de la hauteur des boutons */
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    width: 750px;
+    height: 100%;
+   
+}
+
+.post {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -40,9 +50,8 @@ body{
     background-color: #ffffff;
     border-radius: 10px;
     border: solid 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
     position: relative;
+    /* margin: 5px; */
 }
 .author-info {
     display: flex;
@@ -170,6 +179,8 @@ body{
 .notif{
   position:relative;
   height: fit-content;
+  border-radius: 10px;
+  padding-bottom: 1px;
 }
 .notif_viewed{
   position:relative;
@@ -178,3 +189,44 @@ body{
   border-radius: 10px;
   padding-bottom: 1px;
 }
+
+.hour{
+  position: absolute;
+  top:25px;
+  left: 5px;
+  z-index: 1;
+  font-size:x-small;
+  opacity: 0.5;
+}
+.user_presentation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.link{
+  
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100px;
+}
+
+.followers_pres{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  flex-direction: row;
+
+}
+.icon_followers{
+  position:relative;
+}
+.badge_follower{
+  position: absolute;
+  left: 30px;
+  top: -5px;
+}
+

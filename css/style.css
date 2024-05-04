@@ -182,11 +182,22 @@ body{
 .notif{
     position:relative;
     height: fit-content;
-}
+    border-radius: 10px;
+    padding-bottom: 1px;
+  }
 .notif_viewed{
     height: fit-content;
     position:relative;
     background-color: #ced4da;
     border-radius: 10px;
     padding-bottom: 1px;
+}
+
+.hour{
+    position: absolute;
+    top:25px;
+    left: 5px;
+    z-index: 1;
+    font-size:x-small;
+    opacity: 0.5;
 }

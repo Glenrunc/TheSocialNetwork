@@ -29,7 +29,7 @@
       </div>
       <div class="modal-body">
         <?php
-        $sql = "SELECT * FROM notification WHERE id_user = ? AND retirer = 0";
+        $sql = "SELECT * FROM notification WHERE id_user = ? AND retirer = 0 ORDER BY date DESC, hour DESC";
         $qry = $db->prepare($sql);
         $qry->execute([$_SESSION['id_user']]);
         $notif = $qry->fetchAll();
@@ -40,7 +40,7 @@
           foreach ($notif as $notification) {
             $notificationData = $notification;
             if ($notificationData["retirer"] == 0) {
-              $notification = new Notification($notificationData["id"], $notificationData["id_user"], $notificationData["id_post"], $notificationData["content"], $notificationData["date"], $notificationData["hour"], $notificationData["viewed"], $notificationData["retirer"]);
+              $notification = new Notification($notificationData["id"], $notificationData["id_user"], $notificationData["id_post"], $notificationData["content"], $notificationData["date"], $notificationData["hour"], $notificationData["viewed"], $notificationData["retirer"], $notificationData["id_like"], $notificationData["warning"]);
               $notification->displayNotification();
             }
 

@@ -14,7 +14,7 @@
             mysqli_stmt_execute($stmt);
             
             if($_POST["id_user"] != $_SESSION["id_user"]){
-                $sql = "INSERT INTO notification (id_user, id_post,content,viewed,retirer) VALUES (?, ?, ?,?, ?)";
+                $sql = "INSERT INTO notification (id_user, id_post,content,viewed,retirer,warning) VALUES (?, ?, ?,?, ?,1)";
                 $stmt = mysqli_prepare($con, $sql);
                 mysqli_stmt_bind_param($stmt, "iisii", $_POST["id_user"], $_POST["id"], $_POST["reason"], $viewed, $retirer);
                 mysqli_stmt_execute($stmt);

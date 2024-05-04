@@ -56,6 +56,7 @@ class User{
 
     function displayUserPage(){
         $img_path = $this->profile_picture;
+        echo'<div class="user_presentation">';
         if ($img_path[0] == "#") {
             echo "<div class='rounded-pill' style='width: 48px;px; height=48px; background-color:".$img_path."; color:aliceblue; text-align: center; line-height: 48px; font-size: 20px; border-radius: 50%;'>".substr($this->getPseudo(),0,1)."</div>";
         }else{
@@ -67,7 +68,7 @@ class User{
         echo "<div id='user_info'>";
         echo "<p class='info'>$this->pseudo</p>";
         echo "</div>";
-     
+       
     }
 
     public function getIdUser() {
