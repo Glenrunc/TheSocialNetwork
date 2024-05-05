@@ -103,10 +103,8 @@ class Post
 
         if ($this->getAdmin() == 1) {
             echo "<div class='post_admin' id='post" . $this->getId() . "'>";
-
-        }else{
+        } else {
             echo "<div class='post' id='post" . $this->getId() . "'>";
-
         }
 
         if (!empty($_SESSION["admin"])) {
@@ -154,28 +152,27 @@ class Post
         }
 
         if ($this->getFlou() == 1) {
-            if(isset($_SESSION["id_user"])){
+            if (isset($_SESSION["id_user"])) {
                 echo '<div class="btn_see">';
                 echo '<button  id = "unblur_user' . $this->getId() . '" type="button" class="btn btn-warning btn-sm mb-1" onclick="unblurUserPosts(' . $this->getId() . ')" >See</button>';
                 echo '</div>';
-            }else{
-                echo'<div class="info_btn">';
-                echo'<span class="badge text-bg-light">Create an account or connect to see the blur post</span>';
-                echo'</div>';
+            } else {
+                echo '<div class="info_btn">';
+                echo '<span class="badge text-bg-light">Create an account or connect to see the blur post</span>';
+                echo '</div>';
             }
             echo '<div id="content-blur' . $this->getId() . '"  class="content-blur">';
-
         } else {
-            echo '<div class="content-notblur" id="content'. $this->getId() .'">';
+            echo '<div class="content-notblur" id="content' . $this->getId() . '">';
         }
         echo "<p id = 'content" . $this->getId() . "' class='content'>$this->content</p>";
         if ($this->getImage()) {
             echo "<img id = 'img" . $this->getId() . "' class='img' src='../image/post_photo/" . $this->getImage() . "' alt='post image'>";
         }
         echo "</div>";
-        
-       
-       
+
+
+
 
         echo "<p class='createdAt'>$this->createdAt</p>";
 
@@ -206,7 +203,43 @@ class Post
                 <span> Total amount of like : ' . $like . '</span>
                 </div>';
             }
+        
+        $sql = "SELECT COUNT(*) FROM comment WHERE id_post = ?";
+        $query = $db->prepare($sql);
+        $query->execute([$this->getId()]);
+        $comment = $query->fetch()[0];
+
+        echo '
+        
+        <div class="comment" id="comment' . $this->getId() . '">
+        <svg data-bs-toggle="collapse" href="#multiCollapseExample'. $this->getId() .'" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+        <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+        <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark sm">
+        ' . $comment . '
+        <span class="visually-hidden">unread messages</span>
+        </span>
+        </svg>
+        </div>
+        ';
+        
         }
-        echo "</div>";
+        echo '
+        <div class="goTo" id="goto' . $this->getId() . '">
+        <a href="../view/post.php?id_post='. $this->getId() .'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-text-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+        </svg>
+        </a>
+        </div>
+        </div>';
+        ?>
+        <div class="collapse multi-collapse" id="multiCollapseExample<?php echo $this->getId(); ?>">
+            <div class="card card-body">
+               <?php require("../view/form_comment.php"); ?>
+            </div>
+        </div>
+       
+        <?php
     }
 }

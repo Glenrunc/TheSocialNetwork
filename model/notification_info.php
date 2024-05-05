@@ -95,7 +95,7 @@ class Notification{
             $qry = $db->prepare($sql);
             $qry->execute([$id_user]);
             $pseudo = $qry->fetch()[0];
-            echo'<p><a href="../view/user.php?id='.$id_user.'">'.$pseudo.'</a> '.$this->getContent().'</p>';
+            echo'<p><a href="../view/user.php?id='.$id_user.'">'.$pseudo.'</a> '.$this->getContent().' <a href="../view/post.php?id_post='.$this->getIdPost().'">post</a></p>';
         }
 
         if($this->getWarning() == 1){

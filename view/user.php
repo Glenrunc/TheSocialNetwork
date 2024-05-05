@@ -93,7 +93,8 @@
                     require("../view/follow_modal.php");
                     echo '</div>';
                     echo '<div id="postbox">';
-    ?><div id="creation_post">
+                ?>  
+                   <div id="creation_post">
                         <p id="create">Creation post</p>
                         <?php require("../view/form_create_post.html"); ?>
                     </div>

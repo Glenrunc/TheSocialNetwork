@@ -22,7 +22,7 @@ if(!$liked){
     if($id_user != $_SESSION["id_user"]){
         $sql = "INSERT INTO notification(id_user,id_post,content,viewed,retirer,id_like,warning) VALUES (?,?,?,0,0,?,0)";
         $query = $db->prepare($sql);
-        $query->execute([$id_user,$id_post,"liked your post", $lastInsertId]);
+        $query->execute([$id_user,$id_post,"liked your", $lastInsertId]);
     }
    
 }

@@ -35,7 +35,7 @@
         //While terminé. On crée un bouton "charger plus de posts"
 		?>
         <div id="morePosts" >
-            <button type="button" onclick="loadMorePosts(<?php echo $postNumber; ?>)">Charger plus de Posts</button>
+            <button type="button"  class="btn btn-light btn-sm" onclick="loadMorePosts(<?php echo $postNumber; ?>)">Load more</button>
         </div>
 		<?php
     }

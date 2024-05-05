@@ -22,6 +22,7 @@
     echo "<script src='../script/add_blur.js'></script>";
     echo "<script src='../script/add_delete_admin.js'></script>";
     echo "<script src='../script/add_blur_admin.js'></script>";
+    echo "<script src='../script/loadMore.js'></script>";
     ?>
     <?php
     if (isset($_SESSION["id_user"])) {

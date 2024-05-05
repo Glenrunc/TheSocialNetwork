@@ -17,12 +17,13 @@
   <?php
   require("../model/database.php");
   session_start();
-  
+
   echo "<script src='../script/add_like.js'></script>";
   echo "<script src='../script/add_dislike.js'></script>";
   echo "<script src='../script/add_blur.js'></script>";
   echo "<script src='../script/add_delete_admin.js'></script>";
   echo "<script src='../script/add_blur_admin.js'></script>";
+  echo "<script src='../script/loadMore.js'></script>";
 
   ?>
 
@@ -35,19 +36,19 @@
   ?>
 
   <div id="wrap">
-  <div id="searchresult"></div>
+    <div id="searchresult"></div>
   </div>
   <div id="maincontainer">
     <div id="button">
       <p>Recent post</p>
       <?php
-      if(isset($_SESSION["id_user"])) {
+      if (isset($_SESSION["id_user"])) {
         echo "<button id='toto' type='button' class='btn btn' onclick='showFollowed()' style='background-color: #303245; color:aliceblue'>Followed</button>";
       }
       ?>
-    
+
     </div>
-  
+
 
     <div id="postbox">
 
@@ -61,40 +62,24 @@
           echo "<p>Il n'y a pas de publication pour le moment.</p>";
         } else {
           foreach ($data as $post) {
-              if($post['retirer'] != 1){
+            if ($post['retirer'] != 1) {
               $postData = $post;
-              $post = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["flou"],$post["retirer"],$post["image"]);
+              $post = new Post($post["id"], $post["content"], $post["id_user"], $post["time"], $post["flou"], $post["retirer"], $post["image"]);
               $post->displayPost();
-              
             }
           }
         }
 
 
         ?>
-          <script>
 
-//Pour utiliser fetch, la fonction doit ÃĒtre "asynchrone"
-async function loadMorePosts(numberOfPostsAlready) {
-
-	//Efface le bouton prÃŠcÃŠdent, car il sera remplacÃŠ
-    const buttonMore = document.getElementById('morePosts');
-    if (buttonMore != null ) {buttonMore.remove();}
-
-	//Le AJAX qui va chercher les nouveaux posts
-    var AJAXresult = await fetch("../model/loadMe.php?firstPost=" + numberOfPostsAlready);
-    writearea = document.getElementById("recent");
-    writearea.innerHTML += await AJAXresult.text();
-
-}
- </script>
-                <div id="morePosts" >
-            <button type="button" onclick="loadMorePosts(5)">Charger plus de Posts</button>
+        <div id="morePosts">
+          <button type="button" class="btn btn-light btn-sm" onclick="loadMorePosts(5)">Load more</button>
         </div>
       </div>
     </div>
   </div>
-
+        
 </body>
 
 </html>
