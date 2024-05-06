@@ -19,6 +19,10 @@
     session_start();
     echo "<script src='../script/add_like.js'></script>";
     echo "<script src='../script/add_dislike.js'></script>";
+    echo "<script src='../script/add_blur.js'></script>";
+    echo "<script src='../script/add_delete_admin.js'></script>";
+    echo "<script src='../script/add_blur_admin.js'></script>";
+    echo "<script src='../script/loadMore.js'></script>";
     ?>
     <?php
     if (isset($_SESSION["id_user"])) {
@@ -37,7 +41,7 @@
             <p>Followed</p>
             <?php
             if (isset($_SESSION["id_user"])) {
-                echo "<button type='button' class='btn btn' onclick='showRecent()' style='background-color: #303245; color:aliceblue'>Recent</button>";
+                echo "<button type='button' class='btn btn' onclick='showRecent()' style='background-color: #f5c396; color:aliceblue'>Recent</button>";
             }
             ?>
         </div>

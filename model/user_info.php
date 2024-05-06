@@ -33,9 +33,10 @@ class User{
     function displayGestionPage(){
         //Create post_info.php
         $img_path = $this->profile_picture;
+        echo'<div class="user_gestion">';
 
         if ($img_path[0] == "#") {
-            echo "<a href='../view/user.php?id=".$this->id_user."'<div class='rounded-pill' style='width: 48px;px; height=48px; background-color:".$img_path."; color:aliceblue; text-align: center; line-height: 48px; font-size: 20px; border-radius: 50%;'>".substr($this->getPseudo(),0,1)."</div></a>";
+            echo "<a href='../view/user.php?id=".$this->id_user."'><div class='rounded-pill' style='width: 48px;px; height=48px; background-color:".$img_path."; color:aliceblue; text-align: center; line-height: 48px; font-size: 20px; border-radius: 50%;'>".substr($this->getPseudo(),0,1)."</div></a>";
         }else{
             echo "<div class='profile_picture'>";
             echo "<a href='../view/user.php?id=".$this->id_user."'><img src='../image/avatar_user/".$img_path."' alt='Logo' style='width:125px;' id='img'></a>";
@@ -49,11 +50,13 @@ class User{
         echo "<p class='info'>Email: $this->email</p>";
         echo "<p class='info'>Pseudo: $this->pseudo</p>";
         echo "</div>";
+        
+
     }
 
     function displayUserPage(){
         $img_path = $this->profile_picture;
-
+        echo'<div class="user_presentation">';
         if ($img_path[0] == "#") {
             echo "<div class='rounded-pill' style='width: 48px;px; height=48px; background-color:".$img_path."; color:aliceblue; text-align: center; line-height: 48px; font-size: 20px; border-radius: 50%;'>".substr($this->getPseudo(),0,1)."</div>";
         }else{
@@ -65,7 +68,7 @@ class User{
         echo "<div id='user_info'>";
         echo "<p class='info'>$this->pseudo</p>";
         echo "</div>";
-     
+       
     }
 
     public function getIdUser() {

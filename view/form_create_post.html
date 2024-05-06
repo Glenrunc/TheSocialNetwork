@@ -1,9 +1,13 @@
-<form method="POST" enctype="multipart/form-data" action="../model/create_post.php">
-   
-    <textarea name="content" id="content" required></textarea><br><br>
-    
-    <input type="hidden" name="MAX_FILE_SIZE" value="" />
-    <input class='' id='post_img_form' name="post_img" type="file" accept='image/png, image/jpeg, image/jpg' autocomplete="off" />
-    <br>
-    <input id = "submit" type="submit" value="Create">
+
+<form method="POST" action="../model/create_post.php" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="message" class="form-label">Message</label>
+        <textarea type="text" name="message" class="form-control" id="message"></textarea>
+    </div>
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupFile01">Upload</label>
+        <input type="hidden" name="MAX_FILE_SIZE" value="">
+        <input type="file" name="image" class="form-control" id="inputGroupFile01"  accept='image/png, image/jpeg, image/jpg' autocomplete="off" >
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>

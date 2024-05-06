@@ -39,6 +39,7 @@
         <div id="button">
             <button class="submit" onclick="checkAndRedirect()">Update</button>
         </div>
+        </div>
         <div id="overlay"></div>
         <div id="rectangle">
             <?php require("../view/update_user_form.php") ?>

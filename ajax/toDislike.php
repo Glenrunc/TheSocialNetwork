@@ -12,6 +12,19 @@ if(!$liked){
     $sql = "INSERT INTO likedpost(id_post,id_user) VALUES (?,?)";
     $query = $db->prepare($sql);
     $query->execute([$id_post,$_SESSION["id_user"]]);
+    $lastInsertId = $db->lastInsertId();
+
+    $sql = "SELECT id_user FROM post WHERE id = ?";
+    $query = $db->prepare($sql);
+    $query->execute([$id_post]);
+    $id_user = $query->fetch()[0];
+
+    if($id_user != $_SESSION["id_user"]){
+        $sql = "INSERT INTO notification(id_user,id_post,content,viewed,retirer,id_like,warning) VALUES (?,?,?,0,0,?,0)";
+        $query = $db->prepare($sql);
+        $query->execute([$id_user,$id_post,"liked your", $lastInsertId]);
+    }
+   
 }
 
 
@@ -22,6 +35,6 @@ $like = $query->fetch()[0];
 ?>
 
 <div id="dislike<?php echo $id_post; ?>">
-    <button type="button" class="btn btn-danger mb-1" onclick="toLike(<?php echo $id_post; ?>)">Dislike</button>
+    <button type="button" class="btn btn-danger btn-sm mb-1" onclick="toLike(<?php echo $id_post; ?>)">Dislike</button>
     <span> Total amount of like : <?php echo $like ?></span>
 </div>

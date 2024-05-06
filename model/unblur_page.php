@@ -21,7 +21,10 @@
             session_start();
             echo "<script src='../script/add_like.js'></script>";
             echo "<script src='../script/add_dislike.js'></script>";
-            
+            echo "<script src='../script/add_blur.js'></script>";
+            echo "<script src='../script/add_blur_admin.js'></script>";
+            echo "<script src='../script/add_admin.js'></script>";
+
             if(isset($_SESSION["admin"]) && $_SESSION["admin"] == 1){
 
                 $sql = "SELECT * FROM post WHERE flou = 1";
@@ -37,7 +40,7 @@
                     
                     $post_obj = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["flou"],$post["retirer"],$post["image"]);
                     echo '<div class="btn-div">';
-                    echo '<button id ="unblur'.$post_obj->getId().'" type="button" class="btn btn-danger mb-1">Unblur</button>';
+                    echo '<button id ="unblur'.$post_obj->getId().'" type="button" class="btn btn-danger mb-1" onclick="unblurPost('.$post_obj->getId().')">Unblur</button>';
                     echo '</div>';
                     $post_obj->displayPost();
                     ?>
@@ -46,27 +49,7 @@
                         if(buttonAction != null) {buttonAction.remove();};
                     </script>
                     <?php
-                    echo'
-                        <script>
-                        $(document).ready(function(){
-                            $("#unblur'.$post_obj->getId().'").click(function(){
-                                
-                                if(confirm("Are you sure you want to unblur this post?")){
-                                $.ajax({
-                                    url: "../ajax/blur_post.php",
-                                    type: "POST",
-                                    data: {id_unblur: '.$post_obj->getId().'},
-                                    success: function(data){
-                                        $("#post'.$post_obj->getId().'").remove();
-                                        $("#unblur'.$post_obj->getId().'").remove();
-                                    }
-                                });
-                                
-                            }
-                            });
-                        });
-                        </script>
-                    ';
+                   
                 }
                 echo '</div>';
                 }

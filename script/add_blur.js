@@ -6,3 +6,13 @@ function add_blur(id_post) {
     const buttonBlur = document.getElementById("blur_post"+id_post);
     if(buttonBlur != null) {buttonBlur.remove();}
 }
+
+
+function unblurUserPosts(id_post){
+    if(confirm("Are you sure you want to unblur this post?")){
+        const classBlur = document.getElementById("content-blur"+id_post);
+        if(classBlur != null) {classBlur.style.filter= "blur(0px)";}
+        const buttonBlur = document.getElementById("unblur_user"+id_post);
+        if(buttonBlur != null) {buttonBlur.remove();}
+    }
+}
