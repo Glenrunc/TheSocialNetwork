@@ -25,11 +25,11 @@
         echo "<script src='../script/add_blur_admin.js'></script>";
         require("../view/popup_signin.php");
         ?>
+     
+        <div id="postboxPost">
         <div id="wrap">
         <div id="searchresult"></div>
         </div>
-
-        <div id="postboxPost">
             <?php
                         
                 $sql= "SELECT * FROM post WHERE id= ?";
@@ -40,7 +40,9 @@
                 if($data){
                     $post = new Post($data["id"], $data["content"], $data["id_user"], $data["time"], $data["flou"], $data["retirer"], $data["image"]);
                     
-                    
+                    if($data["retirer"] == 1){
+                        echo "<p>Post removed</p>";
+                    }else{
                     $post->displayPost();
                     ?>
                     
@@ -67,9 +69,11 @@
                     }else{
                         echo "<p>No comment</p>";
                     }
+                     
                     ?>
                     </div>
                     <?php
+                    }
 
                 }else{
                     echo "<p>Post not found</p>";

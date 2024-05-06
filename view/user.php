@@ -28,6 +28,8 @@
     echo "<script src='../script/add_blur.js'></script>";
     echo "<script src='../script/add_delete_admin.js'></script>";
     echo "<script src='../script/add_blur_admin.js'></script>";
+    echo "<script src='../script/loadMoreUser.js'></script>";
+
 
     global $db;
 
@@ -56,11 +58,18 @@
                     $query_check_follow = $db->prepare("SELECT * FROM follow WHERE id_user = ? AND id_follow = ?");
                     $query_check_follow->execute([$_SESSION["id_user"], $_GET["id"]]);
                     $data = $query_check_follow->fetch();
+                    echo "<div class='follow-unfollow'>";
+
                     if ($data) {
                         require("../view/form_unfollow.php");
+                        require("../view/follow_modal.php");
+
                     } else {
                         require("../view/form_follow.php");
+                        require("../view/follow_modal.php");
+
                     }
+                    echo "</div>";
                     echo "</div>";
                     echo '<div id="postbox">';
                 } else {
@@ -92,6 +101,7 @@
                     </a></div>';
                     require("../view/follow_modal.php");
                     echo '</div>';
+                    echo '</div>';
                     echo '<div id="postbox">';
                 ?>  
                    <div id="creation_post">
@@ -107,20 +117,30 @@
             //Afficher les posts de l'utilisateur
 
 
-            $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
+            $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC LIMIT 5");
             $query->execute([$_GET["id"]]);
             $data = $query->fetchAll();
-
+            if(empty($data)){
+                echo '<div class="nopost">';
+                echo "<p>No post yet</p>";
+                echo '</div>';
+            }else{
             foreach ($data as $post) {
                 if ($post['retirer'] != 1) {
                     $post_obj = new Post($post["id"], $post["content"], $post["id_user"], $post["time"], $post["flou"], $post["retirer"], $post["image"]);
                     $post_obj->displayPost();
                 }
                 ?>
-
+        
     <?php
             }
-
+            ?>
+            <div id="morePosts">
+            <button type="button" class="btn btn-light btn-sm" onclick="loadMorePosts(5, '<?php echo $_GET["id"]; ?>')">Load more</button>
+            </div>
+            <?php
+        }
+       
             echo "</div>";
         } else {
             header("Location: ../view/user.php?id=" . $_SESSION['id_user']);

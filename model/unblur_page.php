@@ -47,6 +47,10 @@
                     <script>
                         var buttonAction = document.getElementById("btn-action"+<?php echo $post_obj->getId(); ?>);
                         if(buttonAction != null) {buttonAction.remove();};
+                        var commentAccess = document.getElementById("goto"+<?php echo $post_obj->getId(); ?>);
+                        if(commentAccess != null) {commentAccess.remove();};
+                        var commentIcon = document.getElementById("commentIcon"+<?php echo $post_obj->getId(); ?>);
+                        if(commentIcon != null) {commentIcon.remove();};
                     </script>
                     <?php
                    

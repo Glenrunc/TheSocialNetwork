@@ -34,8 +34,7 @@ body{
   }
 
   #postbox {
-    position: absolute;
-    top: calc(50% + 100px); /* Ajustez la marge en fonction de la hauteur des boutons */
+    position: relative;
     left: 50%;
     transform: translate(-50%);
     text-align: center;
@@ -221,13 +220,16 @@ body{
 }
 
 .link{
-  
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
-  width: 100px;
 }
-
+.follow-unfollow{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
 .followers_pres{
   display: flex;
   justify-content:space-between;
@@ -237,6 +239,8 @@ body{
 }
 .icon_followers{
   position:relative;
+  margin-right:10px;
+  margin-left:10px;
 }
 .badge_follower{
   position: absolute;
@@ -268,4 +272,17 @@ body{
   top: 3px;
   left: 10px;
   z-index: 1;
+}
+
+
+.nopost p {
+  position: relative;
+  margin-top: 30px;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%,-60%);
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif  ;
+  font-weight: bold;
+  font-size: 20px;
 }

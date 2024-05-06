@@ -33,7 +33,7 @@ h1,h2{
 
 .btn_see{
     position: absolute;
-    top: 50%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
@@ -45,8 +45,7 @@ h1,h2{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color:#999BBA;
+    background-color:#ece4db;
     border-radius: 10px;
-    border: solid 5px;
     position: relative;
 }

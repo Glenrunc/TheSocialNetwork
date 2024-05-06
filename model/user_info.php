@@ -68,6 +68,7 @@ class User{
         echo "<div id='user_info'>";
         echo "<p class='info'>$this->pseudo</p>";
         echo "</div>";
+        echo "</div>";   
        
     }
 

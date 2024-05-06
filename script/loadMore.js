@@ -7,6 +7,6 @@ async function loadMorePosts(numberOfPostsAlready) {
 
 	//Le AJAX qui va chercher les nouveaux posts
     var AJAXresult = await fetch("../ajax/loadMe.php?firstPost=" + numberOfPostsAlready);
-    writearea = document.getElementById("recent");
+    writearea = document.getElementById("postbox");
     writearea.innerHTML += await AJAXresult.text();
 }

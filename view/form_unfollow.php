@@ -3,5 +3,6 @@
     <input type ="hidden" name="id_follow" value="<?php echo $_GET["id"] ?>">
     <input type ="hidden" name="id_user" value="<?php echo $_SESSION["id_user"] ?>">
     <input type ="hidden" name="unfollow" value="Unfollow">
-    <button type="button" onclick="confirmUnfollow()">Unfollow</button>
+    <button type="button"  class="btn btn-primary btn-sm" onclick="confirmUnfollow()">Unfollow</button>
+
 </form>

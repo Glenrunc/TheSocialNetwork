@@ -29,6 +29,11 @@
       </div>
       <div class="modal-body">
         <?php
+
+        $sql = "UPDATE notification SET retirer = 1 WHERE id_user = ? AND date < DATE_SUB(NOW(), INTERVAL 2 WEEK)";
+        $qry = $db->prepare($sql);
+        $qry->execute([$_SESSION['id_user']]);
+
         $sql = "SELECT * FROM notification WHERE id_user = ? AND retirer = 0 ORDER BY date DESC, hour DESC";
         $qry = $db->prepare($sql);
         $qry->execute([$_SESSION['id_user']]);
@@ -40,7 +45,7 @@
           foreach ($notif as $notification) {
             $notificationData = $notification;
             if ($notificationData["retirer"] == 0) {
-              $notification = new Notification($notificationData["id"], $notificationData["id_user"], $notificationData["id_post"], $notificationData["content"], $notificationData["date"], $notificationData["hour"], $notificationData["viewed"], $notificationData["retirer"], $notificationData["id_like"], $notificationData["warning"]);
+              $notification = new Notification($notificationData["id"], $notificationData["id_user"], $notificationData["id_post"], $notificationData["content"], $notificationData["date"], $notificationData["hour"], $notificationData["viewed"], $notificationData["retirer"], $notificationData["id_like"], $notificationData["warning"], $notificationData["id_comment"], $notificationData["id_follow"]);
               $notification->displayNotification();
             }
 

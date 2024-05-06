@@ -21,10 +21,6 @@
                 $post->displayPost();
             }
 			//On utilise la classe "postStorage pour afficher le post
-
-
-            
-			
 			//On incrémente le compteur de posts 
 			//(utile pour créer le bouton avec bon javascript à la fin)
             $postNumber++;
@@ -35,8 +31,11 @@
         //While terminé. On crée un bouton "charger plus de posts"
 		?>
         <div id="morePosts" >
-            <button type="button"  class="btn btn-light btn-sm" onclick="loadMorePosts(<?php echo $postNumber; ?>)">Load more</button>
+        <div class="d-grid gap-2">
+            <button type="button" class="btn btn-dark btn-sm mb-2" onclick="loadMorePosts(<?php echo $postNumber; ?>)">Load more</button>
+        </div> 
         </div>
 		<?php
     }
+    
 ?>

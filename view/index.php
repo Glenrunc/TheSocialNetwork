@@ -52,7 +52,6 @@
 
     <div id="postbox">
 
-      <div id="recent">
         <?php
         $sql = "SELECT * FROM post ORDER BY time DESC LIMIT 5";
         $query = $db->prepare($sql);
@@ -74,9 +73,11 @@
         ?>
 
         <div id="morePosts">
-          <button type="button" class="btn btn-light btn-sm" onclick="loadMorePosts(5)">Load more</button>
+        <div class="d-grid gap-2">
+
+          <button type="button" class="btn btn-dark btn-sm mb-2" onclick="loadMorePosts(5)">Load more</button>
+        </div>  
         </div>
-      </div>
     </div>
   </div>
         

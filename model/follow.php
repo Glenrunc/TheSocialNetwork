@@ -6,15 +6,19 @@ if (isset($_POST['follow'])) {
     $query_check_follow->execute([$_POST["id_user"], $_POST["id_follow"]]);
     $count_follow = $query_check_follow->fetchColumn();
 
-    if ($count_follow > 0) {
-        // L'utilisateur suit déjà l'autre utilisateur
-        echo "Vous suivez déjà cet utilisateur.";
-    } else {
+    if ($count_follow == 0) {
         // Le suivi n'est pas déjà actif, donc on l'insère
         $query_insert_follow = $db->prepare("INSERT INTO follow (id_user, id_follow) VALUES (?, ?)");
         $query_insert_follow->execute([$_POST["id_user"], $_POST["id_follow"]]);
+        $lastInsertId = $db->lastInsertId();
+
+        // On ajoute une notification
+        $sql = "INSERT INTO notification(id_user,id_post,content,viewed,retirer,warning,id_follow) VALUES (?,NULL,?,0,0,0,?)";
+        $query = $db->prepare($sql);
+        $query->execute([$_POST["id_follow"], "started following you", $lastInsertId]);
+
         header("Location: ../view/user.php?id=" . $_POST["id_follow"]);
-    }
+    } 
 }
 if (isset($_POST['unfollow'])) {
     // Vérifier si le suivi est actif

@@ -18,7 +18,8 @@
             require("../model/database.php");
             require("../model/post_info.php");
             session_start();
-          
+            echo "<script src='../script/add_like.js'></script>";
+            echo "<script src='../script/add_dislike.js'></script>";
             echo "<script src='../script/add_blur_admin.js'></script>";    
             echo "<script src='../script/add_delete_admin.js'></script>";
             echo "<script src='../script/add_blur.js'></script>";    
@@ -45,6 +46,10 @@
                     <script>
                         var buttonAction = document.getElementById("btn-action"+<?php echo $post_obj->getId(); ?>);
                         if(buttonAction != null) {buttonAction.remove();};
+                        var commentAccess = document.getElementById("goto"+<?php echo $post_obj->getId(); ?>);
+                        if(commentAccess != null) {commentAccess.remove();};
+                        var commentIcon = document.getElementById("commentIcon"+<?php echo $post_obj->getId(); ?>);
+                        if(commentIcon != null) {commentIcon.remove();};
                     </script>
                     <?php
                    
