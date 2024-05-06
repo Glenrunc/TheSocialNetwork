@@ -6,9 +6,9 @@
     
     
     $postNumber = $_GET["firstPost"];
-    $sql = "SELECT * FROM post ORDER BY time DESC LIMIT 5 OFFSET ".$postNumber;
+    $sql = "SELECT * FROM post WHERE id_user=? ORDER BY time DESC LIMIT 5 OFFSET ".$postNumber;
     $stmt = $db->prepare($sql);
-    $stmt->execute();
+    $stmt->execute([$_GET["id"]]);
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     if (!empty($data)) { 
@@ -47,7 +47,7 @@
         } else {
             ?>
             <div id="morePosts" >
-                <button type="button" onclick="loadMorePosts(<?php echo $postNumber; ?>)">Charger plus de Posts</button>
+                <button type="button" onclick="loadMorePosts(<?php echo $postNumber; ?>,'<?php echo $_GET["id"]; ?>')">Charger plus de Posts</button>
             </div>
             <?php
         }

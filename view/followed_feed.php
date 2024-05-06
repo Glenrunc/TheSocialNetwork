@@ -22,7 +22,7 @@
     echo "<script src='../script/add_blur.js'></script>";
     echo "<script src='../script/add_delete_admin.js'></script>";
     echo "<script src='../script/add_blur_admin.js'></script>";
-    echo "<script src='../script/loadMore.js'></script>";
+    echo "<script src='../script/loadMoreFollow.js'></script>";
     ?>
     <?php
     if (isset($_SESSION["id_user"])) {
@@ -49,7 +49,7 @@
         <div id="postbox">
 
             <div id="recent">
-                <?php
+            <?php
                 $sql = "SELECT id_follow FROM follow WHERE id_user = ?";
                 $query = $db->prepare($sql);
                 $query->execute([$_SESSION["id_user"]]);
@@ -60,7 +60,7 @@
                     $posts = array();
                     $follows = array();
                     foreach ($data as $follow) {
-                        $sql = "SELECT * FROM post WHERE id_user = ? ORDER BY time DESC";
+                        $sql = "SELECT * FROM post WHERE id_user = ? ORDER BY time DESC LIMIT 5";
                         $query = $db->prepare($sql);
                         $query->execute([$follow["id_follow"]]);
                         $posts = array_merge($posts, $query->fetchAll());
@@ -69,17 +69,25 @@
                     usort($posts, function ($a, $b) {
                         return $b['time'] <=> $a['time'];
                     });
+                    $nombrepost = 0;
                     foreach ($posts as $post) {
                         if($post['retirer'] != 1){
+                            $nombrepost++;
                             $postData = $post;
                             $post = new Post($post["id"],$post["content"], $post["id_user"], $post["time"],$post["flou"],$post["retirer"],$post["image"]);
                             $post->displayPost();
                       
 
                         }
+                        if($nombrepost == 5){
+                            break;
+                        }
                     }
                 }
                 ?>
+            <div id="morePosts">
+          <button type="button" class="btn btn-light btn-sm" onclick="loadMorePosts(5)">Load more</button>
+        </div>
             </div>
         </div>
       

@@ -28,7 +28,7 @@
     echo "<script src='../script/add_blur.js'></script>";
     echo "<script src='../script/add_delete_admin.js'></script>";
     echo "<script src='../script/add_blur_admin.js'></script>";
-
+    echo "<script src='../script/loadMoreUser.js'></script>";
     global $db;
 
     ?>
@@ -107,7 +107,7 @@
             //Afficher les posts de l'utilisateur
 
 
-            $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC");
+            $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC LIMIT 5");
             $query->execute([$_GET["id"]]);
             $data = $query->fetchAll();
 
@@ -116,12 +116,16 @@
                     $post_obj = new Post($post["id"], $post["content"], $post["id_user"], $post["time"], $post["flou"], $post["retirer"], $post["image"]);
                     $post_obj->displayPost();
                 }
-                ?>
 
-    <?php
             }
 
+            ?>
+            <div id="morePosts">
+                <button type="button" class="btn btn-light btn-sm" onclick="loadMorePosts(5, '<?php echo $_GET["id"]; ?>')">Load more</button>
+            </div>
+            <?php
             echo "</div>";
+  
         } else {
             header("Location: ../view/user.php?id=" . $_SESSION['id_user']);
         }
