@@ -2,7 +2,7 @@
 <script src="../script/ajax_search.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<nav id= "signin_query"class="navbar navbar-expand-lg mt-5 my-3 navbar-dark rounded" style="background-color: #303245 ;margin: 0 auto;">
+<nav id= "signin_query"class="navbar navbar-expand-lg navbar-dark rounded" style="background-color: #ece4db ;margin: 0 auto;">
   <div class="container ">
     <a class="navbar-brand" href="../view/index.php">
       <img src="../image/Logo_TZU.png" alt="Logo" style="width:40px;" class="rounded-pill">
@@ -75,10 +75,10 @@
           <script>
             $(document).ready(function(){
               $("#icon").mouseover(function(){
-                $("#signin_query").css("background-color", "#42445E");
+                $("#signin_query").css("background-color", "#f5c396");
               });
               $("#icon").mouseout(function(){
-                $("#signin_query").css("background-color", "#303245");
+                $("#signin_query").css("background-color", "#ece4db");
               });
             })
           </script>

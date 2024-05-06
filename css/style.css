@@ -2,6 +2,7 @@
 body{
     margin: 0;
     padding: 0;
+    color:black;
 }
 
 .img{
@@ -26,6 +27,7 @@ body{
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+    box-shadow: #7d7777 10px 5px 5px 2px;
     overflow-y: scroll; /* Activer le défilement vertical */
     width: 300px;
     height: 100px; /* Hauteur de la zone de recherche */
@@ -55,8 +57,10 @@ body{
     text-align: center;
     width: fit-content;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color:#f0f0f0;
+    color:#000000;
 }
+
+
 
 #postbox {
     position: absolute;
@@ -80,6 +84,7 @@ body{
     margin-top: 10px;
     margin-bottom: 10px;
     position: relative;
+    box-shadow: #7d7777 10px 5px 5px 2px;
     /* margin: 5px; */
 }
 
@@ -119,7 +124,7 @@ body{
 .btn-action{
     position: absolute;
     top:10px;
-    left:10px;
+    right:3px;
 }
 
 .like-dislike{
@@ -146,7 +151,7 @@ body{
 
 .btn_see{
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
@@ -165,11 +170,13 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color:#999BBA;
+    background-color:#ece4db;
     border-radius: 10px;
     position: relative;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    box-shadow: #7d7777 10px 5px 5px 2px;
+
 }
 
 .close_cross{
@@ -207,7 +214,7 @@ body{
     opacity: 0.5;
 }
 
-.comment{
+.commentIcon{
     position :absolute;
     bottom: 3px;
     left: 10px;

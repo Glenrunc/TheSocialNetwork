@@ -20,14 +20,13 @@ h1,h2{
     position: absolute;
     top:20px;
     right: 5px;
-    margin-left: 20px;
     width: fit-content;
   }
 
 .btn-div{
     position : relative;
     width: fit-content;
-    top: 50px;
+    top: 85px;
     left:10px;
     z-index: 1;
 }

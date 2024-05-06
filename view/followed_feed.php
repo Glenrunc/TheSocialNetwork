@@ -41,7 +41,7 @@
             <p>Followed</p>
             <?php
             if (isset($_SESSION["id_user"])) {
-                echo "<button type='button' class='btn btn' onclick='showRecent()' style='background-color: #303245; color:aliceblue'>Recent</button>";
+                echo "<button type='button' class='btn btn' onclick='showRecent()' style='background-color: #f5c396; color:aliceblue'>Recent</button>";
             }
             ?>
         </div>

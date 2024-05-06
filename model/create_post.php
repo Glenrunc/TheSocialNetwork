@@ -7,21 +7,21 @@
 
 
     if (!empty($_POST)) {
-        if (!empty($_POST["content"])) {
+        if (!empty($_POST["message"])) {
 
             $content = "";
 
-            $content = $_POST["content"];
+            $content = $_POST["message"];
             $id_user = $_SESSION["id_user"];
             $date = date("Y-m-d H:i:s");
 
             $query = $db->prepare("INSERT INTO post (id_user,time,content) VALUES (?,?,?)");
             $query->execute([$id_user, $date, $content]);
 
-            if($_FILES["post_img"]["size"] != 0 ){
+            if($_FILES["image"]["size"] != 0 ){
                 echo  "<script>console.log('test') </script>";
                 $path ="../image/post_photo/";
-                $extention = pathinfo($_FILES["post_img"]["name"],PATHINFO_EXTENSION);
+                $extention = pathinfo($_FILES["image"]["name"],PATHINFO_EXTENSION);
                
                 $sql = "SELECT id FROM post WHERE time = ?";
                 $query = $db->prepare($sql);
@@ -29,7 +29,7 @@
 
                 $id_post = $query->fetch()[0];
 
-                move_uploaded_file($_FILES["post_img"]["tmp_name"],$path.$id_post.".".$extention);
+                move_uploaded_file($_FILES["image"]["tmp_name"],$path.$id_post.".".$extention);
 
                 $query = $db->prepare("UPDATE post SET image = ? WHERE id = ?");
                 $query->execute([$id_post.".".$extention,$id_post]);

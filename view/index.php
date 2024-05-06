@@ -43,7 +43,7 @@
       <p>Recent post</p>
       <?php
       if (isset($_SESSION["id_user"])) {
-        echo "<button id='toto' type='button' class='btn btn' onclick='showFollowed()' style='background-color: #303245; color:aliceblue'>Followed</button>";
+        echo "<button id='toto' type='button' class='btn btn' onclick='showFollowed()' style='background-color: #f5c396; color:aliceblue'>Following</button>";
       }
       ?>
 

@@ -38,7 +38,7 @@ echo '
         }
 echo' </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Followed</button>
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Following</button>
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@ echo' </div>
   <div class="modal-dialog  modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Followed</h1>
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Following</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">';

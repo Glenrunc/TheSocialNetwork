@@ -53,8 +53,10 @@ body{
     background-color: #ffffff;
     border-radius: 10px;
     position: relative;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    box-shadow: #7d7777 10px 5px 5px 2px;
+
     /* margin: 5px; */
 }
 .author-info {
@@ -69,6 +71,11 @@ body{
   #user_info{
     width: fit-content;
   }
+
+  #user_info p{
+    color:black;
+  }
+
 
   .picture {
     overflow: hidden; /* Cache les parties de l'image qui dépassent */
@@ -85,9 +92,8 @@ body{
   position :relative;
   width: 100% ;
   background-color: #ffffff;
-  border-radius: 10px ;
-  border: solid 5px;
-
+  border-radius: 10px;
+  box-shadow: #7d7777 10px 5px 5px 2px;
 }
 
 #content{
@@ -125,6 +131,8 @@ body{
   width: 300px;
   height: 100px; /* Hauteur de la zone de recherche */
   border-radius: 10px;
+  box-shadow: #7d7777 10px 5px 5px 2px;
+  margin-bottom:10px;
 
 }
 
@@ -135,7 +143,7 @@ body{
 .btn-action{
   position: absolute;
   top: 10px;
-  left: 10px;
+  right: 3px;
  
   width: fit-content;
 }
@@ -162,11 +170,12 @@ body{
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color:#999BBA;
-  border-radius: 10px;
+  background-color:#ece4db;
   position: relative;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  box-shadow: #7d7777 10px 5px 5px 2px;
+
 }
 
 .close_cross{
@@ -238,6 +247,11 @@ body{
 .comment{
   position :absolute;
   bottom: 5px;
+  left: 10px;
+}
+.commentIcon{
+  position :absolute;
+  bottom: 3px;
   left: 10px;
 }
 
