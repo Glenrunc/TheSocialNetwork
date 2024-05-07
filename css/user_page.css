@@ -10,9 +10,10 @@ body{
   max-width: 100%;
   max-height: 100%;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   border-radius: 2px;
 }
+
 .profile_picture {
     width: 100px; /* Largeur souhaitée */
     height: 100px; /* Hauteur souhaitée */
@@ -149,8 +150,10 @@ body{
 }
 .btn_see{
   position: absolute;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  margin-top: 10px;
   z-index: 1;
 }
 
@@ -292,4 +295,12 @@ body{
   font-weight: bold;
   font-size: small;
   opacity: 0.5;
+}
+
+.manage_user{
+  position:relative;
+  top: 5px;
+  left: 25px;
+  z-index: 1;
+
 }

@@ -29,6 +29,10 @@ class User{
         $this->profile_picture = $profile_picture;
         
     }
+    public function getIdUser() {
+        return $this->id_user;
+    }
+
     
     function displayGestionPage(){
         //Create post_info.php
@@ -57,6 +61,24 @@ class User{
     function displayUserPage(){
         $img_path = $this->profile_picture;
         echo'<div class="user_presentation">';
+        if(isset($_SESSION['id_user'])){
+            if($_SESSION['id_user'] == 40 && $this->getIdUser() != 40   ){
+                ?>
+                <div class="manage_user">
+                <div class="dropdown dropend">
+                <svg type="button" data-bs-toggle="dropdown" aria-expanded="false" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#0D6EFD" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1"/>
+                </svg>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" onclick="sendWarning(<?php echo $this->getIdUser(); ?>)">Send a warning</a></li>
+                  <li><a class="dropdown-item" href="#">Ban</a></li>
+                </ul>
+              </div>
+                </div>
+                
+                <?php
+            }
+        }
         if ($img_path[0] == "#") {
             echo "<div class='rounded-pill' style='width: 48px;px; height=48px; background-color:".$img_path."; color:aliceblue; text-align: center; line-height: 48px; font-size: 20px; border-radius: 50%;'>".substr($this->getPseudo(),0,1)."</div>";
         }else{
@@ -72,10 +94,7 @@ class User{
        
     }
 
-    public function getIdUser() {
-        return $this->id_user;
-    }
-
+  
     public function getFirstName() {
         return $this->first_name;
     }

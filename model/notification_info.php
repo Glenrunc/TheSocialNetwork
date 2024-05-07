@@ -181,8 +181,12 @@ class Notification{
             echo'<p><a href="../view/user.php?id='.$id_user.'">'.$pseudo.'</a> '.$this->getContent().' comment (<span class="contentNotifComment">'.$content.'</span>) on this <a href="../view/post.php?id_post='.$this->getIdPost().'">post</a></p>';
         }
 
-        if($this->getWarning() == 1){
-            echo'<p>'.$this->getContent().'</p>';
+        if ($this->getWarning() == 1) {
+            if ($this->getIdPost() != NULL) {
+                echo '<p>' . $this->getContent() . ' <a href="../view/post.php?id_post=' . $this->getIdPost() . '">here</a></p>';
+            } else {
+                echo '<p> <a href="../view/user.php?id=40">Admin</a> has sent this to you : ' . $this->getContent() . '</p>';
+            }
         }
 
         echo'<span class="hour"><p>'.$this->getDate().' '.$this->getHour().'</p></span>';
