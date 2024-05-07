@@ -47,7 +47,10 @@
         } else {
             ?>
             <div id="morePosts" >
-                <button type="button" onclick="loadMorePosts(<?php echo $postNumber; ?>,'<?php echo $_GET["id"]; ?>')">Charger plus de Posts</button>
+            <div class="d-grid gap-2">
+
+            <button type="button" class="btn btn-dark btn-sm mb-2" onclick="loadMorePosts(<?php echo $postNumber; ?>,'<?php echo $_GET["id"]; ?>')">Load more</button>
+            </div> 
             </div>
             <?php
         }

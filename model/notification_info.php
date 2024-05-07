@@ -12,8 +12,9 @@ class Notification{
     private $warning;
     private $id_comment;
     private $id_follow;
+    private $id_like_comment;
 
-    public function __construct($id,$id_user,$id_post,$content,$date,$hour,$viewed,$retirer,$id_like,$warning,$id_comment,$id_follow)
+    public function __construct($id,$id_user,$id_post,$content,$date,$hour,$viewed,$retirer,$id_like,$warning,$id_comment,$id_follow,$id_like_comment)
     {   
         $this->id = $id;
         $this->id_user = $id_user;
@@ -27,6 +28,7 @@ class Notification{
         $this->warning = $warning;
         $this->id_comment = $id_comment;
         $this->id_follow = $id_follow;
+        $this->id_like_comment = $id_like_comment;
     }
 
     public function getId()
@@ -88,6 +90,12 @@ class Notification{
     {
         return $this->id_follow;
     }
+
+    public function getIdLikeComment()
+    {
+        return $this->id_like_comment;
+    }
+
     public function displayNotification(){
         require("../model/database.php");
         global $db;
@@ -135,7 +143,7 @@ class Notification{
             echo'<p><a href="../view/user.php?id='.$id_user.'">'.$pseudo.'</a> '.$this->getContent().' <a href="../view/post.php?id_post='.$this->getIdPost().'">post</a></p>';
         }
 
-        if($this->getIdLike() == NULL && $this->getIdComment() == NULL && $this->getIdFollow() == NULL && $this->getWarning() == 0){
+        if($this->getIdLike() == NULL && $this->getIdComment() == NULL && $this->getIdFollow() == NULL && $this->getWarning() == 0 && $this->getIdLikeComment() == NULL){
             $sql = "SELECT u.pseudo, u.id
             FROM user u
             INNER JOIN post p ON u.id = p.id_user
@@ -147,6 +155,32 @@ class Notification{
             echo'<p><a href="../view/user.php?id='.$data["id"].'">'.$data["pseudo"].'</a> '.$this->getContent().' <a href="../view/post.php?id_post='.$this->getIdPost().'">post</a></p>';
     
         }
+
+        if($this->getIdLikeComment()!= NULL){
+
+            $sql = "SELECT id_user FROM likedcomment WHERE id = ?";
+            $qry = $db->prepare($sql);
+            $qry->execute([$this->getIdLikeComment()]);
+            $id_user = $qry->fetch()[0];
+
+            $sql = "SELECT pseudo FROM user WHERE id = ?";
+            $qry = $db->prepare($sql);
+            $qry->execute([$id_user]);
+            $pseudo = $qry->fetch()[0];
+
+            $sql = "SELECT id_comment FROM likedcomment WHERE id = ?";
+            $qry = $db->prepare($sql);
+            $qry->execute([$this->getIdLikeComment()]);
+            $id_comment = $qry->fetch()[0];
+
+            $sql = "SELECT content FROM comment WHERE id = ?";
+            $qry = $db->prepare($sql);
+            $qry->execute([$id_comment]);
+            $content = $qry->fetch()[0];
+
+            echo'<p><a href="../view/user.php?id='.$id_user.'">'.$pseudo.'</a> '.$this->getContent().' comment (<span class="contentNotifComment">'.$content.'</span>) on this <a href="../view/post.php?id_post='.$this->getIdPost().'">post</a></p>';
+        }
+
         if($this->getWarning() == 1){
             echo'<p>'.$this->getContent().'</p>';
         }

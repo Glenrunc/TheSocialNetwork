@@ -57,3 +57,17 @@
 .comment-info p{
     margin: 0;
 }
+
+.comment-like{
+    position: absolute;
+    bottom: 5px;
+    left: 20px;
+    z-index: 1;
+}
+
+
+.contentNotifComment {
+    font-weight: bold;
+    font-size: small;
+    opacity: 0.5;
+}

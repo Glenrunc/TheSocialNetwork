@@ -23,6 +23,9 @@
         echo "<script src='../script/add_blur.js'></script>";
         echo "<script src='../script/add_delete_admin.js'></script>";
         echo "<script src='../script/add_blur_admin.js'></script>";
+        echo "<script src='../script/add_like_comment.js'></script>";
+        echo "<script src='../script/add_dislike_comment.js'></script>";
+        
         require("../view/popup_signin.php");
         ?>
      

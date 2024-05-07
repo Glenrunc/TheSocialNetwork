@@ -102,6 +102,41 @@ class Comment
             <div class="comment-info">
                 <p><?php echo $this->date ?> <?php echo $this->hour ?></p>
             </div>
+            <?php
+            if(isset($_SESSION["id_user"])){
+                $sql = "SELECT COUNT(*) FROM likedcomment WHERE id_comment = ? AND id_user = ?";
+                $query = $db->prepare($sql);
+                $query->execute([$this->getIdComment(),$_SESSION["id_user"]]);
+                $liked = $query->fetch()[0];
+
+                $sql="SELECT COUNT(*) FROM likedcomment WHERE id_comment = ?";
+                $query = $db->prepare($sql);
+                $query->execute([$this->getIdComment()]);
+                $likes = $query->fetch()[0];
+                
+
+                if($liked){
+                    ?>
+                    <div class="comment-like">
+                    <svg id="like_comment<?php echo $this->getIdComment() ?>" class="like_comment" onclick="addDislikeComment(<?php echo $this->getIdComment() ?>,<?php echo $_SESSION["id_user"] ?>)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                    <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/> 
+                    </svg>
+                    <span id="badge<?php echo $this->getIdComment() ?>" class="badge bg-danger"><?php echo $likes ?> like</span>
+                    </div>
+                    <?php
+                }else{
+                    ?>
+                    <div class="comment-like">
+                    <svg type="button" id="like_comment<?php echo $this->getIdComment() ?>" class="like_comment" onclick="addLikeComment(<?php echo $this->getIdComment() ?>,<?php echo $_SESSION["id_user"] ?>)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                    <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
+                    </svg>
+                    <span id="badge<?php echo $this->getIdComment() ?>" class="badge bg-danger"><?php echo $likes ?> like</span>
+                    </div>
+                    <?php
+                }
+
+            }
+            ?>
         </div>
         <?php
     }

@@ -27,17 +27,16 @@ body{
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    box-shadow: #7d7777 10px 5px 5px 2px;
     overflow-y: scroll; /* Activer le défilement vertical */
-    width: 300px;
+    width: 750px;
     height: 100px; /* Hauteur de la zone de recherche */
     border-radius: 10px;
+    box-shadow: #7d7777 10px 5px 5px 2px;
+    margin-bottom:10px;
+  
+  }
 
-}
 
-#searchresult::-webkit-scrollbar {
-    display: none; /* Masquer la barre de défilement pour Chrome, Safari et Opera */
-}
 #maincontainer {
     position: relative;
     width: 100%;
@@ -231,7 +230,13 @@ body{
 
 .goTo{
     position: absolute;
-    top: 3px;
-    left: 10px;
+    bottom: 3px;
+    left: 50px;
     z-index: 1;
+}
+
+.contentNotifComment {
+    font-weight: bold;
+    font-size: small;
+    opacity: 0.5;
 }

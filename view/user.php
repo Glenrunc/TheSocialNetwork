@@ -136,7 +136,10 @@
             }
             ?>
             <div id="morePosts">
-            <button type="button" class="btn btn-light btn-sm" onclick="loadMorePosts(5, '<?php echo $_GET["id"]; ?>')">Load more</button>
+            <div class="d-grid gap-2">
+
+            <button type="button" class="btn btn-dark btn-sm mb-2" onclick="loadMorePosts(5, '<?php echo $_GET["id"]; ?>')">Load more</button>
+            </div> 
             </div>
             <?php
         }

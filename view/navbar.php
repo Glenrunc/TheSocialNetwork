@@ -12,10 +12,12 @@
     </button>
 
     <div class="collapse navbar-collapse" id="mynavbar">
-      <input type="text" id="search" placeholder="Search for user ?!" autocomplete="off">
       
-
-
+      
+      <span class="input-group-text" id="basic-addon1">@</span>
+      <input type="text" id="search" class="form-control col-3" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="width:200px;">
+    
+    
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <?php        
