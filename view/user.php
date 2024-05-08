@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="../css/user_page.css" rel="stylesheet">
     <link href="../css/style_popup.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
     <title>TZU</title>
@@ -102,6 +103,81 @@
                             $qry->execute([$_SESSION["id_user"]]);
                             $data = $qry->fetch();
                             echo '<div class="link">';
+                            ?>
+                            <svg type="button"  data-bs-toggle="modal" data-bs-target="#ModalStat"style="margin-right:5px;" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#0D6EFD" class="bi bi-bar-chart-line-fill" viewBox="0 0 16 16">
+                                <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1z"/>
+                            </svg>
+                            <div class="modal fade" id="ModalStat" tabindex="-1" aria-labelledby="ModalStatLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-fullscreen">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="ModalStatLabel">Statistics of your account</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <!-- Follow/Followers -->
+                                    <canvas id="ChartFollower" width="200" height="200"></canvas>
+                                    <?php
+                                        $sql= "SELECT COUNT(*) FROM follow WHERE id_follow = ?";
+                                        $query = $db->prepare($sql);
+                                        $query->execute([$_SESSION["id_user"]]);
+                                        $followers = $query->fetch()[0];
+
+                                        $sql= "SELECT COUNT(*) FROM follow WHERE id_user = ?";
+                                        $query = $db->prepare($sql);
+                                        $query->execute([$_SESSION["id_user"]]);
+                                        $following = $query->fetch()[0];
+                                    ?>
+
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                        // Données factices pour les followers et following
+                                        const followersData = <?php echo $followers; ?>;
+                                        const followingData = <?php echo $following; ?>;
+
+                                        // Récupérer le contexte du canvas
+                                        const ctx = document.getElementById('ChartFollower').getContext('2d');
+
+                                        // Créer le graphique
+                                        const myChart = new Chart(ctx, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: ['Followers', 'Following'],
+                                                datasets: [{
+                                                    label: 'Followers and Following',
+                                                    data: [followersData, followingData],
+                                                    backgroundColor: [
+                                                        'rgba(54, 162, 235, 0.5)', // Couleur pour les followers
+                                                        'rgba(255, 99, 132, 0.5)' // Couleur pour les following
+                                                    ],
+                                                    borderColor: [
+                                                        'rgba(54, 162, 235, 1)',
+                                                        'rgba(255, 99, 132, 1)'
+                                                    ],
+                                                    borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                scales: {
+                                                    yAxes: [{
+                                                        ticks: {
+                                                            beginAtZero: true
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        });
+                                    });                                 
+
+                                    </script>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <?php
                             if ($data["admin"] == 1) {
                                 ?>
                                 <div class="dropdown dropstart">
@@ -161,7 +237,9 @@
                             </svg>
                             </a></div>';
                             require("../view/follow_modal.php");
+                            
                             echo '</div>';
+                            
                             echo '</div>';
                             echo '<div id="postbox">';
                         ?>  

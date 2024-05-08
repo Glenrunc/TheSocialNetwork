@@ -158,7 +158,7 @@ class Post
                 echo '</div>';
             } else {
                 echo '<div class="info_btn">';
-                echo '<span class="badge text-bg-light">Create an account or connect to see the blur post</span>';
+                echo '<span class="badge text-bg-danger">Create an account or connect to see the blur post</span>';
                 echo '</div>';
             }
             echo '<div id="content-blur' . $this->getId() . '"  class="content-blur">';
