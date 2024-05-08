@@ -15,7 +15,7 @@
       
       
       <span class="input-group-text" id="basic-addon1">@</span>
-      <input type="text" id="search" class="form-control col-3" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="width:200px;">
+      <input type="text" id="search" class="form-control col-3" placeholder="What's happening ?" aria-label="Username" aria-describedby="basic-addon1" style="width:200px;">
     
     
       <ul class="navbar-nav ms-auto">
