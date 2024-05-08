@@ -30,6 +30,7 @@
     echo "<script src='../script/add_blur_admin.js'></script>";
     echo "<script src='../script/loadMoreUser.js'></script>";
     echo "<script src='../script/send_warning.js'></script>";
+    echo "<script src='../script/unban.js'></script>";
 
 
     global $db;
@@ -127,14 +128,21 @@
                                             $query = $db->prepare($sql);
                                             $query->execute();
                                             $data = $query->fetchAll();
-
+                                            if(empty($data)){
+                                                echo "<p>No user banned</p>";
+                                            }
                                             foreach($data as $user){
                                                 $sql = "SELECT pseudo FROM user WHERE id = ?";
                                                 $query = $db->prepare($sql);
                                                 $query->execute([$user["id_user"]]);
                                                 $data = $query->fetch();
-                                                    echo "<p><a href='../view/user.php?id=".$user["id_user"]."'>".$data["pseudo"]."</a></p>";
-                                                }
+                                                    echo "<p class='ban_user_name' id='ban_user_name".$user["id_user"]."'><a href='../view/user.php?id=".$user["id_user"]."'>".$data["pseudo"]."</a>";
+                                                    echo "<span class='unban_modal_span' type='button' onclick='unban(".$user["id_user"].")'>Unban</span>";
+                                                    echo"<hr></p>";
+                                                    ?>
+                                                    
+                                                    <?php
+                                            }
                                         ?>
                                       </div>
                                       <div class="modal-footer">

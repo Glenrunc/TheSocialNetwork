@@ -332,3 +332,15 @@ body{
   color: red;
   font-weight: bold;
 }
+.ban_user_name{
+  position:relative;
+}
+.unban_modal_span{
+  position: absolute;
+  right: 10px;
+}
+
+.unban_modal_span:hover{
+
+  color: red;
+}

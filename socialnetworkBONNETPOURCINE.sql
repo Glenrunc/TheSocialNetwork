@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 07 mai 2024 à 22:02
+-- Généré le : mer. 08 mai 2024 à 16:55
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -33,6 +33,13 @@ CREATE TABLE `ban` (
   `date_begin` date DEFAULT curdate(),
   `date_end` date DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `ban`
+--
+
+INSERT INTO `ban` (`id`, `id_user`, `date_begin`, `date_end`) VALUES
+(19, 57, '2024-05-08', '2024-05-15');
 
 -- --------------------------------------------------------
 
@@ -114,8 +121,6 @@ INSERT INTO `follow` (`id`, `id_user`, `id_follow`) VALUES
 (54, 40, 45),
 (59, 45, 40),
 (60, 45, 48),
-(61, 45, 55),
-(62, 45, 57),
 (63, 45, 52),
 (66, 56, 57),
 (67, 56, 40),
@@ -140,8 +145,6 @@ CREATE TABLE `likedcomment` (
 --
 
 INSERT INTO `likedcomment` (`id`, `id_comment`, `id_user`) VALUES
-(82, 25, 40),
-(84, 26, 40),
 (103, 26, 45),
 (104, 25, 45),
 (105, 12, 45),
@@ -149,7 +152,10 @@ INSERT INTO `likedcomment` (`id`, `id_comment`, `id_user`) VALUES
 (107, 1, 45),
 (109, 27, 40),
 (114, 27, 45),
-(115, 17, 45);
+(115, 17, 45),
+(117, 18, 40),
+(118, 18, 45),
+(119, 26, 40);
 
 -- --------------------------------------------------------
 
@@ -192,7 +198,13 @@ INSERT INTO `likedpost` (`id`, `id_post`, `id_user`) VALUES
 (98, 47, 40),
 (100, 66, 40),
 (102, 56, 40),
-(108, 51, 40);
+(108, 51, 40),
+(109, 85, 58),
+(110, 83, 48),
+(111, 63, 48),
+(112, 67, 48),
+(113, 58, 48),
+(114, 85, 56);
 
 -- --------------------------------------------------------
 
@@ -213,73 +225,83 @@ CREATE TABLE `notification` (
   `warning` int(11) DEFAULT NULL,
   `id_comment` int(11) DEFAULT NULL,
   `id_follow` int(11) DEFAULT NULL,
-  `id_like_comment` int(11) DEFAULT NULL
+  `id_like_comment` int(11) DEFAULT NULL,
+  `ban` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `notification`
 --
 
-INSERT INTO `notification` (`id`, `id_user`, `id_post`, `content`, `viewed`, `date`, `hour`, `retirer`, `id_like`, `warning`, `id_comment`, `id_follow`, `id_like_comment`) VALUES
-(1, 45, 51, 'Mek tu fais quoi', 1, '2024-05-02', '10:57:48', 1, NULL, 1, NULL, NULL, NULL),
-(2, 48, 48, 'Your post may cause several problems regarding our rules', 1, '2024-05-03', '09:24:39', 1, NULL, 1, NULL, NULL, NULL),
-(3, 45, 51, 'Your post may cause several problems regarding our rules', 1, '2024-05-04', '11:02:43', 1, NULL, 1, NULL, NULL, NULL),
-(24, 45, 46, 'liked your post', 0, '2024-05-04', '14:59:13', 0, 52, 0, NULL, NULL, NULL),
-(25, 45, 47, 'Your post may cause several problems regarding our rules', 0, '2024-05-04', '14:59:16', 0, NULL, 1, NULL, NULL, NULL),
-(26, 48, 48, 'Your post may cause several problems regarding our rules', 0, '2024-05-04', '20:44:39', 0, NULL, 1, NULL, NULL, NULL),
-(29, 45, 51, 'liked your post', 0, '2024-05-05', '16:28:11', 0, 56, 0, NULL, NULL, NULL),
-(30, 45, 51, 'liked your post', 0, '2024-05-05', '16:45:22', 0, 57, 0, NULL, NULL, NULL),
-(37, 48, 48, 'liked your', 0, '2024-05-06', '08:58:58', 0, 71, 0, NULL, NULL, NULL),
-(41, 45, 59, 'Your post may cause several problems regarding our rules', 1, '2024-05-06', '10:59:13', 1, NULL, 1, NULL, NULL, NULL),
-(42, 48, 62, 'liked your', 0, '2024-05-06', '13:38:32', 0, 78, 0, NULL, NULL, NULL),
-(44, 45, 59, 'add a comment on your', 0, '2024-05-06', '14:53:43', 0, NULL, 0, 19, NULL, NULL),
-(45, 48, 64, 'add a comment on your', 0, '2024-05-06', '14:55:44', 0, NULL, 0, 20, NULL, NULL),
-(46, 40, 63, 'add a comment on your', 1, '2024-05-06', '14:56:42', 0, NULL, 0, 22, NULL, NULL),
-(47, 45, 51, 'add a comment on your', 0, '2024-05-06', '15:00:34', 0, NULL, 0, 23, NULL, NULL),
-(48, 45, 51, 'add a comment on your', 0, '2024-05-06', '15:01:13', 0, NULL, 0, 24, NULL, NULL),
-(50, 57, NULL, 'started following you', 0, '2024-05-06', '15:33:09', 0, NULL, 0, NULL, 66, NULL),
-(51, 40, NULL, 'started following you', 0, '2024-05-06', '15:36:23', 0, NULL, 0, NULL, 67, NULL),
-(52, 56, 65, 'liked your', 0, '2024-05-06', '15:38:26', 0, 82, 0, NULL, NULL, NULL),
-(53, 48, 64, 'liked your', 0, '2024-05-06', '15:38:27', 0, 83, 0, NULL, NULL, NULL),
-(54, 40, 63, 'liked your', 0, '2024-05-06', '15:38:28', 0, 84, 0, NULL, NULL, NULL),
-(55, 48, 62, 'liked your', 0, '2024-05-06', '15:38:30', 0, 85, 0, NULL, NULL, NULL),
-(56, 40, 49, 'liked your', 0, '2024-05-06', '15:38:44', 0, 86, 0, NULL, NULL, NULL),
-(57, 40, 52, 'liked your', 0, '2024-05-06', '15:38:46', 0, 87, 0, NULL, NULL, NULL),
-(58, 40, 53, 'liked your', 0, '2024-05-06', '15:38:46', 0, 88, 0, NULL, NULL, NULL),
-(59, 40, 54, 'liked your', 0, '2024-05-06', '15:38:47', 0, 89, 0, NULL, NULL, NULL),
-(60, 40, 55, 'liked your', 0, '2024-05-06', '15:38:48', 0, 90, 0, NULL, NULL, NULL),
-(61, 40, 56, 'liked your', 0, '2024-05-06', '15:38:49', 0, 91, 0, NULL, NULL, NULL),
-(62, 40, 57, 'liked your', 0, '2024-05-06', '15:38:49', 0, 92, 0, NULL, NULL, NULL),
-(63, 40, 58, 'liked your', 0, '2024-05-06', '15:38:50', 0, 93, 0, NULL, NULL, NULL),
-(64, 40, NULL, 'started following you', 0, '2024-05-06', '15:51:43', 0, NULL, 0, NULL, 68, NULL),
-(65, 56, NULL, 'started following you', 0, '2024-05-06', '16:04:27', 0, NULL, 0, NULL, 69, NULL),
-(112, 45, 83, 'add a new', 0, '2024-05-06', '20:30:47', 0, NULL, 0, NULL, NULL, NULL),
-(113, 56, 83, 'add a new', 0, '2024-05-06', '20:30:47', 0, NULL, 0, NULL, NULL, NULL),
-(114, 48, 83, 'add a new', 0, '2024-05-06', '20:30:47', 0, NULL, 0, NULL, NULL, NULL),
-(115, 40, 83, 'add a comment on your', 0, '2024-05-06', '20:38:35', 0, NULL, 0, 25, NULL, NULL),
-(117, 48, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL),
-(118, 52, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL),
-(119, 51, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL),
-(120, 53, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL),
-(121, 54, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL),
-(122, 55, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL),
-(123, 56, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL),
-(124, 57, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL),
-(125, 40, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL),
-(126, 45, 84, 'liked your', 0, '2024-05-06', '20:45:43', 0, 97, 0, NULL, NULL, NULL),
-(127, 45, 47, 'liked your', 0, '2024-05-07', '10:27:32', 0, 98, 0, NULL, NULL, NULL),
-(134, 40, 83, 'liked your', 0, '2024-05-07', '12:40:43', 0, NULL, 0, NULL, NULL, 103),
-(135, 40, 58, 'liked your', 0, '2024-05-07', '12:42:06', 0, NULL, 0, NULL, NULL, 105),
-(136, 40, 58, 'liked your', 0, '2024-05-07', '12:42:07', 0, NULL, 0, NULL, NULL, 106),
-(137, 40, 58, 'liked your', 0, '2024-05-07', '12:42:09', 0, NULL, 0, NULL, NULL, 107),
-(138, 56, 65, 'add a comment on your', 0, '2024-05-07', '12:43:12', 0, NULL, 0, 27, NULL, NULL),
-(140, 57, 66, 'liked your', 0, '2024-05-07', '12:59:50', 0, 100, 0, NULL, NULL, NULL),
-(145, 40, 65, 'liked your', 0, '2024-05-07', '20:45:42', 0, NULL, 0, NULL, NULL, 114),
-(146, 56, 65, 'Your post may cause several problems regarding our rules', 0, '2024-05-07', '20:47:59', 0, NULL, 1, NULL, NULL, NULL),
-(148, 45, 47, 'Your post may cause several problems regarding our rules', 0, '2024-05-07', '21:01:15', 0, NULL, 1, NULL, NULL, NULL),
-(154, 45, 51, 'liked your', 0, '2024-05-07', '21:05:17', 0, 108, 0, NULL, NULL, NULL),
-(155, 57, NULL, 'Your comportement is problematic be aware that you could be ban from the website!', 0, '2024-05-07', '21:50:23', 0, NULL, 1, NULL, NULL, NULL),
-(156, 40, NULL, 'started following you', 0, '2024-05-07', '21:54:00', 0, NULL, 0, NULL, 70, NULL);
+INSERT INTO `notification` (`id`, `id_user`, `id_post`, `content`, `viewed`, `date`, `hour`, `retirer`, `id_like`, `warning`, `id_comment`, `id_follow`, `id_like_comment`, `ban`) VALUES
+(1, 45, 51, 'Mek tu fais quoi', 1, '2024-05-02', '10:57:48', 1, NULL, 1, NULL, NULL, NULL, 0),
+(2, 48, 48, 'Your post may cause several problems regarding our rules', 1, '2024-05-03', '09:24:39', 1, NULL, 1, NULL, NULL, NULL, 0),
+(3, 45, 51, 'Your post may cause several problems regarding our rules', 1, '2024-05-04', '11:02:43', 1, NULL, 1, NULL, NULL, NULL, 0),
+(24, 45, 46, 'liked your post', 0, '2024-05-04', '14:59:13', 0, 52, 0, NULL, NULL, NULL, 0),
+(25, 45, 47, 'Your post may cause several problems regarding our rules', 0, '2024-05-04', '14:59:16', 0, NULL, 1, NULL, NULL, NULL, 0),
+(26, 48, 48, 'Your post may cause several problems regarding our rules', 0, '2024-05-04', '20:44:39', 0, NULL, 1, NULL, NULL, NULL, 0),
+(29, 45, 51, 'liked your post', 0, '2024-05-05', '16:28:11', 0, 56, 0, NULL, NULL, NULL, 0),
+(30, 45, 51, 'liked your post', 0, '2024-05-05', '16:45:22', 0, 57, 0, NULL, NULL, NULL, 0),
+(37, 48, 48, 'liked your', 0, '2024-05-06', '08:58:58', 0, 71, 0, NULL, NULL, NULL, 0),
+(41, 45, 59, 'Your post may cause several problems regarding our rules', 1, '2024-05-06', '10:59:13', 1, NULL, 1, NULL, NULL, NULL, 0),
+(42, 48, 62, 'liked your', 0, '2024-05-06', '13:38:32', 0, 78, 0, NULL, NULL, NULL, 0),
+(44, 45, 59, 'add a comment on your', 0, '2024-05-06', '14:53:43', 0, NULL, 0, 19, NULL, NULL, 0),
+(45, 48, 64, 'add a comment on your', 0, '2024-05-06', '14:55:44', 0, NULL, 0, 20, NULL, NULL, 0),
+(46, 40, 63, 'add a comment on your', 1, '2024-05-06', '14:56:42', 0, NULL, 0, 22, NULL, NULL, 0),
+(47, 45, 51, 'add a comment on your', 0, '2024-05-06', '15:00:34', 0, NULL, 0, 23, NULL, NULL, 0),
+(48, 45, 51, 'add a comment on your', 0, '2024-05-06', '15:01:13', 0, NULL, 0, 24, NULL, NULL, 0),
+(50, 57, NULL, 'started following you', 0, '2024-05-06', '15:33:09', 0, NULL, 0, NULL, 66, NULL, 0),
+(51, 40, NULL, 'started following you', 0, '2024-05-06', '15:36:23', 0, NULL, 0, NULL, 67, NULL, 0),
+(52, 56, 65, 'liked your', 0, '2024-05-06', '15:38:26', 0, 82, 0, NULL, NULL, NULL, 0),
+(53, 48, 64, 'liked your', 0, '2024-05-06', '15:38:27', 0, 83, 0, NULL, NULL, NULL, 0),
+(54, 40, 63, 'liked your', 0, '2024-05-06', '15:38:28', 0, 84, 0, NULL, NULL, NULL, 0),
+(55, 48, 62, 'liked your', 0, '2024-05-06', '15:38:30', 0, 85, 0, NULL, NULL, NULL, 0),
+(56, 40, 49, 'liked your', 0, '2024-05-06', '15:38:44', 0, 86, 0, NULL, NULL, NULL, 0),
+(57, 40, 52, 'liked your', 0, '2024-05-06', '15:38:46', 0, 87, 0, NULL, NULL, NULL, 0),
+(58, 40, 53, 'liked your', 0, '2024-05-06', '15:38:46', 0, 88, 0, NULL, NULL, NULL, 0),
+(59, 40, 54, 'liked your', 0, '2024-05-06', '15:38:47', 0, 89, 0, NULL, NULL, NULL, 0),
+(60, 40, 55, 'liked your', 0, '2024-05-06', '15:38:48', 0, 90, 0, NULL, NULL, NULL, 0),
+(61, 40, 56, 'liked your', 0, '2024-05-06', '15:38:49', 0, 91, 0, NULL, NULL, NULL, 0),
+(62, 40, 57, 'liked your', 0, '2024-05-06', '15:38:49', 0, 92, 0, NULL, NULL, NULL, 0),
+(63, 40, 58, 'liked your', 0, '2024-05-06', '15:38:50', 0, 93, 0, NULL, NULL, NULL, 0),
+(64, 40, NULL, 'started following you', 0, '2024-05-06', '15:51:43', 0, NULL, 0, NULL, 68, NULL, 0),
+(65, 56, NULL, 'started following you', 0, '2024-05-06', '16:04:27', 0, NULL, 0, NULL, 69, NULL, 0),
+(112, 45, 83, 'add a new', 0, '2024-05-06', '20:30:47', 0, NULL, 0, NULL, NULL, NULL, 0),
+(113, 56, 83, 'add a new', 0, '2024-05-06', '20:30:47', 0, NULL, 0, NULL, NULL, NULL, 0),
+(114, 48, 83, 'add a new', 0, '2024-05-06', '20:30:47', 0, NULL, 0, NULL, NULL, NULL, 0),
+(115, 40, 83, 'add a comment on your', 0, '2024-05-06', '20:38:35', 0, NULL, 0, 25, NULL, NULL, 0),
+(117, 48, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL, 0),
+(118, 52, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL, 0),
+(119, 51, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL, 0),
+(120, 53, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL, 0),
+(121, 54, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL, 0),
+(122, 55, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL, 0),
+(123, 56, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL, 0),
+(124, 57, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL, 0),
+(125, 40, 84, 'add a new', 0, '2024-05-06', '20:39:06', 0, NULL, 0, NULL, NULL, NULL, 0),
+(126, 45, 84, 'liked your', 0, '2024-05-06', '20:45:43', 0, 97, 0, NULL, NULL, NULL, 0),
+(127, 45, 47, 'liked your', 0, '2024-05-07', '10:27:32', 0, 98, 0, NULL, NULL, NULL, 0),
+(134, 40, 83, 'liked your', 0, '2024-05-07', '12:40:43', 0, NULL, 0, NULL, NULL, 103, 0),
+(135, 40, 58, 'liked your', 0, '2024-05-07', '12:42:06', 0, NULL, 0, NULL, NULL, 105, 0),
+(136, 40, 58, 'liked your', 0, '2024-05-07', '12:42:07', 0, NULL, 0, NULL, NULL, 106, 0),
+(137, 40, 58, 'liked your', 0, '2024-05-07', '12:42:09', 0, NULL, 0, NULL, NULL, 107, 0),
+(138, 56, 65, 'add a comment on your', 0, '2024-05-07', '12:43:12', 0, NULL, 0, 27, NULL, NULL, 0),
+(140, 57, 66, 'liked your', 0, '2024-05-07', '12:59:50', 0, 100, 0, NULL, NULL, NULL, 0),
+(145, 40, 65, 'liked your', 0, '2024-05-07', '20:45:42', 0, NULL, 0, NULL, NULL, 114, 0),
+(146, 56, 65, 'Your post may cause several problems regarding our rules', 0, '2024-05-07', '20:47:59', 0, NULL, 1, NULL, NULL, NULL, 0),
+(148, 45, 47, 'Your post may cause several problems regarding our rules', 0, '2024-05-07', '21:01:15', 0, NULL, 1, NULL, NULL, NULL, 0),
+(154, 45, 51, 'liked your', 0, '2024-05-07', '21:05:17', 0, 108, 0, NULL, NULL, NULL, 0),
+(155, 57, NULL, 'Your comportement is problematic be aware that you could be ban from the website!', 0, '2024-05-07', '21:50:23', 0, NULL, 1, NULL, NULL, NULL, 0),
+(156, 40, NULL, 'started following you', 0, '2024-05-07', '21:54:00', 0, NULL, 0, NULL, 70, NULL, 0),
+(157, 45, 47, 'liked your', 0, '2024-05-08', '13:12:03', 0, NULL, 0, NULL, NULL, 117, 0),
+(163, 40, 83, 'liked your', 0, '2024-05-08', '15:00:37', 0, 110, 0, NULL, NULL, NULL, 0),
+(164, 40, 63, 'liked your', 0, '2024-05-08', '15:00:38', 0, 111, 0, NULL, NULL, NULL, 0),
+(165, 40, 67, 'liked your', 0, '2024-05-08', '15:00:39', 0, 112, 0, NULL, NULL, NULL, 0),
+(166, 40, 58, 'liked your', 0, '2024-05-08', '15:00:39', 0, 113, 0, NULL, NULL, NULL, 0),
+(170, 58, 85, 'liked your', 0, '2024-05-08', '15:40:10', 0, 114, 0, NULL, NULL, NULL, 0),
+(178, 52, NULL, 'You have been banned for 50 days', 0, '2024-05-08', '16:46:31', 0, NULL, NULL, NULL, NULL, NULL, 1),
+(179, 52, NULL, 'You have been unbanned but all your posts have been removed', 0, '2024-05-08', '16:46:42', 0, NULL, 1, NULL, NULL, NULL, 0),
+(180, 57, NULL, 'You have been banned for 7 days', 0, '2024-05-08', '16:53:42', 0, NULL, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -321,10 +343,11 @@ INSERT INTO `post` (`id`, `id_user`, `time`, `content`, `image`, `retirer`, `flo
 (63, 40, '2024-05-06 13:40:47', 'Test Pour l\'affichage des post', NULL, NULL, NULL),
 (64, 48, '2024-05-06 13:41:03', 'okkk', NULL, NULL, NULL),
 (65, 56, '2024-05-06 15:24:16', 'test', NULL, NULL, 1),
-(66, 57, '2024-05-06 15:38:04', 'Premier Post, je suis TROP contente d\'être ici ', '66.JPG', NULL, NULL),
+(66, 57, '2024-05-06 15:38:04', 'Premier Post, je suis TROP contente d\'être ici ', '66.JPG', 1, NULL),
 (67, 40, '2024-05-06 16:00:35', 'zezeze', NULL, NULL, NULL),
 (83, 40, '2024-05-06 20:30:46', 'Nouveau post', '83.JPG', NULL, NULL),
-(84, 45, '2024-05-06 20:39:06', 'Me voici dans une impasse ? ', '84.JPG', NULL, NULL);
+(84, 45, '2024-05-06 20:39:06', 'Me voici dans une impasse ? ', '84.JPG', NULL, NULL),
+(85, 58, '2024-05-08 10:56:51', 'Bienvenue sur cette nouvelle page ', '85.JPG', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -360,7 +383,8 @@ INSERT INTO `user` (`id`, `first_name`, `last_name`, `age`, `birthday`, `email`,
 (54, 'Robin', 'Moirot', 22, 2002, 'robin.moirot@utbm.fr', '$argon2id$v=19$m=65536,t=4,p=1$SThxbVJkczh4a2ZLRlhIcQ$9SWtPa/WLFtR/Q5hBUwhiK4Arvo/FW3/N10FiwIIUlo', 'RORO', NULL, '#DF9395'),
 (55, 'Hugo', 'Decrypte', 42, 1982, 'hugo.decrypte@utbm.fr', '$argon2id$v=19$m=65536,t=4,p=1$MXEudzVnRFcud2E1UjJmdA$pVBZ+V85L2wGtUvip03fFp87huSPvDD2nVXvnbgONNU', 'hugBig', NULL, '#E4376B'),
 (56, 'Stephane', 'Jore', 35, 1989, 'stephane.jore@utbm.fr', '$argon2id$v=19$m=65536,t=4,p=1$MTB6QTd2QWJtOFN4Q1lPRQ$bNp6DZIUXFTNr1svv+s9gXMQSEo9qr8qb3ZBzffZPU4', 'steph', NULL, '#D20D65'),
-(57, 'Camille', 'Moiset', 20, 2004, 'camille.moiset@utbm.fr', '$argon2id$v=19$m=65536,t=4,p=1$RFdsRDNDbGZ6TDd3Y001aA$BL0/z5omHFIZaay6oYDvXyQ9iAYbjTab7sGpURvkNnU', 'camcam', NULL, '#5947C4');
+(57, 'Camille', 'Moiset', 20, 2004, 'camille.moiset@utbm.fr', '$argon2id$v=19$m=65536,t=4,p=1$RFdsRDNDbGZ6TDd3Y001aA$BL0/z5omHFIZaay6oYDvXyQ9iAYbjTab7sGpURvkNnU', 'camcam', NULL, '#5947C4'),
+(58, 'Manuel', 'Jean', 24, 2000, 'manuel.jean@utbm.fr', '$argon2id$v=19$m=65536,t=4,p=1$VjZ4blkyeU0zS3hCMGlSZQ$yy6EGjfe1K3obgLoDUj9dY556U64ANWwlu3sX4U78qs', 'Manu', NULL, '#31CC3E');
 
 --
 -- Index pour les tables déchargées
@@ -371,6 +395,7 @@ INSERT INTO `user` (`id`, `first_name`, `last_name`, `age`, `birthday`, `email`,
 --
 ALTER TABLE `ban`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_id_user` (`id_user`),
   ADD KEY `idx_user` (`id_user`);
 
 --
@@ -441,7 +466,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `ban`
 --
 ALTER TABLE `ban`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pour la table `comment`
@@ -459,31 +484,31 @@ ALTER TABLE `follow`
 -- AUTO_INCREMENT pour la table `likedcomment`
 --
 ALTER TABLE `likedcomment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT pour la table `likedpost`
 --
 ALTER TABLE `likedpost`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT pour la table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
 
 --
 -- AUTO_INCREMENT pour la table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Contraintes pour les tables déchargées

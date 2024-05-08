@@ -11,7 +11,7 @@
             $query = $db->prepare($sql);
             $query->execute([$id_user_ban,$number_of_day_ban]);
 
-            $sql = "INSERT INTO notification(id_user, content,retirer, ban) VALUES(?,?,0,?)";
+            $sql = "INSERT INTO notification(id_user, content,viewed,retirer, ban) VALUES(?,?,0,0,?)";
             $query = $db->prepare($sql);
 
             if($_POST["reason_ban"] == ""){
