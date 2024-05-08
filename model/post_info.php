@@ -208,7 +208,13 @@ class Post
         $query = $db->prepare($sql);
         $query->execute([$this->getId()]);
         $comment = $query->fetch()[0];
+        $sql = "SELECT COUNT(*) FROM ban WHERE id_user = ?";
+        $query = $db->prepare($sql);
+        $query->execute([$_SESSION["id_user"]]);
+        $ban = $query->fetch()[0];
 
+        if ($ban == 0) {
+            
         echo '
         
         <div class="commentIcon" id="commentIcon' . $this->getId() . '">
@@ -222,7 +228,7 @@ class Post
         </svg>
         </div>
         ';
-        
+        }
         }
         echo '
         <div class="goTo" id="goto' . $this->getId() . '">
@@ -241,5 +247,6 @@ class Post
         </div>
        
         <?php
+        
     }
 }

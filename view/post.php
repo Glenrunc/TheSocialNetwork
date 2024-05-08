@@ -56,7 +56,7 @@
                        
 
                     <div id="commentbox">
-                       
+                    <h6>Comments</h6>
                     <?php
                     require("../model/comment_info.php");
                     $sql = "SELECT * FROM comment WHERE id_post = ? ORDER BY date DESC, hour DESC";

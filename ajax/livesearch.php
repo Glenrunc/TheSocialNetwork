@@ -6,7 +6,7 @@
 
         $sql = "SELECT id,pseudo FROM user WHERE pseudo LIKE '{$input}%' OR pseudo LIKE '%{$input}%' OR pseudo LIKE '%{$input}' OR pseudo LIKE '{$input}'";
         $resultUser = mysqli_query($con,$sql);
-        $sql = "SELECT id AS post_id,content,id_user FROM post WHERE content LIKE '{$input}%' OR content LIKE '%{$input}%' OR content LIKE '%{$input}' OR content LIKE '{$input}'";
+        $sql = "SELECT id AS post_id,content,id_user,retirer FROM post WHERE content LIKE '{$input}%' OR content LIKE '%{$input}%' OR content LIKE '%{$input}' OR content LIKE '{$input}'";
         $resultPost = mysqli_query($con,$sql);
 
         if(mysqli_num_rows($resultUser) > 0 ){?>
@@ -45,15 +45,20 @@
                         $content = $row["content"];
                         $id= $row["id_user"];
                         $id_post = $row["post_id"];
+                        $retire = $row["retirer"];
+
                         $sql = "SELECT pseudo FROM user WHERE id = $id";
                         $result = mysqli_query($con,$sql);
                         $row = mysqli_fetch_assoc($result);
                         $pseudo = $row["pseudo"];
+                        if($retire == NULL){
                          ?>
                         <tr>
                             <td><a href="../view/user.php?id=<?php echo $id; ?>"><?php echo $pseudo; ?></a> : <?php echo $content; ?>. <a href="../view/post.php?id_post=<?php echo $id_post;?>">(go to)</a></td>
                         </tr>
+                         
                         <?php
+                         }
                     }
                         
                     ?>

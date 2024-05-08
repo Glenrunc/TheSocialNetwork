@@ -50,101 +50,155 @@
         if ($data) {
             $user = new User($data["id"], $data["first_name"], $data["last_name"], $data["age"], $data["birthday"], $data["email"], $data["pseudo"], $data["admin"], $data["profile_picture"]);
             $user->displayUserPage();
-            if (isset($_SESSION["id_user"])) {
-                //Si l'utilisateur est connecté et que c'est son profil
-                if ($_SESSION["id_user"] != $_GET["id"]) {
-                    //Si l'utilisateur est connecté et que ce n'est pas son profil
-                    //bouton follow
-                    require("../model/follow.php");
-                    $query_check_follow = $db->prepare("SELECT * FROM follow WHERE id_user = ? AND id_follow = ?");
-                    $query_check_follow->execute([$_SESSION["id_user"], $_GET["id"]]);
-                    $data = $query_check_follow->fetch();
-                    echo "<div class='follow-unfollow'>";
 
-                    if ($data) {
-                        require("../view/form_unfollow.php");
-                        require("../view/follow_modal.php");
+            if(isset($_SESSION["id_user"])){
+                $sql = "SELECT COUNT(*),date_end FROM ban WHERE id_user = ?";
+                $query = $db->prepare($sql);
+                $query->execute([$_SESSION["id_user"]]);
+                $data = $query->fetch();
+                $ban = $data[0];
+                $date_end = $data[1];
 
-                    } else {
-                        require("../view/form_follow.php");
-                        require("../view/follow_modal.php");
-
-                    }
-                    echo "</div>";
-                    echo "</div>";
-                    echo '<div id="postbox">';
-                } else {
-
-                    $sql = "SELECT admin FROM user WHERE id = ?";
-                    $qry = $db->prepare($sql);
-                    $qry->execute([$_SESSION["id_user"]]);
-                    $data = $qry->fetch();
-                    echo '<div class="link">';
-                    if ($data["admin"] == 1) {
-                        ?>
-                        <div class="dropdown dropstart">
-                        <svg class=" dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#0D6EFD" class="bi bi-gear-fill" viewBox="0 0 16 16">
-                        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
-                        </svg>
-                        
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="../model/undelete_page.php">Post deleted</a></li>
-                          <li><a class="dropdown-item" href="../model/unblur_page.php">Post Blured</a></li>
-                          <li><a class="dropdown-item" href="../model/user_gestion.php">User Banned</a></li>
-                        </ul>
-                        </div>
-                        <?php
-                    }
-                    echo '<div><a href="../model/user_gestion.php?id=' . $_SESSION["id_user"] . '">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-gear" viewBox="0 0 16 16">
-                    <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
-                    </svg>
-                    </a></div>';
-                    require("../view/follow_modal.php");
-                    echo '</div>';
-                    echo '</div>';
-                    echo '<div id="postbox">';
-                ?>  
-                   <div id="creation_post">
-                        <p id="create">Creation post</p>
-                        <?php require("../view/form_create_post.html"); ?>
-                    </div>
-                <?php
-                }
-            } else {
-                echo "</div>";
-                echo '<div id="postbox">';
+            }else{
+                $ban = 0;
             }
+            
+
+            if($user->getBan() == 1){
+                echo "<div class='ban'><p>User banned</p></div>";
+            }else{
+                if($ban == 1){
+                    echo "<div class='ban'><p>Your are banned, you cannot interact with other people until ".$date_end."</p></div>";
+
+                }else{
+                    if (isset($_SESSION["id_user"])) {
+                        //Si l'utilisateur est connecté et que c'est son profil
+                        if ($_SESSION["id_user"] != $_GET["id"]) {
+                            //Si l'utilisateur est connecté et que ce n'est pas son profil
+                            //bouton follow
+                            require("../model/follow.php");
+                            $query_check_follow = $db->prepare("SELECT * FROM follow WHERE id_user = ? AND id_follow = ?");
+                            $query_check_follow->execute([$_SESSION["id_user"], $_GET["id"]]);
+                            $data = $query_check_follow->fetch();
+                            echo "<div class='follow-unfollow'>";
+
+                            if ($data) {
+                                require("../view/form_unfollow.php");
+                                require("../view/follow_modal.php");
+
+                            } else {
+                                require("../view/form_follow.php");
+                                require("../view/follow_modal.php");
+
+                            }
+                            echo "</div>";
+                            echo "</div>";
+                            echo '<div id="postbox">';
+                        } else {
+
+                            $sql = "SELECT admin FROM user WHERE id = ?";
+                            $qry = $db->prepare($sql);
+                            $qry->execute([$_SESSION["id_user"]]);
+                            $data = $qry->fetch();
+                            echo '<div class="link">';
+                            if ($data["admin"] == 1) {
+                                ?>
+                                <div class="dropdown dropstart">
+                                <svg class=" dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#0D6EFD" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                                </svg>
+
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="../model/undelete_page.php">Post deleted</a></li>
+                                  <li><a class="dropdown-item" href="../model/unblur_page.php">Post Blured</a></li>
+                                  <li><a data-bs-toggle="modal" data-bs-target="#Userban" class="dropdown-item">User Banned</a></li>
+                                </ul>
+                                </div>
+                                <div class="modal fade" id="Userban" tabindex="-1" aria-labelledby="UserbanLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="UserbanLabel">Ban users</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <?php
+                                            $sql = "SELECT id_user FROM ban ";
+                                            $query = $db->prepare($sql);
+                                            $query->execute();
+                                            $data = $query->fetchAll();
+
+                                            foreach($data as $user){
+                                                $sql = "SELECT pseudo FROM user WHERE id = ?";
+                                                $query = $db->prepare($sql);
+                                                $query->execute([$user["id_user"]]);
+                                                $data = $query->fetch();
+                                                    echo "<p><a href='../view/user.php?id=".$user["id_user"]."'>".$data["pseudo"]."</a></p>";
+                                                }
+                                        ?>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <?php
+
+                                
+                            }
+                            echo '<div><a href="../model/user_gestion.php?id=' . $_SESSION["id_user"] . '">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-gear" viewBox="0 0 16 16">
+                            <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
+                            </svg>
+                            </a></div>';
+                            require("../view/follow_modal.php");
+                            echo '</div>';
+                            echo '</div>';
+                            echo '<div id="postbox">';
+                        ?>  
+                           <div id="creation_post">
+                                <p id="create">Creation post</p>
+                                <?php require("../view/form_create_post.html"); ?>
+                            </div>
+                        <?php
+                        }
+                    } else {
+                        echo "</div>";
+                        echo '<div id="postbox">';
+                    }
+                
             //Afficher les posts de l'utilisateur
 
 
-            $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC LIMIT 5");
-            $query->execute([$_GET["id"]]);
-            $data = $query->fetchAll();
-            if(empty($data)){
-                echo '<div class="nopost">';
-                echo "<p>No post yet</p>";
-                echo '</div>';
-            }else{
-            foreach ($data as $post) {
-                if ($post['retirer'] != 1) {
-                    $post_obj = new Post($post["id"], $post["content"], $post["id_user"], $post["time"], $post["flou"], $post["retirer"], $post["image"]);
-                    $post_obj->displayPost();
+                $query = $db->prepare("SELECT * FROM post WHERE id_user=? ORDER BY time DESC LIMIT 5");
+                $query->execute([$_GET["id"]]);
+                $data = $query->fetchAll();
+                if(empty($data)){
+                    echo '<div class="nopost">';
+                    echo "<p>No post yet</p>";
+                    echo '</div>';
+                }else{
+                foreach ($data as $post) {
+                    if ($post['retirer'] != 1) {
+                        $post_obj = new Post($post["id"], $post["content"], $post["id_user"], $post["time"], $post["flou"], $post["retirer"], $post["image"]);
+                        $post_obj->displayPost();
+                    }
+                    ?>
+
+    <?php   
                 }
                 ?>
-        
-    <?php
-            }
-            ?>
-            <div id="morePosts">
-            <div class="d-grid gap-2">
+                <div id="morePosts">
+                <div class="d-grid gap-2">
 
-            <button type="button" class="btn btn-dark btn-sm mb-2" onclick="loadMorePosts(5, '<?php echo $_GET["id"]; ?>')">Load more</button>
-            </div> 
-            </div>
-            <?php
+                <button type="button" class="btn btn-dark btn-sm mb-2" onclick="loadMorePosts(5, '<?php echo $_GET["id"]; ?>')">Load more</button>
+                </div> 
+                </div>
+                <?php
+                }
+            }
         }
-       
             echo "</div>";
         } else {
             header("Location: ../view/user.php?id=" . $_SESSION['id_user']);

@@ -27,11 +27,7 @@
                     
                     $post = $post = new Post($row["id"],$row["content"], $row["id_user"], $row["time"],$row["flou"],$row["retirer"],$row["image"]);
                     $post->displayPost();
-                }else{
-                    echo "<p>la publication numero </p>";
-                    echo $row["id"];
-                    echo "<p> ne rentre pas dans le if</p>";
-                  }
+                }
                 //On utilise la classe "postStorage pour afficher le post
     
     

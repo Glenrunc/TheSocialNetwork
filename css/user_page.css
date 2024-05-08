@@ -304,3 +304,31 @@ body{
   z-index: 1;
 
 }
+
+#rangeValue{
+  position: relative;
+  /* top: 50%;
+  right: 50%; */
+  font-size: x-large;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  
+  z-index: 1;
+}
+
+#morePosts{
+  margin-top: 10px;
+}
+
+
+.ban{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 1;
+  font-size: xx-large;
+  color: red;
+  font-weight: bold;
+}
