@@ -13,7 +13,8 @@ class User{
     private $ban;
 
     public function __construct($id_user,$first_name,$last_name,$age,$birthday,$email,$pseudo,$admin,$profile_picture){
-        
+        global $db;
+
         $this->id_user = $id_user;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
@@ -27,13 +28,20 @@ class User{
             $this->admin = $admin;
         }
         $this->profile_picture = $profile_picture;
+        $sql = "SELECT COUNT(*) FROM ban WHERE id_user = ?";
+                    $query = $db->prepare($sql);
+                    $query->execute([$this->getIdUser()]);
+                    $data = $query->fetch();
+        $this->ban = $data[0];
         
     }
     public function getIdUser() {
         return $this->id_user;
     }
 
-    
+    public function getBan() {
+        return $this->ban;
+    }
     function displayGestionPage(){
         //Create post_info.php
         $img_path = $this->profile_picture;
@@ -59,6 +67,7 @@ class User{
     }
 
     function displayUserPage(){
+        global $db;
         $img_path = $this->profile_picture;
         echo'<div class="user_presentation">';
         if(isset($_SESSION['id_user'])){
@@ -71,10 +80,62 @@ class User{
                 </svg>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" onclick="sendWarning(<?php echo $this->getIdUser(); ?>)">Send a warning</a></li>
-                  <li><a class="dropdown-item" href="#">Ban</a></li>
+                  <?php
+                    
+                    if($this->getBan()   == 0){
+                  ?>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#banModal">Ban</a></li>
+                    <?php
+                        }
+                    ?>
                 </ul>
               </div>
                 </div>
+                
+                <!-- Modal -->
+               <div class="modal fade" id="banModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                 <div class="modal-dialog">
+                   <div class="modal-content">
+                     <div class="modal-header">
+                       <h1 class="modal-title fs-5" id="banModalLabel">Ban User</h1>
+                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                    <form action="../model/ban_user.php" method="post">
+                        <input type="hidden" name="id_user_ban" value="<?php echo $this->getIdUser(); ?>">
+                        <label for="NuberOfDays" class="form-label">Number of days banned from TZU.</label>
+                        <input name="number_of_day_ban" type="range" class="form-range" min="0" max="100" id="NuberOfDays">
+                        <span id="rangeValue" style="color:#FFFF00">50 days</span>
+                        <script>
+                            var rangeInput = document.getElementById("NuberOfDays");
+                            var rangeValue = document.getElementById("rangeValue");
+
+                            rangeInput.addEventListener("input", function() {
+                                var value = rangeInput.value;
+                                var color = getColor(value);
+                                rangeValue.textContent = value + " days";
+                                rangeValue.style.color = color;
+                            });
+
+                            function getColor(value) {
+                                var hue = ((1 - value / 100) * 120).toString(10);
+                                return ["hsl(", hue, ", 100%, 50%)"].join("");
+                            }
+                        </script>
+
+                        <div class="input-group">
+                          <span class="input-group-text">With textarea</span>
+                          <textarea name ="reason_ban" class="form-control" aria-label="With textarea"></textarea>
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" class="btn btn-primary">Ban</button>
+                         </div>
+                    <form>
+                     </div>
+                     
+                 </div>
+               </div>
                 
                 <?php
             }

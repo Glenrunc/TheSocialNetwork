@@ -45,7 +45,7 @@
           foreach ($notif as $notification) {
             $notificationData = $notification;
             if ($notificationData["retirer"] == 0) {
-              $notification = new Notification($notificationData["id"], $notificationData["id_user"], $notificationData["id_post"], $notificationData["content"], $notificationData["date"], $notificationData["hour"], $notificationData["viewed"], $notificationData["retirer"], $notificationData["id_like"], $notificationData["warning"], $notificationData["id_comment"], $notificationData["id_follow"], $notificationData["id_like_comment"]);
+              $notification = new Notification($notificationData["id"], $notificationData["id_user"], $notificationData["id_post"], $notificationData["content"], $notificationData["date"], $notificationData["hour"], $notificationData["viewed"], $notificationData["retirer"], $notificationData["id_like"], $notificationData["warning"], $notificationData["id_comment"], $notificationData["id_follow"], $notificationData["id_like_comment"],$notificationData["ban"]);
               $notification->displayNotification();
             }
 

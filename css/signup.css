@@ -1,12 +1,12 @@
 body {
     align-items: center;
-    background-color: #0e1117   ;
+    background-color: #ffffff   ;
     display: flex;
     justify-content: center;
   }
   
   .form {
-    background-color: #0e1117;
+    background-color: #ece4db;
     border-radius: 20px;
     box-sizing: border-box;
     height: fit-content;
@@ -59,7 +59,7 @@ body {
   }
   
   .cut {
-    background-color: #0e1117;
+    background-color: #ece4db;
     border-radius: 10px;
     height: 20px;
     left: 20px;
@@ -102,15 +102,15 @@ body {
   
   .input:focus ~ .placeholder {
     background-color: transparent;
-    color: #cf4e4e;
+    color: #ffffff;
   }
   
   .submit {
-    background-color: rgb(11, 55, 82);
+    background-color: #f5c396;
     border-radius: 12px;
     border: 0;
     box-sizing: border-box;
-    color: #eee;
+    color: #ffffff;
     cursor: pointer;
     font-size: 18px;
     height: 50px;
@@ -119,7 +119,7 @@ body {
     text-align: center;
     width: 100%;
   }
-  
   .submit:active {
-    background-color: #06b;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
   }

@@ -13,8 +13,9 @@ class Notification{
     private $id_comment;
     private $id_follow;
     private $id_like_comment;
+    private $ban;
 
-    public function __construct($id,$id_user,$id_post,$content,$date,$hour,$viewed,$retirer,$id_like,$warning,$id_comment,$id_follow,$id_like_comment)
+    public function __construct($id,$id_user,$id_post,$content,$date,$hour,$viewed,$retirer,$id_like,$warning,$id_comment,$id_follow,$id_like_comment,$ban)
     {   
         $this->id = $id;
         $this->id_user = $id_user;
@@ -29,6 +30,7 @@ class Notification{
         $this->id_comment = $id_comment;
         $this->id_follow = $id_follow;
         $this->id_like_comment = $id_like_comment;
+        $this->ban = $ban;
     }
 
     public function getId()
@@ -96,6 +98,11 @@ class Notification{
         return $this->id_like_comment;
     }
 
+    public function getBan()
+    {
+        return $this->ban;
+    }
+
     public function displayNotification(){
         require("../model/database.php");
         global $db;
@@ -143,7 +150,7 @@ class Notification{
             echo'<p><a href="../view/user.php?id='.$id_user.'">'.$pseudo.'</a> '.$this->getContent().' <a href="../view/post.php?id_post='.$this->getIdPost().'">post</a></p>';
         }
 
-        if($this->getIdLike() == NULL && $this->getIdComment() == NULL && $this->getIdFollow() == NULL && $this->getWarning() == 0 && $this->getIdLikeComment() == NULL){
+        if($this->getIdLike() == NULL && $this->getIdComment() == NULL && $this->getIdFollow() == NULL && $this->getWarning() == 0 && $this->getIdLikeComment() == NULL && $this->getBan() == 0){
             $sql = "SELECT u.pseudo, u.id
             FROM user u
             INNER JOIN post p ON u.id = p.id_user
@@ -188,6 +195,11 @@ class Notification{
                 echo '<p> <a href="../view/user.php?id=40">Admin</a> has sent this to you : ' . $this->getContent() . '</p>';
             }
         }
+
+        if($this->getBan() == 1){
+            echo'<p>'.$this->getContent().' by <a href="../view/user.php?id=40"> Admin</a></p>';
+        }
+
 
         echo'<span class="hour"><p>'.$this->getDate().' '.$this->getHour().'</p></span>';
         echo'<span class="check" id="check'.$this->getId().'">';

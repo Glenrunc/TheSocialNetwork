@@ -42,8 +42,29 @@
                         $_SESSION["pseudo"] = $user["pseudo"];
                         $_SESSION["profile_picture"]= $user["profile_picture"];
                         $_SESSION["admin"] = $user["admin"];
+
+                        $sql = "SELECT COUNT(*) FROM ban WHERE id_user = ?";
+                        $query = $db->prepare($sql);
+                        $query->execute([$_SESSION["id_user"]]);
+                        $data = $query->fetch();
+
+                        if ($data[0] != 0) {
+
+                            $sql = "SELECT date_end FROM ban WHERE id_user = ?";
+                            $query = $db->prepare($sql);
+                            $query->execute([$_SESSION["id_user"]]);
+                            $data = $query->fetch();
+
+                            if (strtotime($data["date_end"]) < strtotime(date("Y-m-d"))) {
+                                $sql = "DELETE FROM ban WHERE id_user = ?";
+                                $query = $db->prepare($sql);
+                                $query->execute([$_SESSION["id_user"]]);
+                            } 
+                        }
+ 
                         header("Location: ../view/user.php?id=" . $_SESSION["id_user"]);
                     }
+
                 }
             } else {
                 echo "<script>Fill all the fields</script>";

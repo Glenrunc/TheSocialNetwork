@@ -129,7 +129,7 @@ body{
   transform: translateX(-50%);
   overflow-y: scroll; /* Activer le défilement vertical */
   width: 750px;
-  height: 100px; /* Hauteur de la zone de recherche */
+  height: 200px; /* Hauteur de la zone de recherche */
   border-radius: 10px;
   box-shadow: #7d7777 10px 5px 5px 2px;
   margin-bottom:10px;
@@ -303,4 +303,44 @@ body{
   left: 25px;
   z-index: 1;
 
+}
+
+#rangeValue{
+  position: relative;
+  /* top: 50%;
+  right: 50%; */
+  font-size: x-large;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  
+  z-index: 1;
+}
+
+#morePosts{
+  margin-top: 10px;
+}
+
+
+.ban{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 1;
+  font-size: xx-large;
+  color: red;
+  font-weight: bold;
+}
+.ban_user_name{
+  position:relative;
+}
+.unban_modal_span{
+  position: absolute;
+  right: 10px;
+}
+
+.unban_modal_span:hover{
+
+  color: red;
 }
